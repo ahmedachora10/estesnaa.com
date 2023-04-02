@@ -1,0 +1,213 @@
+/*******************************************************************************
+ * 01. Common
+ *
+*******************************************************************************/ 
+header { 
+background-color: #1A222C;
+background-image: url(../img/deepblue/bg.png); }
+
+a,
+.slogan h2,
+.feature-services-widgets h5 { 
+	color: #2B4461;
+}
+
+a:hover,
+.related-posts h3,
+.author-info h3,
+.post-header  h2,
+.post-text h1, 
+.post-text h2, 
+.post-text h3, 
+.post-text h4, 
+.post-text h5, 
+.post-text h6,
+#comments #comments-title, 
+#respond #reply-title,
+#sidebar .widget h3 { 
+	color: #1A222C;
+}
+
+
+/*******************************************************************************
+ * 02. Header
+ *
+*******************************************************************************/ 
+nav#header-menu ul li a,
+.page-header h2,
+.page-header h2 a,
+#comments ol.commentlist li .comment-meta cite.fn {
+	color: #1A222C;
+}
+
+nav#header-menu ul li a:hover,
+nav#header-menu ul li a.selected,
+nav#top-menu ul li a,
+header .site-title,
+header .site-title a,
+.nivo-caption h6 a:hover, 
+.kwicks li .heading-text h6 a:hover,
+footer,
+footer a {
+	color: #F6FBFF;
+}
+
+nav#header-menu ul li a:hover,
+nav#header-menu ul li a.selected,
+nav#header-menu ul li ul {
+	background: #1A222C;
+}
+
+nav#header-menu ul li ul li a {
+	color: #F6FBFF;
+}
+
+nav#header-menu ul li ul li a:hover, 
+nav#header-menu ul li ul li a.selected {
+	color: #CBD6E3;
+	background: #0E131A;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#topmedia li a { background-image: url(../images/deepblue/topmedia.png); }
+
+#topsearch input[type="submit"] {
+	background: url(../images/deepblue/submit.png);
+}
+
+
+/*******************************************************************************
+ * 03. Slider
+ *
+*******************************************************************************/ 
+.nivo-caption h6 a,
+.kwicks li .heading-text h6 a {
+	color: #CBD6E3;
+}
+
+
+/*******************************************************************************
+ * 04. Slogan
+ *
+*******************************************************************************/ 
+.slogan-button .button-wrap a,
+.slogan-button .button-wrap span {
+	background-image: url(../images/deepblue/button-large-deepblue.png);
+}
+
+.slogan-button .button-wrap a:hover,
+.slogan-button .button-wrap span:hover,
+.shortcode-blog-lists .button-wrap a:hover {
+	border: 1px solid #25313E;
+}
+
+.slogan-button .button-wrap a,
+.slogan-button .button-wrap span,
+.terms-menu li a:hover,
+.terms-menu li.current-menu-item a,
+.widget-contact-form input[type="submit"],
+.widget-contact-form input[type="submit"]:hover,
+#respond input[type="submit"],
+#respond input[type="submit"]:hover,
+.page-contact input[type="submit"],
+.page-contact input[type="submit"]:hover,
+.pagenavi span.current, 
+.pagenavi a:hover,
+.wp-pagination span.current,
+.wp-pagination a:hover,
+.page-link a:hover,
+.shortcode-blog-lists .button-wrap a {
+	border: 1px solid #394654;
+}
+
+
+/*******************************************************************************
+ * 04. Lists
+ *
+*******************************************************************************/ 
+.terms-menu li a:hover,
+.terms-menu li.current-menu-item a {
+	background-image: url(../images/deepblue/button-medium-deepblue.png);
+}
+
+.blog-lists .entry-data { 
+	background-image: url(../images/deepblue/blog-data.png);
+}
+
+.news-lists .entry-meta p {
+	background-image: url(../images/deepblue/news-date.png);
+}
+
+
+
+/*******************************************************************************
+ * 05. Post Comment
+ *
+*******************************************************************************/
+.widget-contact-form input[type="submit"],
+.widget-contact-form input[type="submit"]:hover,
+#respond input[type="submit"],
+#respond input[type="submit"]:hover,
+.page-contact input[type="submit"],
+.page-contact input[type="submit"]:hover {
+	/* background-image: url(../images/deepblue/button-medium-deepblue.png); */
+}
+
+
+
+/*******************************************************************************
+ * 06. Pagination
+ *
+*******************************************************************************/
+.pagenavi span.current, 
+.pagenavi a:hover,
+.wp-pagination span.current,
+.wp-pagination a:hover,
+.page-link a:hover,
+.shortcode-blog-lists .button-wrap a {
+	 color: #FFFFFF; 
+	 background: url(../images/deepblue/button-small-deepblue.png) repeat-x 0 0;
+}
+
+
+/*******************************************************************************
+ * 07. Widget
+ *
+*******************************************************************************/
+#sidebar .widget a:hover {
+	color: #2B4461;
+}
+
+#sidebar .widget_categories li a:hover,
+#sidebar .widget_nav_menu li a:hover,
+#sidebar .widget_pages li a:hover {
+	color: #FFFFFF;
+	background: url(../images/deepblue/widget-cat-libg.png) no-repeat;
+}
+
+
+.footer-widgets .widget-contact-form input[type="text"], 
+.footer-widgets .widget-contact-form textarea {
+	color: #FFFFFF;
+	background: #1A222C;
+	box-shadow: inset 0px 2px 5px #1C242D;
+	-moz-box-shadow: inset 0px 2px 5px #1C242D;
+	-webkit-box-shadow: inset 0px 2px 5px #1C242D;
+}
+
+.footer-widgets .widget-contact-form input[type="submit"] {
+	box-shadow: 0px 2px 3px #1C242D;
+	-moz-box-shadow: 0px 2px 3px #1C242D;
+	-webkit-box-shadow: 0px 2px 3px #1C242D;
+}
+
+.footer-widgets .widget-tag-cloud a {
+	color: #FFFFFF;
+	background: #1E2630;
+}
+
+.footer-widgets .widget-tag-cloud a:hover {
+	background: #1A222C;
+}
