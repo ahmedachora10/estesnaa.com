@@ -179,6 +179,45 @@ return [
         ]
     ],
 
+    'paypal' => [
+
+        'title' => 'Paypal',
+        'desc' => '',
+        'icon' => 'menu-icon tf-icons bx bx-id-card',
+
+        'elements' => [
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'paypal_client_id',
+                'label' => 'Paypal Client ID',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => '',
+            ],
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'paypal_client_secret',
+                'label' => 'Paypal Client Secret',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => '',
+            ],
+            [
+                'type' => 'select',
+                'data' => 'string',
+                'name' => 'paypal_live_mode',
+                'label' => 'Live mode?',
+                'rules' => 'nullable|integer|in:0,1',
+                'class' => '',
+                'value' => '',
+                'parent_class' => 'col-12'
+
+            ]
+        ]
+    ],
+
     'pagination' => [
 
         'title' => 'Pagination',
