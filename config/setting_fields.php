@@ -173,7 +173,11 @@ return [
                 'rules' => 'nullable|integer|in:0,1',
                 'class' => '',
                 'value' => '',
-                'parent_class' => 'col-12'
+                'parent_class' => 'col-12',
+                'options' => [
+                    0 => 'اخفاء',
+                    1 => 'اظهار',
+                ]
 
             ]
         ]
@@ -186,6 +190,20 @@ return [
         'icon' => 'menu-icon tf-icons bx bx-id-card',
 
         'elements' => [
+            [
+                'type' => 'select',
+                'data' => 'string',
+                'name' => 'paypal_live_mode',
+                'label' => 'Live mode?',
+                'rules' => 'nullable|integer|in:0,1',
+                'class' => '',
+                'value' => '',
+                'parent_class' => 'col-12',
+                'options' => [
+                    0 => 'لا',
+                    1 => 'نعم',
+                ]
+            ],
             [
                 'type' => 'text',
                 'data' => 'string',
@@ -204,17 +222,6 @@ return [
                 'class' => '',
                 'value' => '',
             ],
-            [
-                'type' => 'select',
-                'data' => 'string',
-                'name' => 'paypal_live_mode',
-                'label' => 'Live mode?',
-                'rules' => 'nullable|integer|in:0,1',
-                'class' => '',
-                'value' => '',
-                'parent_class' => 'col-12'
-
-            ]
         ]
     ],
 

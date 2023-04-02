@@ -6,8 +6,9 @@
     <x-select type="{{ $field['type'] ?? '' }}" name="{{ $field['name'] ?? '' }}"
         value="{{ old($field['name'] ?? '', \setting($field['name'] ?? '')) }}" class="{{ $field['class'] ?? '' }}"
         id="{{ $field['name'] ?? '' }}">
-        <option value="1" @selected(setting('about_status') == 1)>اضهار</option>
-        <option value="0" @selected(setting('about_status') == 0)>اخفاء</option>
+        @foreach ($field['options'] ?? [] as $key => $option)
+            <option value="{{ $key }}" @selected(setting($field['name'] ?? '') == $key)>{{ $option }}</option>
+        @endforeach
     </x-select>
     @if ($errors->has($field['name'] ?? ''))
         <small class="help-block">{{ $errors->first($field['name'] ?? '') }}</small>
