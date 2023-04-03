@@ -14,8 +14,17 @@ class EventsContainer extends Component
 
     public function render()
     {
+        $user = auth()->user();
+        $events = [];
+
+        if($user->role == 'admin') {
+            $events = Event::with(['category', 'owner'])->latest()->paginate(setting('pagination'));
+        } elseif($user->role == 'event') {
+            $events = $user->events()->with('category')->latest()->paginate(setting('pagination'));
+        }
+
         return view('livewire.dashboard.events-container', [
-            'events' => Event::with('category')->latest()->paginate(setting('pagination'))
+            'events' => $events
         ]);
     }
 }

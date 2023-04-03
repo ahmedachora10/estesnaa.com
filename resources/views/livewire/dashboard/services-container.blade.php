@@ -1,12 +1,22 @@
+@php
+    $isAdmin = auth()->user()->role == 'admin';
+    if ($isAdmin) {
+        $columns = ['image', 'name', 'owner', 'category', 'status', 'actions'];
+    } else {
+        $columns = ['image', 'name', 'category', 'status', 'actions'];
+    }
+@endphp
+
 <div>
-    <x-dashboard.tables.table1 title="sidebar.services" :action="route('services.create')" :columns="['image', 'name', 'owner', 'category', 'status', 'actions']">
+    <x-dashboard.tables.table1 title="sidebar.services" :action="route('services.create')" :columns="$columns">
         @forelse ($services as $service)
             <tr>
                 <td><img src="{{ asset($service->image) }}" class=" rounded-circle" alt="avatar" width="30px"
                         height="30px"></td>
                 <td>{{ $service->name }}</td>
-
-                <td><span class="badge badge bg-label-success">{{ $service->owner->name }}</span></td>
+                @if ($isAdmin)
+                    <td><span class="badge badge bg-label-success">{{ $service->owner->name }}</span></td>
+                @endif
                 <td><span class="badge badge bg-label-primary">{{ $service->category->name }}</span></td>
 
                 <td> <span class="badge badge bg-label-{{ $service->status->color() }}" style="cursor: pointer"
@@ -26,4 +36,8 @@
             </tr>
         @endforelse
     </x-dashboard.tables.table1>
+
+    <div class="mt-4" style="margin-right: -40px">
+        {{ $services->links() }}
+    </div>
 </div>

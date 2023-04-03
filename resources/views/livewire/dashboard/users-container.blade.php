@@ -32,7 +32,7 @@
         @endforelse
     </x-dashboard.tables.table1>
 
-    <div class="mt-4 float-end">
+    <div class="mt-4" style="margin-right: -40px">
         {{ $users->links() }}
     </div>
 </div>

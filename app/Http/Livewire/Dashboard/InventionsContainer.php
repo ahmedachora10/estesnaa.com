@@ -21,8 +21,17 @@ class InventionsContainer extends Component
 
     public function render()
     {
+        $user = auth()->user();
+        $inventions = [];
+
+        if($user->role == 'admin') {
+            $inventions = Invention::with(['category', 'owner'])->latest()->paginate(setting('pagination'));
+        } elseif($user->role == 'inventor') {
+            $inventions = $user->inventions()->with('category')->latest()->paginate(setting('pagination'));
+        }
+
         return view('livewire.dashboard.inventions-container', [
-            'inventions' => Invention::with(['category', 'owner'])->latest()->paginate(setting('pagination'))
+            'inventions' => $inventions
         ]);
     }
 }

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\FeaturedService;
 use App\Models\Invention;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
+
+use function Clue\StreamFilter\fun;
 
 class HomeController extends Controller
 {

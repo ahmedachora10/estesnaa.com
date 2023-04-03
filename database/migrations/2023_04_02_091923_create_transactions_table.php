@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('payment_id')->unique();
+            $table->string('payer_id');
+            $table->string('status');
+            $table->float('amount');
+            $table->string('payment_method');
             $table->timestamps();
         });
     }

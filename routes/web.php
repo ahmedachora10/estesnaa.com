@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ServiceController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,14 @@ Route::controller(EventController::class)->group(function ()
 {
     Route::get('events', 'index')->name('front.events.index');
     Route::get('events/{event}', 'show')->name('front.events.show');
+});
+
+Route::controller(PaymentController::class)->name('pay.')->middleware('auth')
+->prefix('pay')->group(function ()
+{
+    Route::get('/success', 'success')->name('success');
+    Route::get('/cancel', 'cancel')->name('cancel');
+    Route::get('/{package}', 'pay')->name('send');
 });
 
 

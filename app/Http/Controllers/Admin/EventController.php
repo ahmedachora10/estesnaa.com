@@ -43,7 +43,7 @@ class EventController extends Controller
     {
         $request->validated();
 
-        Event::create($request->safe()->except('image') + $this->saveImage($request->image));
+        Event::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
 
         return redirect()->route('events.index')->with('success', trans('message.create'));
     }
@@ -67,6 +67,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        abort_if(auth()->user()->role != 'admin' && auth()->id() !== $event->user_id, 404);
         $categories = Category::eventsSection()->get();
 
         return view('admin.events.edit', compact('categories', 'event'));
@@ -81,6 +82,7 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
+        abort_if(auth()->user()->role != 'admin' && auth()->id() !== $event->user_id, 404);
         $request->validated();
 
         $data = [];

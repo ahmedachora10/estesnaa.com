@@ -21,8 +21,17 @@ class ServicesContainer extends Component
     }
     public function render()
     {
+        $user = auth()->user();
+        $services = [];
+
+        if($user->role == 'admin') {
+            $services = Service::with(['category', 'owner'])->latest()->paginate(setting('pagination'));
+        } elseif($user->role == 'inventor') {
+            $services = $user->services()->with('category')->latest()->paginate(setting('pagination'));
+        }
+
         return view('livewire.dashboard.services-container', [
-            'services' => Service::with(['category', 'owner'])->latest()->paginate(setting('pagination'))
+            'services' => $services
         ]);
     }
 }

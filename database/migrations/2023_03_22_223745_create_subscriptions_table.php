@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('amount');
             $table->date('start_date');
             $table->date('end_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
