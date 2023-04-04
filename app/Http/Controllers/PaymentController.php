@@ -27,15 +27,15 @@ class PaymentController extends Controller
 
         if($package->amount == 0) {
             $this->saveSubscription($package);
-            return redirect()->route('pay.success');
+            return redirect()->route('payment.success');
         }
 
         try {
             $response = $this->geteway->purchase([
                 'amount' => $package->amount,
                 'currency' => 'USD',
-                'returnUrl' => route('pay.success'),
-                'cancelUrl' => route('pay.cancel'),
+                'returnUrl' => route('payment.success'),
+                'cancelUrl' => route('payment.cancel'),
             ])->send();
 
             if($response->isRedirect()) {

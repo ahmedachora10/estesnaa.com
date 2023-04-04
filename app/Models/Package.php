@@ -19,6 +19,11 @@ class Package extends Model
         'features' => 'json'
     ];
 
+    public function scopeActive($query)
+    {
+        $query->where('status', Status::ENABLED->value);
+    }
+
     public function getAmountAttribute()
     {
         return $this->discount == 0 ? $this->price : $this->price - (($this->price * $this->discount) / 100);

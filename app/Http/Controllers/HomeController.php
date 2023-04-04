@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\FeaturedService;
 use App\Models\Invention;
+use App\Models\Package;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,6 +42,15 @@ class HomeController extends Controller
     public function showInvention(Invention $invention)
     {
         return view('front.inventions.show', compact('invention'));
+    }
+
+    public function packages()
+    {
+        $packages = Package::active()->where('group', auth()->user()->role)->orderBy('price')->get();
+
+        $user_plan = auth()->user()->plan;
+
+        return view('front.packages', compact('packages', 'user_plan'));
     }
 
 }

@@ -3,11 +3,17 @@
         @forelse ($packages as $package)
             <tr>
                 <td>{{ $package->name }}</td>
-                <td>{{ $package->price }}</td>
+                <td> <span class="badge badge bg-label-danger fw-bold">{{ $package->price }}$</span></td>
                 <td> <span class="badge badge bg-label-info fw-bold">{{ date_for_humans($package->duration) }}</span>
                 </td>
-                <td>{{ $package->discount }}</td>
-                <td> <span class="badge badge bg-label-primary fw-bold">{{ $package->group }}</span></td>
+                <td><span class="badge badge bg-label-secondary fw-bold">{{ $package->discount }}%</span></td>
+                <td>
+                    @if ($role_name = $roles->where('name', $package->group)->first())
+                        <span class="badge badge bg-label-warning fw-bold">{{ $role_name->display_name }}</span>
+                    @else
+                        -
+                    @endif
+                </td>
                 <td> <span class="badge badge bg-label-{{ $package->status->color() }}" style="cursor: pointer"
                         wire:click="updateStatus({{ $package->id }})">{{ $package->status->name() }}</span>
                 </td>

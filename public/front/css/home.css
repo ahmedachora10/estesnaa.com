@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css?family=Tajawal:400,500,700&display=swap&subset=arabic');
+.icon-lg {
+    width: 64px;
+    height: 64px;
+}
+.border-radius-xl{
+   border-radius: 0.75rem;
+}
+
+.icon-shape{
+      width: 48px;
+    height: 48px;
+    background-position:center;
+    border-radius:0.5rem;
+}
+
+ 
+
+.mt-n4{
+   /* margin-top :-1.5rem !important; */
+}
+.position-absolute{
+    position:absolute !important;
+}
+
+
+ .card{
+  box-shadow:0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border:  0 solid rgba(0, 0, 0, 0.125);
+  border-radius:0.75rem;
+ }
+
+.card .card-header{
+    padding:1.5rem;
+}
+
+.card-header:first-child{
+   border-radius: 0.50rem 0.50rem 0 0;
+}
+
+
+.card .fa i{
+    fill:currentColor;
+    stroke:none;
+    display:inline-block;
+    color:#111111;
+}
+.icon-lg  i{
+  top:31%;
+    font-size:1.5rem;
+}
+
+.icon-shape i{
+    color:#fff;
+    opacity:0.8;
+    top:11px;
+    position:relative;
+}
+
+.opacity-10{
+   opacity:1 !important;
+}
+
+.pt-1{
+    padding-top:0.25rem !important;
+} 
+.pt-2{
+    padding-top:0.5rem !important;
+}
+
+hr.horizontal.dark{
+    background-color:#7b809a33;
+        }
+
+hr.horizontal{
+   background-color:transparent; 
+}
+.card > hr{
+    margin: 0;
+}
+
+.card .card-footer{
+  padding:  1.5rem;
+    background-color:transparent;
+}
+
+.card-footer:last-child{
+    border-radius:0 0 0.75rem 0.75rem;
+}
+
+.text-success{
+    color:#4CAF50 !important
+}
+
+.text-start{
+    text-align:left !important;
+}
+
+.bg-gradient-dark{
+    background-image: linear-gradient(195deg, #b1aeb1 0%, #a8a5a7 100%);
+}
+
+.bg-gradient-primary{
+    background-image:linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
+}
+
+.shadow-primary{
+   box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(233 30 99 / 40%) !important;
+}
+
+.bg-gradient-success{
+    background-image:linear-gradient(195deg, #66BB6A 0%, #43A047 100%);
+}
+
+.shadow-primary{
+   box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(76 175 80 / 40%) !important;
+}
+
+.bg-gradient-info{
+    background-image:linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);
+}
+
+.shadow-primary{
+   box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(0 188 212 / 40%) !important;
+}
+
+.mt-4{
+  margin-top:1.5rem !important;
+}
+
+.mt-n4{
+  margin-top: -2.5rem !important;
+}
+
+.container-fluid.py-4 {
+    margin-top: 3%;
+}
+
+h4.mb-0 {
+    font-weight: 900;
+}
+
+.border-radius-lg{
+  border-radius:0.5rem;
+}
+
+.card .card-body{
+  padding:1.5rem;
+}
+h6.mb-0 {
+    font-weight: 800;
+    font-size: 14px;
+}
+
+footer.footer.py-4 {
+    margin-top: 5rem !important;
+    margin-bottom: 1rem !important;
+    position: absolute;
+    bottom: -5%;
+    width: 100%;
+}
+.isheader {
+    border: 2px solid #02316a;
+    min-height: 100px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 8%;
+    background: #fff;
+    direction: rtl;
+}
+div#h-center {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    margin-top: 1.5%;
+}
+
+div#h-center h3.mb-0 {
+  color: #02316a;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-family: 'Tajawal',sans-serif;
+}
+.form-group.has-feedback  input.form-control {
+    background: #eff0f6;
+ 
+}
+ .login-logo.text-center {
+    margin-left: 8%;
+}
+
+.login-box .btn-primary:focus {
+  outline: none;
+  border: 2px solid #AFBCFF !important;
+}
+.login-box .btn-primary {
+ background-color: #0051ef;
+ box-shadow: 0 3px 3px 0 #fff, 0 3px 1px -2px #fff, 0 1px 5px 0 #fff !important;
+ }
+  .login-box .btn-primary:active{
+ background-color:#00c0ef;
+ }
+.login-box .btn-primary:focus {
+  border-color: transparent !important;
+  outline: none;
+}
+@media only screen and (min-width:980px ) and (max-width:1024px)
+{
+.isheader {min-height: 80px;}
+div#h-center { margin-top: 1%;}
+  
+.card{margin-bottom:10%;}
+
+}
+@media only screen and (min-width:768px ) and (max-width:979px)
+{
+.isheader {min-height: 60px;}
+div#h-center { align-items:center;margin-top: 0.1%;}
+.card{margin-bottom:15%;}
+}
+@media only screen and ( max-width:767px)
+{
+.isheader {min-height: auto;}
+div#h-center {align-items:center; padding-bottom: 5%;}
+.card{margin:15% 0.1%; }
+}
+ 
+

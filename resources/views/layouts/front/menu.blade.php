@@ -37,6 +37,14 @@
                 بيع الاختراعات
             </a>
         </li>
+        <li>
+            <a @class([
+                'nav-link scrollto',
+                'active' => request()->routeIs('front.packages'),
+            ]) href="{{ route('front.packages') }}">
+                الباقات
+            </a>
+        </li>
         @guest
             <li>
                 <a @class([

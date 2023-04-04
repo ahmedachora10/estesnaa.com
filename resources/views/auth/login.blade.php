@@ -1,47 +1,53 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    <div class="login-box">
+        <div class="login-box-body">
+            <div class="login-logo text-center">
+                <img src="{{ asset(setting('logo')) }}" width="150">
+            </div>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <hr>
+            <form method="post" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group has-feedback mb-2">
+                    <input type="email" class="form-control" name="email" placeholder="اسم المستخدم" required=""
+                        autofocus>
+                    <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                </div>
+                @error('email')
+                    <span class="text-danger mt-2 mb-3">{{ $message }}</span>
+                @enderror
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" name="password" placeholder="كلمة المرور"
+                        required="">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+
+                @error('password')
+                    <span class="text-danger mt-2 mb-3">{{ $message }}</span>
+                @enderror
+                <br>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-12 text-center">
+                        <button type="submit" name="login"
+                            class="btn btn-primary btn-block btn-flat w-100">دخول</button>
+                    </div>
+                    <div class="col-xs-6">
+
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <!-- /.social-auth-links -->
         </div>
+        <!-- /.login-box-body -->
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('front/css/admin_lte.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/css/admin_lte_rtl.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/css/home.css') }}">
+    @endpush
 </x-guest-layout>

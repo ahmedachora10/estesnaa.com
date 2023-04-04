@@ -31,24 +31,32 @@
     <link href="{{ asset('assets/fontawesome/solid.css') }}" rel="stylesheet">
 
     {{-- <link rel="stylesheet" href="assets/css/fontawesome.css"> --}}
-    <link href="{{ asset('front/css/general.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/vendor/aos/aos.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/css/main.css') }}" rel="stylesheet">
+    @if (!request()->routeIs('front.packages'))
+        <link href="{{ asset('front/css/general.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/vendor/aos/aos.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+        <!-- Template Main CSS File -->
+        <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/css/main.css') }}" rel="stylesheet">
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+        <!-- Vendors CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- Page CSS -->
+        <!-- Page CSS -->
 
-    <!-- Helpers -->
-    <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+        <!-- Helpers -->
+        <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+    @else
+        <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('front/css/pricing-plan.css') }}">
+    @endif
+
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -66,14 +74,18 @@
 <body>
     <main>
         {{-- Header Section --}}
-        @include('layouts.front.header', ['sliders' => $sliders])
+        @if (!request()->routeIs('front.packages'))
+            @include('layouts.front.header', ['sliders' => $sliders])
+        @endif
 
         {{-- Content --}}
         {{ $slot }}
     </main>
 
-    {{-- Footer Section --}}
-    @include('layouts.front.footer')
+    @if (!request()->routeIs('front.packages'))
+        {{-- Footer Section --}}
+        @include('layouts.front.footer')
+    @endif
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -83,9 +95,11 @@
 
     {{-- <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
 
-    <!-- Template Main JS File -->
-    {{-- <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
-    <script src="{{ asset('front/js/main.js') }}"></script>
+    @if (!request()->routeIs('front.packages'))
+        <!-- Template Main JS File -->
+        {{-- <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
+        <script src="{{ asset('front/js/main.js') }}"></script>
+    @endif
 
 
     <!-- Place this tag in your head or just before your close body tag. -->

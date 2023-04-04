@@ -27,6 +27,10 @@ Route::controller(HomeController::class)->group(function ()
     Route::get('/inventions/{invention}', 'showInvention')->name('front.inventions.show');
     Route::get('/inventors', 'inventors')->name('front.inventors.index');
     Route::get('/inventors/{inventor}', 'showInventor')->name('front.inventors.show');
+
+    // Packages
+    Route::get('/packages', 'packages')->middleware(['auth', 'role:service_provider|event|inventor'])
+    ->name('front.packages');
 });
 
 Route::controller(ServiceController::class)->name('front.services.')
@@ -43,12 +47,12 @@ Route::controller(EventController::class)->group(function ()
     Route::get('events/{event}', 'show')->name('front.events.show');
 });
 
-Route::controller(PaymentController::class)->name('pay.')->middleware('auth')
+Route::controller(PaymentController::class)->name('payment.')->middleware('auth')
 ->prefix('pay')->group(function ()
 {
     Route::get('/success', 'success')->name('success');
     Route::get('/cancel', 'cancel')->name('cancel');
-    Route::get('/{package}', 'pay')->name('send');
+    Route::get('/{package}', 'pay')->name('pay');
 });
 
 

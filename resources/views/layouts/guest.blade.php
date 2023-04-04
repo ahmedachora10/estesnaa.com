@@ -31,38 +31,41 @@
     <link href="{{ asset('assets/fontawesome/solid.css') }}" rel="stylesheet">
 
     {{-- <link rel="stylesheet" href="assets/css/fontawesome.css"> --}}
-    <link href="{{ asset('front/css/general.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/vendor/aos/aos.css') }}" rel="stylesheet">
+    @if (!request()->routeIs('login'))
+        <link href="{{ asset('front/css/general.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/vendor/aos/aos.css') }}" rel="stylesheet">
+    @endif
     <link href="{{ asset('front/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('front/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/css/main.css') }}" rel="stylesheet">
+    @if (!request()->routeIs('login'))
+        <!-- Template Main CSS File -->
+        <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('front/css/main.css') }}" rel="stylesheet">
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+        <!-- Vendors CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- Page CSS -->
-    <style>
-        label.form-label {
-            padding-top: .9rem;
-        }
-
-        @media only screen and (max-width:767px) {
-            .register {
-                width: 100%;
-                margin: 0;
+        <!-- Page CSS -->
+        <style>
+            label.form-label {
+                padding-top: .9rem;
             }
 
-            section.breadcrumbs .container {
-                width: 100%;
-            }
-        }
-    </style>
+            @media only screen and (max-width:767px) {
+                .register {
+                    width: 100%;
+                    margin: 0;
+                }
 
+                section.breadcrumbs .container {
+                    width: 100%;
+                }
+            }
+        </style>
+    @endif
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
@@ -79,17 +82,21 @@
     @livewireStyles
 </head>
 
-<body>
+<body @class(['hold-transition login-page' => request()->routeIs('login')])>
     <main>
-        {{-- Header Section --}}
-        @include('layouts.front.header', ['sliders' => []])
+        @if (!request()->routeIs('login'))
+            {{-- Header Section --}}
+            @include('layouts.front.header', ['sliders' => []])
+        @endif
 
         {{-- Content --}}
         {{ $slot }}
     </main>
 
     {{-- Footer Section --}}
-    @include('layouts.front.footer')
+    @if (!request()->routeIs('login'))
+        @include('layouts.front.footer')
+    @endif
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
