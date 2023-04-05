@@ -1,1 +1,1 @@
-<img src="{{ $image }}" {{ $attributes }}>
+<img src="{{ $image ?? asset(str_replace('public/', 'storage/', setting('logo'))) }}" {{ $attributes }}>
