@@ -47,7 +47,7 @@ Route::controller(EventController::class)->group(function ()
     Route::get('events/{event}', 'show')->name('front.events.show');
 });
 
-Route::controller(PaymentController::class)->name('payment.')->middleware('auth')
+Route::controller(PaymentController::class)->name('payment.')->middleware(['auth', 'role:service_provider|event|inventor'])
 ->prefix('pay')->group(function ()
 {
     Route::get('/success', 'success')->name('success');

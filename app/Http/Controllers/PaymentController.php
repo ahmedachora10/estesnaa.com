@@ -50,6 +50,34 @@ class PaymentController extends Controller
         }
     }
 
+    // Service Payment
+    public function servicePay()
+    {
+        if($package->amount == 0) {
+            $this->saveSubscription($package);
+            return redirect()->route('payment.success');
+        }
+
+        try {
+            $response = $this->geteway->purchase([
+                'amount' => $package->amount,
+                'currency' => 'USD',
+                'returnUrl' => route('payment.success'),
+                'cancelUrl' => route('payment.cancel'),
+            ])->send();
+
+            if($response->isRedirect()) {
+                session()->put('packageID', $package->id);
+                return $response->redirect();
+            } else {
+                return $response->getMessage();
+            }
+
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function success(Request $request)
     {
         if($request->input('paymentId') && $request->input('PayerID')) {
@@ -85,7 +113,6 @@ class PaymentController extends Controller
         return view('payment.cancel');
     }
 
-
     private function saveTransaction(array $data)
     {
         if(Transaction::where("payment_id", $data['id'])->first()) return false;
@@ -103,7 +130,7 @@ class PaymentController extends Controller
     {
         $oldSubs = Subscription::where('user_id', auth()->id());
         if($oldSubs->count() > 0) {
-            $oldSubs->delete();
+            $oldSubs->update(['status' => Status::DISABLED->value]);
         }
 
         return Subscription::create([

@@ -26,8 +26,14 @@
                     <span class="badge badge bg-label-dark fw-bold">{{ $invention->discount }}%</span>
                 </td>
 
-                <td> <span class="badge badge bg-label-{{ $invention->status->color() }}" style="cursor: pointer"
-                        wire:click="updateStatus({{ $invention->id }})">{{ $invention->status->name() }}</span>
+                <td>
+                    @if ($isAdmin || (!is_null($userPlan) && !$userPlan->expired))
+                        <span class="badge badge bg-label-{{ $invention->status->color() }}" style="cursor: pointer"
+                            wire:click="updateStatus({{ $invention->id }})">{{ $invention->status->name() }}</span>
+                    @else
+                        <span class="badge badge bg-label-warning" style="cursor: pointer"><i
+                                class="bx bx-low-vision"></i></span>
+                    @endif
                 </td>
 
 

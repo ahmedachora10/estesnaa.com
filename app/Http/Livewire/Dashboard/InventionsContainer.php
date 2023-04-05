@@ -12,6 +12,13 @@ class InventionsContainer extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    public $userPlan = null;
+
+    public function mount()
+    {
+        $this->userPlan = auth()->user()->plan;
+    }
+
     public function updateStatus(Invention $invention)
     {
         if($invention) {

@@ -31,7 +31,7 @@
                                     @endforeach
                                 @endif
                             </ul>
-                            @if (!is_null($user_plan) && $user_plan->plan_id == $package->id)
+                            @if (!is_null($user_plan) && ($user_plan->plan_id == $package->id || $package->amount == 0))
                                 <a href="#" class="btn pricing-plan-purchase-btn bg-secondary disabled">اشتراك</a>
                             @else
                                 <a href="{{ route('payment.pay', $package) }}"
