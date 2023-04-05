@@ -6,13 +6,12 @@ use Illuminate\View\Component;
 
 class Logo extends Component
 {
-    public $image = null;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($image = null)
+    public function __construct(public $image = null)
     {
         $this->image = $image ?? asset(str_replace('public/', 'storage/', setting('logo')));
     }
