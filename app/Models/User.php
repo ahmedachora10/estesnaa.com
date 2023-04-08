@@ -71,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function plan()
     {
-        return $this->hasOne(Subscription::class);
+        return $this->hasOne(Subscription::class)->active();
     }
 
     public function country()
