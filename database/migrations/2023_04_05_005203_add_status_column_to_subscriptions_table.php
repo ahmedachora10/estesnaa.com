@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('subscriptions', function (Blueprint $table) {
-            $table->tinyInteger('status')->default(Status::ENABLED->value);
+            $table->tinyInteger('status')->default(Status::DISABLED->value);
         });
     }
 
