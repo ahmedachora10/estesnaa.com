@@ -31,7 +31,7 @@
     <link href="{{ asset('assets/fontawesome/solid.css') }}" rel="stylesheet">
 
     {{-- <link rel="stylesheet" href="assets/css/fontawesome.css"> --}}
-    @if (!request()->routeIs('front.packages'))
+    @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
         <link href="{{ asset('front/css/general.css') }}" rel="stylesheet">
         <link href="{{ asset('front/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
         <link href="{{ asset('front/vendor/aos/aos.css') }}" rel="stylesheet">
@@ -74,7 +74,7 @@
 <body>
     <main>
         {{-- Header Section --}}
-        @if (!request()->routeIs('front.packages'))
+        @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
             @include('layouts.front.header', ['sliders' => $sliders])
         @endif
 
@@ -82,7 +82,7 @@
         {{ $slot }}
     </main>
 
-    @if (!request()->routeIs('front.packages'))
+    @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
         {{-- Footer Section --}}
         @include('layouts.front.footer')
     @endif
@@ -95,7 +95,7 @@
 
     {{-- <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
 
-    @if (!request()->routeIs('front.packages'))
+    @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
         <!-- Template Main JS File -->
         {{-- <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
         <script src="{{ asset('front/js/main.js') }}"></script>

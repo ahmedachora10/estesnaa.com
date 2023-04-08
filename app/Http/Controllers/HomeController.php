@@ -46,11 +46,22 @@ class HomeController extends Controller
 
     public function packages()
     {
+        if(auth()->user()->role == 'service_provider') {
+            return redirect()->route('front.service-provider.plan');
+        }
+
         $packages = Package::active()->where('group', auth()->user()->role)->orderBy('price')->get();
 
         $user_plan = auth()->user()->plan;
 
-        return view('front.packages', compact('packages', 'user_plan'));
+        return view('front.packages.packages', compact('packages', 'user_plan'));
+    }
+
+    public function serviceProviderPlan()
+    {
+        $package = Package::active()->where('group', auth()->user()->role)->first();
+        $user_plan = auth()->user()->service_provider_subscription_paid;
+        return view('front.packages.service_provider_package', compact('package', 'user_plan'));
     }
 
 }

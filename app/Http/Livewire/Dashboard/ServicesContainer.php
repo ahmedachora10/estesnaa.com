@@ -26,7 +26,7 @@ class ServicesContainer extends Component
 
         if($user->role == 'admin') {
             $services = Service::with(['category', 'owner'])->latest()->paginate(setting('pagination'));
-        } elseif($user->role == 'inventor') {
+        } elseif($user->role == 'service_provider') {
             $services = $user->services()->with('category')->latest()->paginate(setting('pagination'));
         }
 

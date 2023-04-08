@@ -9,7 +9,7 @@
                 <td><span class="badge badge bg-label-secondary fw-bold">{{ $package->discount }}%</span></td>
                 <td>
                     @if ($role_name = $roles->where('name', $package->group)->first())
-                        <span class="badge badge bg-label-warning fw-bold">{{ $role_name->display_name }}</span>
+                        <span class="badge badge bg-label-warning fw-bold">{{ $role_name['display_name'] }}</span>
                     @else
                         -
                     @endif

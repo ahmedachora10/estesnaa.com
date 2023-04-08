@@ -29,8 +29,11 @@ Route::controller(HomeController::class)->group(function ()
     Route::get('/inventors/{inventor}', 'showInventor')->name('front.inventors.show');
 
     // Packages
-    Route::get('/packages', 'packages')->middleware(['auth', 'role:service_provider|event|inventor'])
+    Route::get('/packages', 'packages')->middleware(['auth', 'role:event|inventor|service_provider'])
     ->name('front.packages');
+
+    Route::get('/service_providers/plan', 'serviceProviderPlan')->middleware(['auth', 'role:service_provider'])
+    ->name('front.service-provider.plan');
 });
 
 Route::controller(ServiceController::class)->name('front.services.')

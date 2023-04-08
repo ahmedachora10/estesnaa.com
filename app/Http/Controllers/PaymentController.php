@@ -6,6 +6,7 @@ use App\Casts\Status;
 use App\Models\Package;
 use App\Models\Subscription;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Omnipay\Omnipay;
@@ -25,7 +26,9 @@ class PaymentController extends Controller
     {
         abort_if($package->status->value == Status::DISABLED->value,404);
 
-        if($package->amount == 0) {
+        $isServiceProvider = auth()->user()->role == 'service_provider';
+
+        if($package->amount == 0 && !$isServiceProvider) {
             $this->saveSubscription($package);
             return redirect()->route('payment.success');
         }
@@ -39,35 +42,9 @@ class PaymentController extends Controller
             ])->send();
 
             if($response->isRedirect()) {
-                session()->put('packageID', $package->id);
-                return $response->redirect();
-            } else {
-                return $response->getMessage();
-            }
-
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
-    }
-
-    // Service Payment
-    public function servicePay()
-    {
-        if($package->amount == 0) {
-            $this->saveSubscription($package);
-            return redirect()->route('payment.success');
-        }
-
-        try {
-            $response = $this->geteway->purchase([
-                'amount' => $package->amount,
-                'currency' => 'USD',
-                'returnUrl' => route('payment.success'),
-                'cancelUrl' => route('payment.cancel'),
-            ])->send();
-
-            if($response->isRedirect()) {
-                session()->put('packageID', $package->id);
+                if(!$isServiceProvider) {
+                    session()->put('packageID', $package->id);
+                }
                 return $response->redirect();
             } else {
                 return $response->getMessage();
@@ -99,6 +76,10 @@ class PaymentController extends Controller
                             }
 
                             session()->remove('packageID');
+                        } elseif(auth()->user()->role == 'service_provider') {
+                            $user = User::find(auth()->id());
+                            $user->service_provider_subscription_paid = true;
+                            $user->save();
                         }
                     }
 
@@ -141,4 +122,5 @@ class PaymentController extends Controller
             'end_date' => now()->addDays($package->duration)
         ]);
     }
+
 }

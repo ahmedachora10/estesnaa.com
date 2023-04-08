@@ -35,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'country_code',
         'role',
         'address',
+        'service_provider_subscription_paid'
     ];
 
     /**
@@ -61,6 +62,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeActive($query)
     {
         $query->where('status', Status::ENABLED->value);
+    }
+
+    public function serviceProviderSubscriptionPaid()
+    {
+        return $this->service_provider_subscription_paid == true;
     }
 
     public function plan()
