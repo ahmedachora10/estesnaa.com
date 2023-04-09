@@ -264,4 +264,24 @@ return [
             ]
         ]
     ],
+
+    'platform' => [
+
+        'title' => 'percentage',
+        'desc' => '',
+        'icon' => 'menu-icon tf-icons bx bx-money',
+
+        'elements' => [
+            [
+                'type' => 'text',
+                'data' => 'number',
+                'name' => 'percentage',
+                'label' => 'percentage',
+                'rules' => 'nullable|integer|min:0',
+                'parent_class' => 'col-12',
+                'class' => '',
+                'value' => 0,
+            ],
+        ]
+    ],
 ];

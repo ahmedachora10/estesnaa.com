@@ -23,6 +23,8 @@ return [
     'instagram' => 'انستغرام',
     'youtube' => 'اليوتوب',
 
+    'percentage' => 'نسبة المنصة',
+
     'save' => 'حفظ الاعدادات',
     'pagination' => 'عدد العناصر',
 ];

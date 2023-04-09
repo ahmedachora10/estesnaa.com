@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
         $query->where('status', Status::ENABLED->value);
     }
 
+    public function scopeServiceProvider($query)
+    {
+        $query->where('role', 'service_provider');
+    }
+
     public function serviceProviderSubscriptionPaid()
     {
         return $this->service_provider_subscription_paid == true;
