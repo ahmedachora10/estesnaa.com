@@ -10,7 +10,7 @@ class Transaction extends Component
     public function render()
     {
         return view('livewire.dashboard.transaction', [
-            'transactions' => ModelsTransaction::take(6)->get()
+            'transactions' => ModelsTransaction::take(8)->latest()->get()
         ]);
     }
 }
