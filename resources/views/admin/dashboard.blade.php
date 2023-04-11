@@ -75,12 +75,12 @@
                     </div>
                 @endif
 
-                {{-- @if (in_array(auth()->user()->role, ['admin', 'event']))
+                @if (auth()->user()->role == 'event')
                     <div class="col-lg-6 col-md-12 col-6 mb-4">
                         <x-dashboard.cards.user-info title="الفعاليات" description="كل الفعاليات"
                             icon="bx bx-calendar-event" :count="$events_count" color="warning" />
                     </div>
-                @endif --}}
+                @endif
             </div>
         </div>
     </div>

@@ -38,3 +38,22 @@ if (! function_exists('date_for_humans')) {
         return  $day .' '. $day_for_humans;
     }
 }
+
+if (! function_exists('views_for_humans')) {
+
+    function views_for_humans(int $view)
+    {
+        if (!is_int($view)) {
+            return $view;
+        }
+
+        $view_for_humans = null;
+
+        if($view == 1) { $view_for_humans = 'مشاهدة'; }
+        elseif($view == 2) { $view_for_humans = 'مشاهدات'; }
+        elseif($view >= 3 && $view <= 10) { $view_for_humans = 'مشاهدات'; }
+        elseif($view > 10) { $view_for_humans = 'مشاهدة'; }
+
+        return  $view .' '. $view_for_humans;
+    }
+}

@@ -21,6 +21,7 @@ class Event extends Model
         'time',
         'keywords',
         'status',
+        'views',
     ];
 
     protected $casts = [

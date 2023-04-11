@@ -14,6 +14,7 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
+        $event->increment('views');
         return view('front.events.show', compact('event'));
     }
 }
