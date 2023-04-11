@@ -6,7 +6,7 @@ input#submitinput-1 {
 input[type="submit"] {
     font-family: inherit;
 }
- 
+
 .col-md-3.bd-sidebar {
     padding-top: 1rem!important;
     padding-bottom: 1rem!important;
@@ -45,7 +45,7 @@ li.page-item {
 
 .card-footer.text-center{
     color: #48436b;
-    
+
 }
 .card-footer.text-center h3 {
     padding: 5% 3%;
@@ -219,7 +219,7 @@ section#events .card{background:unset;}
     padding: 6px 15px;
   }
 }
- 
+
 
 /*--------------------------------------------------------------
 # Sections General
@@ -292,7 +292,7 @@ section#services {
   left: calc(50% - 20px);
 }
 
- 
+
 .section-title p {
   margin-bottom: 0;
 }
@@ -794,7 +794,7 @@ section.breadcrumbs .container a{
   min-height: 400px;
 }
 
- 
+
 /*--------------------------------------------------------------
 # Departments
 --------------------------------------------------------------*/
@@ -1232,7 +1232,7 @@ section.breadcrumbs .container a{
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #3fbbc0;
 }
- 
+
 section#featured-services {
     width: 990px;
     direction: rtl;
@@ -1457,7 +1457,7 @@ section#featured-services {
   transition: 0.6s;
 }
 
- 
+
 @-webkit-keyframes animate-loading {
   0% {
     transform: rotate(0deg);
@@ -1479,7 +1479,10 @@ section#featured-services {
 }
 
 
+.custom-main-bg-color {
+    background-color:  #021c3b !important;
+}
 
-
-
-
+.custom-main-color {
+    color:  #021c3b !important;
+}

@@ -37,7 +37,7 @@ class Subscription extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function plan()
+    public function package()
     {
         return $this->belongsTo(Package::class, 'plan_id');
     }

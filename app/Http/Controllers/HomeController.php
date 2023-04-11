@@ -53,8 +53,9 @@ class HomeController extends Controller
         $packages = Package::active()->where('group', auth()->user()->role)->orderBy('price')->get();
 
         $user_plan = auth()->user()->plan;
+        $user_expired_plan = auth()->user()->expiredPlan;
 
-        return view('front.packages.packages', compact('packages', 'user_plan'));
+        return view('front.packages.packages', compact('packages', 'user_plan', 'user_expired_plan'));
     }
 
     public function serviceProviderPlan()

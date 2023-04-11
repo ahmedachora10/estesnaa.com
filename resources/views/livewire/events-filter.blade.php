@@ -1,6 +1,15 @@
 <section id="events" class="events">
     <div class="container">
-
+        @auth
+            @if (auth()->user()->role == 'event')
+                <div class="mb-3 d-flex justify-content-end">
+                    <a href="{{ route('events.create') }}" class="btn custom-main-bg-color text-white"
+                        style="width:200px">اضافة
+                        فعالية
+                        جديدة</a>
+                </div>
+            @endif
+        @endauth
         <div class="row">
             <div class="col-md-4 bd-sidebar">
                 <div class="sidebar">
@@ -25,44 +34,27 @@
                     <hr>
                     <div id="skills" class="skills">
                         <div class="container aos-init aos-animate" data-aos="fade-up">
-                            {{--
+
                             <div class="row skills-content">
                                 <div class="col-lg-12">
-                                    <div class="progress">
-                                        <span class="skill">lulah<i class="val">6</i></span>
-                                        <div class="progress-bar-wrap">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="55"
-                                                aria-valuemin="0" aria-valuemax="100" style="width: 55%">55%</div>
+                                    @foreach ($usersEeventsStatistics as $user)
+                                        @php
+                                            $statistics = ($user->events_count * 100) / count($events);
+                                        @endphp
+                                        <div class="progress">
+                                            <span class="skill">{{ $user->name }}<i
+                                                    class="val">{{ $user->events_count }}</i></span>
+                                            <div class="progress-bar-wrap">
+                                                <div class="progress-bar" role="progressbar"
+                                                    aria-valuenow="{{ $statistics }}" aria-valuemin="0"
+                                                    aria-valuemax="100" style="width: {{ $statistics }}%">
+                                                    {{ $statistics }}%</div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="progress">
-                                        <span class="skill">خالد احمد<i class="val">3</i></span>
-                                        <div class="progress-bar-wrap">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="27"
-                                                aria-valuemin="0" aria-valuemax="100" style="width: 27%">27%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="progress">
-                                        <span class="skill">مقدم فعاليات6<i class="val">1</i></span>
-                                        <div class="progress-bar-wrap">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="9"
-                                                aria-valuemin="0" aria-valuemax="100" style="width: 9%">9%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="progress">
-                                        <span class="skill">اسم مقدم فعالية رقم4<i class="val">1</i></span>
-                                        <div class="progress-bar-wrap">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="9"
-                                                aria-valuemin="0" aria-valuemax="100" style="width: 9%">9%</div>
-                                        </div>
-                                    </div>
-
+                                    @endforeach
 
                                 </div>
-                            </div> --}}
+                            </div>
 
                         </div>
                     </div>
@@ -81,7 +73,8 @@
                                 </div>
                                 <div class="card-body">
                                     <h3 class="card-title"><a
-                                            href="{{ route('front.events.show', $event) }}">{{ $event->title }}</a></h3>
+                                            href="{{ route('front.events.show', $event) }}">{{ $event->title }}</a>
+                                    </h3>
                                     <h6><i class="fa fa-calendar"
                                             aria-hidden="true"></i>{{ $event->date->format('Y-m-d') }}
                                         {{ $event->time }}</h6>
@@ -95,3 +88,12 @@
         </div>
     </div>
 </section>
+
+@push('styles')
+    <style>
+        .events .card-img img {
+            width: 300px !important;
+            height: 236px !important;
+        }
+    </style>
+@endpush

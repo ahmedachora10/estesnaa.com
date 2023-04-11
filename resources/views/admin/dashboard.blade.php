@@ -26,9 +26,11 @@
             </div>
 
             <!-- Transactions -->
-            <div class="col-12 order-2 my-4">
-                @livewire('dashboard.transaction')
-            </div>
+            @if (auth()->user()->role == 'admin')
+                <div class="col-12 order-2 my-4">
+                    @livewire('dashboard.transaction')
+                </div>
+            @endif
             <!--/ Transactions -->
         </div>
         <div class="col-lg-5 col-md-5 order-1">

@@ -79,6 +79,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Subscription::class)->active();
     }
 
+    public function expiredPlan()
+    {
+        return $this->hasOne(Subscription::class)->where('end_date', '<', date('Y-m-d'));
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id');
