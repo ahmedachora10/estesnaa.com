@@ -49,6 +49,7 @@
             <div class="col-12 mb-3 mt-4">
                 <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
                 @foreach (App\Casts\Status::cases() as $status)
+                    @continue($status->value == App\Casts\Status::ENABLED->value && !auth()->user()->plan)
                     <x-input-radio name="status" :value="$status->value" :checked="$status->value == $event->status->value">
                         {{ $status->name() }}
                     </x-input-radio>
