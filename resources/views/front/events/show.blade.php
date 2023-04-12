@@ -11,7 +11,7 @@
                     <h6><i class="fa fa-calendar"></i>&nbsp; {{ $event->date->format('Y-m-d') }} {{ $event->time }}
                         <h6 class="mt-2"><i class="fa fa-eye"></i>&nbsp; {{ views_for_humans($event->views) }}</h6>
                         <div class="news_details">
-                            <p>{{ $event->description }}</p>
+                            {!! $event->description !!}
                         </div>
                 </div>
             </div>

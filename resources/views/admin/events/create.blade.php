@@ -40,7 +40,7 @@
             <div class="col-12 mb-3 mt-4">
                 <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
                 @foreach (App\Casts\Status::cases() as $status)
-                    @continue($status->value == App\Casts\Status::ENABLED->value && !auth()->user()->plan)
+                    @continue(auth()->user()->role == 'event' && $status->value == App\Casts\Status::ENABLED->value && !auth()->user()->plan)
                     <x-input-radio name="status" :value="$status->value" checked>
                         {{ $status->name() }}
                     </x-input-radio>
@@ -56,5 +56,20 @@
         </form>
 
     </x-dashboard.cards.sample>
+
+    @push('scripts')
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ar.js"></script>
+
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#description'), {
+                    language: 'ar'
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+    @endpush
 
 </x-app-layout>
