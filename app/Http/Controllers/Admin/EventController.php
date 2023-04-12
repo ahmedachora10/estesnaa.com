@@ -67,7 +67,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        abort_if(auth()->user()->role != 'admin' && auth()->id() !== $event->user_id, 404);
+        abort_if(auth()->user()->role == 'admin'  || auth()->id() !== $event->user_id, 404);
         $categories = Category::eventsSection()->get();
 
         return view('admin.events.edit', compact('categories', 'event'));
@@ -82,7 +82,7 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        abort_if(auth()->user()->role != 'admin' && auth()->id() !== $event->user_id, 404);
+        abort_if(auth()->user()->role == 'admin' || auth()->id() !== $event->user_id, 404);
         $request->validated();
 
         $data = [];
