@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Casts\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -31,6 +32,12 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        if($request->user()->status == Status::PENDING->value) {
+            return back()->with('warning', 'هدا الحساب قيد المراجعة.');
+        }elseif($request->user()->status == Status::DISABLED->value) {
+            return back()->with('danger', 'هدا الحساب معطل .');
+        }
 
         if(in_array($request->user()->role, ['inventor', 'service_provider'])) {
             if(!$request->user()->profit) {

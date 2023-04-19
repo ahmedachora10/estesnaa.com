@@ -7,6 +7,15 @@
             </div>
 
             <hr>
+            @if (session()->get('warning'))
+                <div class="alert alert-warning mb-2">{{ session('warning') }}</div>
+                <hr>
+            @endif
+
+            @if (session()->get('danger'))
+                <div class="alert alert-danger mb-2">{{ session('danger') }}</div>
+                <hr>
+            @endif
             <form method="post" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group has-feedback mb-2">
