@@ -130,8 +130,10 @@
 
     </div>
 
-    <div class="modal animate__animated animate__fadeInDownBig" id="animationModal" tabindex="-1"
-        style="display: none;" aria-hidden="true">
-        @livewire('dashboard.request-withdrawal-user-money')
-    </div>
+    @if (in_array(auth()->user()->role, ['service_provider', 'inventor']))
+        <div class="modal animate__animated animate__fadeInDownBig" id="animationModal" tabindex="-1"
+            style="display: none;" aria-hidden="true">
+            @livewire('dashboard.request-withdrawal-user-money')
+        </div>
+    @endif
 </x-app-layout>
