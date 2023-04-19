@@ -32,6 +32,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if(in_array($request->user()->role, ['inventor', 'service_provider'])) {
+            if(!$request->user()->profit) {
+                $request->user()->profit()->create(['total' => 0]);
+            }
+        }
+
         return redirect()->intended($request->user()->role == 'admin' ? RouteServiceProvider::DASHBOARD : RouteServiceProvider::HOME);
     }
 
