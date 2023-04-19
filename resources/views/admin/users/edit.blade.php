@@ -52,7 +52,7 @@
             </div> {{-- / Roles Group --}}
 
             <div class="col-12 mb-3 mt-4">
-                <x-label for="role" class="d-block">{{ trans('sidebar.status') }}</x-label>
+                <x-label for="role" class="d-block">{{ trans('table.columns.status') }}</x-label>
                 @foreach (App\Casts\Status::cases() as $status)
                     <x-input-radio :checked="$status->value == $user->status->value" name="status" :value="$status->value">
                         {{ $status->name() }}

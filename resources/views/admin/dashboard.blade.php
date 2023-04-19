@@ -27,6 +27,26 @@
 
             <!-- Transactions -->
             @if (auth()->user()->role == 'admin')
+                <div class="col-12 order-1 my-4 row justify-content-between mx-0">
+                    <div class="col-lg-6 col-md-12 col-6 px-0">
+                        <x-dashboard.cards.payment title="مدفوعات الاختراعات" :amount="$inventions_orders_total_amount"
+                            icon="assets/img/icons/unicons/wallet.png" />
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-6 ps-0">
+                        <x-dashboard.cards.payment title="مدفوعات الخدمات" :amount="$services_orders_total_amount"
+                            icon="assets/img/icons/unicons/chart.png" />
+                    </div>
+                </div>
+            @endif
+
+            @if (in_array(auth()->user()->role, ['admin', 'inventor', 'service_provider']))
+                <div class="col-12 order-2 my-4">
+                    @livewire('dashboard.orders')
+                </div>
+            @endif
+
+            @if (auth()->user()->role == 'admin')
                 <div class="col-12 order-2 my-4">
                     @livewire('dashboard.transaction')
                 </div>
@@ -37,10 +57,15 @@
             <div class="row">
                 {{-- Users --}}
                 @if (auth()->user()->role == 'admin')
+                    <div class="col-lg-12 col-md-12 col-6 mb-4">
+                        <x-dashboard.cards.payment title="مبيعات الموقع" :amount="$total_amount" />
+                    </div>
+
                     <div class="col-lg-6 col-md-12 col-6 mb-4">
                         <x-dashboard.cards.user-info title="المستخدمين" description="كل المستخدمين" icon="bx bx-group"
                             :count="$admins_count" />
                     </div>
+
                     <div class="col-lg-6 col-md-12 col-6 mb-4">
                         <x-dashboard.cards.user-info title="الموظفين" description="كل الموظفين" :count="$employees_count"
                             color="success" />
@@ -77,6 +102,19 @@
                     </div>
                 @endif
 
+                @if (in_array(auth()->user()->role, ['service_provider', 'inventor']))
+                    <x-dashboard.cards.payment title="الارباح" :amount="$user_bank_amount" id="user-profit-amount"
+                        icon="assets/img/icons/unicons/paypal.png">
+                        <x-slot:options>
+                            <a class="dropdown-item text-info" href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#animationModal"> <i class="bx bxs-bank me-2"></i> <span
+                                    class="position-relative" style="top: 1.5px">طلب
+                                    سحب
+                                    الارباح</span></a>
+                        </x-slot:options>
+                    </x-dashboard.cards.payment>
+                @endif
+
                 @if (auth()->user()->role == 'event')
                     <div class="col-lg-6 col-md-12 col-6 mb-4">
                         <x-dashboard.cards.user-info title="الفعاليات" description="كل الفعاليات"
@@ -92,4 +130,8 @@
 
     </div>
 
+    <div class="modal animate__animated animate__fadeInDownBig" id="animationModal" tabindex="-1"
+        style="display: none;" aria-hidden="true">
+        @livewire('dashboard.request-withdrawal-user-money')
+    </div>
 </x-app-layout>

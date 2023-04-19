@@ -29,10 +29,13 @@
                     <h4>روابط مهمة</h4>
                     <ul>
                         <li><i class="fa fa-angle-left"></i> <a href="{{ route('home') }}">الرئيسية</a></li>
-                        <li><i class="fa fa-angle-left"></i> <a href="{{ route('home') }}/services/">الخدمات</a></li>
-                        <li><i class="fa fa-angle-left"></i> <a href="#">سياسة الخصوصية</a></li>
+                        @foreach (\App\Models\Page::active()->get() as $page)
+                            <li><i class="fa fa-angle-left"></i> <a
+                                    href="{{ route('front.pages.show', $page) }}">{{ $page->title }}</a></li>
+                        @endforeach
+                        {{-- <li><i class="fa fa-angle-left"></i> <a href="#">سياسة الخصوصية</a></li>
                         <li><i class="fa fa-angle-left"></i> <a href="#">شروط الاستخدام</a></li>
-                        <li><i class="fa fa-angle-left"></i> <a href="#">الاسئلة المتكررة</a></li>
+                        <li><i class="fa fa-angle-left"></i> <a href="#">الاسئلة المتكررة</a></li> --}}
                     </ul>
                 </div>
 

@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\FeaturedService;
 use App\Models\Invention;
 use App\Models\Package;
+use App\Models\Page;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,6 +42,7 @@ class HomeController extends Controller
 
     public function showInvention(Invention $invention)
     {
+        $invention->increment('views');
         return view('front.inventions.show', compact('invention'));
     }
 
@@ -63,6 +65,11 @@ class HomeController extends Controller
         $package = Package::active()->where('group', auth()->user()->role)->first();
         $user_plan = auth()->user()->service_provider_subscription_paid;
         return view('front.packages.service_provider_package', compact('package', 'user_plan'));
+    }
+
+    public function showPage(Page $page)
+    {
+        return view('front.page', compact('page'));
     }
 
 }

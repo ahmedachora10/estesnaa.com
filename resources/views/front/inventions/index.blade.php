@@ -1,9 +1,21 @@
 <x-front>
 
     <x-breadcrumb title="بيع الاختراعات" />
+
+
     <main id="main-provider">
         <section id="services-buy" class="services-buy">
             <div class="container">
+                @auth
+                    @if (auth()->user()->role == 'inventor')
+                        <div class="mb-3 d-flex justify-content-end">
+                            <a href="{{ route('inventions.create') }}" class="btn custom-main-bg-color text-white"
+                                style="width:200px">
+                                اعرض اختراعك للبيع
+                            </a>
+                        </div>
+                    @endif
+                @endauth
                 <div class="row">
                     @foreach ($inventions as $invention)
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch">

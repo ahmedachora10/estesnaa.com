@@ -47,4 +47,9 @@ class Subscription extends Model
         return Carbon::parse($this->end_date)->isPast();
     }
 
+    public function getDurationTimeAttribute()
+    {
+        return Carbon::parse($this->end_date);
+    }
+
 }

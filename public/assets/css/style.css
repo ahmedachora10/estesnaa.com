@@ -54,12 +54,12 @@
   }
 
   .navbar-fixed-top.scrolled .nav-link {
-   
+
     color:#636363!important;
   }
 
   .navbar-fixed-top.scrolled .navbar-brand img {
-   
+
     /* width: 40%; */
     margin-bottom: 0;
     padding: 5px;
@@ -125,7 +125,7 @@
   }
 
   .welcome-head{
-    
+
   }
 
   .pt-15rem{
@@ -145,7 +145,7 @@
     font-weight: bold!important;
   }
 
-  
+
   .btn-brown-green:hover {
     color: #89ce82;
     background-color: #554b46;
@@ -165,7 +165,7 @@
     font-weight: bold;
     font-size: 18px;
     text-decoration: none;
- } 
+ }
 
  /* .half-a-border-on-right {
   border-top: 5px solid;
@@ -196,7 +196,7 @@
 .feature-1 a {
 	/* padding: 9px 10px 8px 35px!important; */
 	padding: 9px 10px 8px 5px!important;
-  
+
 	/* background: #558f4fb5; */
   background: #4f898fb5;
 	color: #fff;
@@ -229,7 +229,7 @@
 
 .specialties .row .col:hover{
   background: rgb(107,177,100);
-  background: linear-gradient(180deg, rgba(107,177,100,1) 0%, rgba(59,89,126,1) 71%); 
+  background: linear-gradient(180deg, rgba(107,177,100,1) 0%, rgba(59,89,126,1) 71%);
   color: #fff;
 }
 
@@ -318,7 +318,7 @@
 
 
 .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev, .owl-carousel button.owl-dot {
-	
+
 	color: #d2c6c6!important;
 	font-size: 5em!important;
   font: caption!important;
@@ -335,6 +335,10 @@
 
 .form-switch .form-check-input{
   cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
 }
 
 .about-section {
@@ -434,7 +438,7 @@
 }
 
 .footer_content li a{
-  
+
 }
 
 .footer_content li a:hover{

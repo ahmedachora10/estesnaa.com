@@ -34,6 +34,9 @@ Route::controller(HomeController::class)->group(function ()
 
     Route::get('/service_providers/plan', 'serviceProviderPlan')->middleware(['auth', 'role:service_provider'])
     ->name('front.service-provider.plan');
+
+    // Pages
+    Route::get('pages/{page:title}', 'showPage')->name('front.pages.show');
 });
 
 Route::controller(ServiceController::class)->name('front.services.')
@@ -50,11 +53,13 @@ Route::controller(EventController::class)->group(function ()
     Route::get('events/{event}', 'show')->name('front.events.show');
 });
 
-Route::controller(PaymentController::class)->name('payment.')->middleware(['auth', 'role:service_provider|event|inventor'])
+Route::controller(PaymentController::class)->name('payment.')->middleware(['auth', 'role:user|service_provider|event|inventor'])
 ->prefix('pay')->group(function ()
 {
     Route::get('/success', 'success')->name('success');
     Route::get('/cancel', 'cancel')->name('cancel');
+    Route::get('/invention/{invention}', 'inventionOrderPayment')->name('invention.order');
+    Route::get('direct', 'direct')->name('direct');
     Route::get('/{package}', 'pay')->name('pay');
 });
 

@@ -57,12 +57,14 @@
                             <span class="align-middle">{{ trans('sidebar.profile') }}</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('settings.index') }}">
-                            <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">{{ trans('sidebar.settings') }}</span>
-                        </a>
-                    </li>
+                    @if (auth()->user()->role == 'admin')
+                        <li>
+                            <a class="dropdown-item" href="{{ route('settings.index') }}">
+                                <i class="bx bx-cog me-2"></i>
+                                <span class="align-middle">{{ trans('sidebar.settings') }}</span>
+                            </a>
+                        </li>
+                    @endif
                     {{-- <li>
                         <a class="dropdown-item" href="#">
                             <span class="d-flex align-items-center align-middle">
@@ -85,6 +87,11 @@
                 </ul>
             </li>
             <!--/ User -->
+
+            <!-- Notification -->
+            <x-dashboard.notifications-container />
+            <!--/ Notification -->
+
         </ul>
     </div>
 </nav>

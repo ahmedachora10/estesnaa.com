@@ -1,6 +1,16 @@
 <div class="person">
     <div class="container">
 
+        @auth
+            @if (auth()->user()->role == 'admin')
+                <div class="mb-3 d-flex justify-content-end mt-3">
+                    <a href="{{ route('inventions.create') }}" class="btn custom-main-bg-color text-white" style="width:200px">
+                        عرف بنفسك
+                    </a>
+                </div>
+            @endif
+        @endauth
+
         <div class="row">
 
             <div class="col-md-3 bd-sidebar">

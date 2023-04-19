@@ -33,14 +33,37 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.users')" icon="user" :link="route('users.index')" />
 
             <x-dashboard.sidebar.link :title="trans('sidebar.roles')" icon="key" :link="route('roles.index')" />
+
+            <x-dashboard.sidebar.link-head>
+                <span>{{ trans('sidebar.transactions') }} / {{ trans('sidebar.requests') }}</span>
+            </x-dashboard.sidebar.link-head>
+
+            <x-dashboard.sidebar.link :title="trans('sidebar.requests')" icon="user" :link="route('withdrawal_requests.index')" />
+
+            <x-dashboard.sidebar.link-head>
+                <span>{{ trans('sidebar.packages') }} / {{ trans('sidebar.subscriptions') }}</span>
+            </x-dashboard.sidebar.link-head>
+
+            <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" :link="route('packages.index')" />
+
+            <x-dashboard.sidebar.link :title="trans('sidebar.subscriptions')" icon="package" :link="route('subscriptions.index')" />
         @endif
 
         <x-dashboard.sidebar.link-head>
             @if ($isAdmin)
                 <span>{{ trans('sidebar.categories') }}
-                    /
             @endif
-            {{ trans('sidebar.events') }}</span>
+            @if ($isEvent)
+                {{ trans('sidebar.events') }}</span>
+            @endif
+
+            @if ($isInventor)
+                {{ trans('sidebar.inventions') }}</span>
+            @endif
+
+            @if ($isServiceProvider)
+                {{ trans('sidebar.services') }}</span>
+            @endif
         </x-dashboard.sidebar.link-head>
 
         @if ($isAdmin)
@@ -48,7 +71,7 @@
         @endif
 
         @if ($isAdmin || $isInventor)
-            <x-dashboard.sidebar.link :title="trans('sidebar.inventions')" icon="brain" :link="route('inventions.index')" />
+            <x-dashboard.sidebar.link title="بيع الاختراعات" icon="brain" :link="route('inventions.index')" />
         @endif
 
         @if ($isAdmin || $isServiceProvider)
@@ -60,18 +83,19 @@
         @endif
 
         @if ($isAdmin)
-            <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" :link="route('packages.index')" />
-
             <x-dashboard.sidebar.link-head>
                 {{ trans('sidebar.location') }}
             </x-dashboard.sidebar.link-head>
 
             <x-dashboard.sidebar.link :title="trans('sidebar.countries')" icon="map" :link="route('countries.index')" />
+
             <x-dashboard.sidebar.link :title="trans('sidebar.cities')" icon="map-pin" :link="route('cities.index')" />
 
             <x-dashboard.sidebar.link-head>
-                {{ trans('sidebar.settings') }}
+                {{ trans('sidebar.settings') }} / {{ trans('sidebar.pages') }}
             </x-dashboard.sidebar.link-head>
+
+            <x-dashboard.sidebar.link :title="trans('sidebar.pages')" icon="file" :link="route('pages.index')" />
 
             <x-dashboard.sidebar.link :title="trans('sidebar.featured')" icon="directions" :link="route('featuredservices.index')" />
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Casts\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Role;
@@ -61,11 +62,16 @@ class RegisteredUserController extends Controller
             'city' => $request->city,
             'country_id' => $request->country_id,
             'country_code' => $request->country_code,
+            'status' => Status::PENDING->value
         ]);
 
         $user->attachRole($request->role_id);
 
         $user->update(['role' => $user->roles->first()->name]);
+
+        if($user->role != 'user') {
+            $user->profit()->create(['total' => 0]);
+        }
 
         event(new Registered($user));
 

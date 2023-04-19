@@ -11,9 +11,12 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedServiceController;
 use App\Http\Controllers\Admin\InventionController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\UserWithdrawalRequestController;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Package;
@@ -53,6 +56,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
          */
         Route::resource('packages', PackageController::class);
 
+        /**
+         * Package Routes
+         */
+        Route::resource('subscriptions', SubscriptionController::class)->only(['index']);
+
 
         Route::resource('users', UserController::class);
 
@@ -77,9 +85,19 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
         Route::resource('sliders', SliderController::class);
 
         /**
+         * Slider Routes
+         */
+        Route::resource('pages', PageController::class);
+
+        /**
          * Featured Service Routes
          */
         Route::resource('featuredservices', FeaturedServiceController::class);
+
+        /**
+         * User Withdrawal Requst Routes
+         */
+        Route::resource('withdrawal_requests', UserWithdrawalRequestController::class);
     });
 
     Route::middleware('role:admin|event')->group(function ()

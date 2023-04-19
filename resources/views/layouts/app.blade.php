@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}"
         class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
@@ -200,6 +201,8 @@
         </div>
     </div>
 
+    <x-dashboard.toast />
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
@@ -227,9 +230,29 @@
     {{-- @vite('resources/js/app.js') --}}
     <script src="{{ asset('build/assets/app.js') }}"></script>
 
+    <script>
+        window.addEventListener('toast', event => {
+            const toast = $('.toast');
+            const target = event.detail;
+            toast.find('.title').text(target.title);
+            toast.find('.toast-body').text(target.content);
+            toast.removeClass('hide');
+            toast.addClass('show');
+
+            console.log(target);
+
+            $('.modal .btn-close').trigger('click');
+
+            if ($('#user-profit-amount').length) {
+                $('#user-profit-amount').find('h3.card-title').text('$' + target.updatedAmount);
+            }
+        });
+    </script>
+
     @stack('scripts')
 
     @livewireScripts
+
 
 </body>
 

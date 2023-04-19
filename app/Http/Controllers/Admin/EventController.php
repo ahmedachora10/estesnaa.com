@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('has.plan')->only('create');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +33,7 @@ class EventController extends Controller
      */
     public function create()
     {
+
         $categories = Category::eventsSection()->get();
 
         return view('admin.events.create', compact('categories'));

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\InventionOrder;
 use App\Models\Package;
+use App\Models\ServiceOrder;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -48,10 +51,27 @@ class DashboardController extends Controller
         $categories_count = Category::count();
         $packages_count = Package::count();
 
+        // Payment Statistics
+        $total_amount = Transaction::sum('amount');
+
+        $user_bank_amount = null;
+        if(in_array(auth()->user()->role, ['service_provider', 'inventor'])) {
+            $user_bank_amount = auth()->user()->profit->total;
+        }
+
+        $inventions_orders_total_amount = null;
+        $services_orders_total_amount = null;
+
+        if(auth()->user()->role == 'admin') {
+            $inventions_orders_total_amount = InventionOrder::sum('amount') ?? 0;
+            $services_orders_total_amount = ServiceOrder::sum('amount') ?? 0;
+        }
+
         return view('admin.dashboard', compact(
             'admins_count', 'employees_count', 'inventors_count', 'events_count',
             'packages_count', 'categories_count', 'service_providers_count',
-            'events_count', 'events_providers_count'
+            'events_count', 'events_providers_count', 'total_amount', 'user_bank_amount',
+            'inventions_orders_total_amount', 'services_orders_total_amount'
         ));
     }
 }

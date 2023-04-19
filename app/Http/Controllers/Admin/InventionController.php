@@ -12,6 +12,11 @@ use App\Utils\UploadImage;
 class InventionController extends Controller
 {
     use UploadImage;
+
+    public function __construct() {
+        $this->middleware('has.plan')->only('create');
+    }
+
     /**
      * Display a listing of the resource.
      *

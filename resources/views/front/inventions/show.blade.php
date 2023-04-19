@@ -14,6 +14,9 @@
                         <div class="socialmedia-buttons smw_left">
                             <a href="#"><i class="fa fa-share-alt"></i></a>
                             <a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-eye ms-1" aria-hidden="true"></i>
+                                {{ views_for_humans($invention->views) }}
+                            </a>
                         </div>
                         <div class="provider-title">
                             <h4>{{ $invention->name }}</h4>
@@ -26,7 +29,8 @@
                 </div>
 
                 <div class="col-lg-12 text-center">
-                    <a href="#" class="btn btn-light" role="button" aria-pressed="true">اشتري الان</a>
+                    <a href="{{ route('payment.invention.order', $invention) }}" class="btn btn-light" role="button"
+                        aria-pressed="true">اشتري الان</a>
                 </div>
 
             </div>

@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Casts\Status;
+use App\Casts\UserActivityType;
+use App\Models\Invention;
+use App\Models\InventionOrder;
 use App\Models\Package;
 use App\Models\Subscription;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UserBankActivity;
+use App\Models\UserProfit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Omnipay\Omnipay;
@@ -55,6 +60,31 @@ class PaymentController extends Controller
         }
     }
 
+    public function inventionOrderPayment(Invention $invention)
+    {
+        abort_if($invention->status->value == Status::DISABLED->value, 404);
+
+
+        try {
+            $response = $this->geteway->purchase([
+                'amount' => $invention->original_price,
+                'currency' => 'USD',
+                'returnUrl' => route('payment.success'),
+                'cancelUrl' => route('payment.cancel'),
+            ])->send();
+
+            if($response->isRedirect()) {
+                session()->put('inventionID', $invention->id);
+                return $response->redirect();
+            } else {
+                return $response->getMessage();
+            }
+
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function success(Request $request)
     {
         if($request->input('paymentId') && $request->input('PayerID')) {
@@ -67,7 +97,11 @@ class PaymentController extends Controller
                 $data = $transaction->getData();
                 DB::transaction(function () use($data)
                 {
-                    if($this->saveTransaction($data) !== false) {
+
+                    // TODO: when buy service & save user profit take platform percentage profit
+
+                    $transaction = $this->saveTransaction($data);
+                    if($transaction !== false) {
                         if(session()->exists('packageID')) {
                             $package = Package::find(session('packageID'));
 
@@ -80,6 +114,35 @@ class PaymentController extends Controller
                             $user = User::find(auth()->id());
                             $user->service_provider_subscription_paid = true;
                             $user->save();
+                        } elseif(session()->exists('inventionID')) {
+                            $invention = Invention::find(session()->get('inventionID'));
+
+                            if($invention) {
+                                InventionOrder::create([
+                                    'buyer_id' => auth()->id(),
+                                    'transaction_id' => $transaction->id,
+                                    'invention_id' => $invention->id,
+                                    'amount' => $transaction->amount
+                                ]);
+
+                                $userProfit = UserProfit::where('user_id', $invention->user_id)->first();
+
+                                if(!$userProfit) {
+                                    $userProfit = new UserProfit();
+                                    $userProfit->user_id = $invention->user_id;
+                                }
+                                $userProfit->total += $transaction->amount;
+                                $userProfit->save();
+
+
+                                UserBankActivity::create([
+                                    'user_id' => $invention->user_id,
+                                    'activity_type' => UserActivityType::RECEIVED,
+                                    'amount' => $transaction->amount
+                                ]);
+
+                                session()->remove('inventionID');
+                            }
                         }
                     }
 
@@ -121,6 +184,11 @@ class PaymentController extends Controller
             'start_date' => now(),
             'end_date' => now()->addDays($package->duration)
         ]);
+    }
+
+    public function direct()
+    {
+        dd(request());
     }
 
 }

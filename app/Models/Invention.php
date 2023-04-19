@@ -12,7 +12,7 @@ class Invention extends Model
 
     protected $fillable = [
         'user_id', 'category_id', 'name', 'image', 'description',
-        'price', 'discount', 'keywords', 'status'
+        'price', 'discount', 'keywords', 'status', 'views'
     ];
 
     protected $casts = [

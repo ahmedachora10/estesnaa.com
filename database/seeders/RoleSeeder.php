@@ -36,6 +36,11 @@ class RoleSeeder extends Seeder
                 'name' => 'event',
                 'display_name' => 'الفعاليات', // optional
                 'description' => 'الفعاليات', // optional
+            ],
+            [
+                'name' => 'user',
+                'display_name' => 'المستخدمين', // optional
+                'description' => 'المستخدمين', // optional
             ]
 
         ];
