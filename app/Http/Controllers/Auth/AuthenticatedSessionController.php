@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        dd($request->user()->status == Status::PENDING->value, $request->user()->status == Status::DISABLED->value, $request->user()->status);
+        dd($request->user()->status == Status::PENDING, $request->user()->status == Status::DISABLED, $request->user()->status);
 
         if($request->user()->status == Status::PENDING->value) {
             $request->user()->logout();
