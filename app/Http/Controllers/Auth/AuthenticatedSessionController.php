@@ -33,12 +33,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        dd($request->user()->status == Status::PENDING, $request->user()->status == Status::DISABLED, $request->user()->status);
-
-        if($request->user()->status == Status::PENDING->value) {
+        if($request->user()->status == Status::PENDING) {
             $request->user()->logout();
             return back()->with('warning', 'هدا الحساب قيد المراجعة.');
-        }elseif($request->user()->status == Status::DISABLED->value) {
+        }elseif($request->user()->status == Status::DISABLED) {
             $request->user()->logout();
             return back()->with('danger', 'هدا الحساب معطل .');
         }
