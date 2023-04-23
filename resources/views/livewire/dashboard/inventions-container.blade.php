@@ -1,9 +1,9 @@
 @php
     $isAdmin = auth()->user()->role == 'admin';
     if ($isAdmin) {
-        $columns = ['image', 'name', 'owner', 'category', 'price', 'discount', 'status', 'actions'];
+        $columns = ['image', 'name', 'owner', 'price', 'discount', 'status', 'actions'];
     } else {
-        $columns = ['image', 'name', 'category', 'price', 'discount', 'status', 'actions'];
+        $columns = ['image', 'name', 'price', 'discount', 'status', 'actions'];
     }
 @endphp
 
@@ -17,7 +17,7 @@
                 @if ($isAdmin)
                     <td><span class="badge badge bg-label-success">{{ $invention->owner->name }}</span></td>
                 @endif
-                <td><span class="badge badge bg-label-primary">{{ $invention->category->name }}</span></td>
+                {{-- <td><span class="badge badge bg-label-primary">{{ $invention->category->name }}</span></td> --}}
                 <td>
                     <span class="badge badge bg-label-info fw-bold">{{ $invention->price }}$</span>
                 </td>

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
 
@@ -107,6 +108,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function profit()
     {
         return $this->hasOne(UserProfit::class);
+    }
+
+    public function getImageAttribute()
+    {
+        $avatarExists = Storage::disk('public')->exists(str_replace('storage/', '', $this->avatar));
+        return $avatarExists ? $this->avatar : 'assets/avatar.jpg';
     }
 
 }
