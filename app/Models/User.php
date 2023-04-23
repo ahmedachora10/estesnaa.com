@@ -69,6 +69,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $query->where('role', 'service_provider');
     }
+    public function scopeInventor($query)
+    {
+        $query->where('role', 'inventor');
+    }
 
     public function serviceProviderSubscriptionPaid()
     {
