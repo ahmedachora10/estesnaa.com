@@ -28,7 +28,7 @@ class UpdateInventionRequest extends FormRequest
         return [
             'category_id' => 'required|integer|exists:categories,id',
             'name' => 'required|string',
-            'image' => 'required|image',
+            'image' => 'nullable|image',
             'description' => 'required|string',
             'price' => 'required|integer',
             'discount' => 'nullable|integer',
