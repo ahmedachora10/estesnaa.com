@@ -32,7 +32,7 @@ class StorePackageRequest extends FormRequest
             'discount' => 'required|integer|min:0|max:100',
             'duration' => 'required|integer|min:0',
             'features' => 'required|array',
-            'group' => ['required', 'exists:roles,name'],
+            'group' => ['required'],
             'status' => ['required', Rule::enum(Status::class)],
         ];
     }

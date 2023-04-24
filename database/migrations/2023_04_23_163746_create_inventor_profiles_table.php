@@ -19,7 +19,10 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('video')->nullable();
             $table->string('file')->nullable();
-            $table->json('social_media')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('whatsapp')->nullable();
             $table->timestamps();
         });
     }

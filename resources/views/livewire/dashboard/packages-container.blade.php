@@ -10,6 +10,8 @@
                 <td>
                     @if ($role_name = $roles->where('name', $package->group)->first())
                         <span class="badge badge bg-label-warning fw-bold">{{ $role_name['display_name'] }}</span>
+                    @elseif($package->group == 'inventor_profile')
+                        <svpan class="badge badge bg-label-warning fw-bold">التعريف بالمخترعين</svpan>
                     @else
                         -
                     @endif

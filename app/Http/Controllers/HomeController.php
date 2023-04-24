@@ -67,6 +67,13 @@ class HomeController extends Controller
         return view('front.packages.service_provider_package', compact('package', 'user_plan'));
     }
 
+    public function inventorProfilePlan()
+    {
+        $packages = Package::active()->where('group', 'inventor_profile')->get();
+        $user_plan = auth()->user()->inventorProfilePlan;
+        return view('front.packages.inventor_profile_package', compact('packages', 'user_plan'));
+    }
+
     public function showPage(Page $page)
     {
         return view('front.page', compact('page'));

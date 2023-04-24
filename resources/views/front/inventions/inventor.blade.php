@@ -15,7 +15,7 @@
                         <div class="caption">
                             <div class="inner">
                                 <h1>{{ $inventor->name }}</h1>
-                                <h5>{{ $inventor->dob->format('Y-m-d') }}</h5>
+                                {{-- <h5>{{ $inventor->dob->format('Y-m-d') }}</h5> --}}
                             </div>
                         </div>
                     </div>
@@ -37,10 +37,12 @@
                     </div>
 
 
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/?rel=0"
-                            allowfullscreen=""></iframe>
-                    </div>
+                    @if ($inventor->inventorProfile->video != null)
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{ asset($inventor->inventorProfile->video) }}"
+                                allowfullscreen=""></iframe>
+                        </div>
+                    @endif
                 </div>
 
 
@@ -53,22 +55,59 @@
                                 شخصية</a>
 
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#Congresses" aria-controls="Congresses"
                                 data-toggle="tab">مؤتمرات</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#Research" aria-controls="Research" data-toggle="tab">مجموعات
                                 البحث</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="hostiry">
-                            <p>
-                                it</p>
+                            <div class="description-container">
+                                {!! $inventor->inventorProfile->description !!}
+                            </div>
+
+                            <hr>
+                            <div class="social-media mt-4">
+                                <h3 class="mb-3 fw-bold text-secondary">مواقع التواصل</h3>
+                                <div class="d-flex flex-row justify-content-start align-items-center">
+                                    @if ($inventor->inventorProfile->facebook != '')
+                                        <a class="btn btn-primary border-0 m-1"
+                                            style="background-color: rgb(59, 89, 152);"
+                                            href="{{ $inventor->inventorProfile->facebook }}" role="button">
+                                            <i class="fab fa-facebook"></i>
+                                        </a>
+                                    @endif
+
+                                    @if ($inventor->inventorProfile->twitter != '')
+                                        <a class="btn btn-primary border-0 m-1" style="background-color: #55acee;"
+                                            href="{{ $inventor->inventorProfile->twitter }}" role="button">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    @endif
+
+                                    @if ($inventor->inventorProfile->instagram != '')
+                                        <a class="btn btn-primary border-0 m-1" style="background-color: #ac2bac;"
+                                            href="{{ $inventor->inventorProfile->instagram }}" role="button">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    @endif
+
+                                    @if ($inventor->inventorProfile->whatsapp != '')
+                                        <a class="btn btn-primary border-0 m-1"
+                                            style="background-color: rgb(37, 211, 102);"
+                                            href="{{ $inventor->inventorProfile->whatsapp }}" role="button">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="tab-pane" id="Congresses">
+                        {{-- <div class="tab-pane" id="Congresses">
                             <p>
                                 it</p>
                         </div>
@@ -77,7 +116,7 @@
                         <div class="tab-pane" id="Research">
                             <p>
                                 it</p>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

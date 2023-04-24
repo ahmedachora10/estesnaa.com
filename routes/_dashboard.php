@@ -61,8 +61,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
          */
         Route::resource('subscriptions', SubscriptionController::class)->only(['index']);
 
-
-        Route::resource('users', UserController::class);
+        /**
+         * Users Routes
+         */
+        Route::resource('users', UserController::class)->only('index', 'create', 'store','delete');
 
         /**
          * Role Routes
@@ -129,12 +131,13 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
     ->group(function ()
     {
         Route::get('/', 'index')->name('dashboard');
+        Route::post('/inventors/profile', [UserController::class, 'updateInventorProfile'])->name('inventors.profile');
+        Route::resource('users', UserController::class)->only('show', 'update');
     });
 
     /**
      * User Routes
      */
-    // Route::get('/users/profile', [UserController::class, 'profile'])->name('users.profile');
     Route::post('/user/profile', [UserController::class, 'updateProfile'])->name('users.profile');
 
 

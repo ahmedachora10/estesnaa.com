@@ -9,6 +9,7 @@ return [
         'phone' => 'الهاتف',
         'description' => 'الوصف',
         'image' => 'الصورة',
+        'video' => 'فيديو',
         'role' => 'الدور',
         'status' => 'الحالة',
         'address' => 'العنوان',

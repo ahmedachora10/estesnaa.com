@@ -35,6 +35,9 @@ Route::controller(HomeController::class)->group(function ()
     Route::get('/service_providers/plan', 'serviceProviderPlan')->middleware(['auth', 'role:service_provider'])
     ->name('front.service-provider.plan');
 
+    Route::get('/inventor_profile/plan', 'inventorProfilePlan')->middleware(['auth', 'role:inventor'])
+    ->name('front.inventor.profile.plan');
+
     // Pages
     Route::get('pages/{page:title}', 'showPage')->name('front.pages.show');
 });

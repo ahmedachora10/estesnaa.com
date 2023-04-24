@@ -10,6 +10,7 @@
 
             <div class="col-md-6 col-12 mb-3">
                 <x-select-group name="group" :title="trans('table.columns.group')">
+                    <option value="inventor_profile">التعريف بالمخترعين</option>
                     @foreach ($groups as $group)
                         <option value="{{ $group->name }}">{{ $group->display_name }}</option>
                     @endforeach

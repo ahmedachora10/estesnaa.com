@@ -12,6 +12,7 @@
 
             <div class="col-md-6 col-12 mb-3">
                 <x-select-group name="group" :title="trans('table.columns.group')">
+                    <option @selected('inventor_profile' == $package->group) value="inventor_profile">التعريف بالمخترعين</option>
                     @foreach ($groups as $group)
                         <option @selected($group->name == $package->group) value="{{ $group->name }}">{{ $group->display_name }}
                         </option>

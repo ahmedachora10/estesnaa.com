@@ -9,11 +9,7 @@ class InventorProfile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['inventor_id', 'description', 'file','video', 'social_media'];
-
-    protected $casts = [
-        'social_media' => 'json'
-    ];
+    protected $fillable = ['inventor_id', 'description', 'file','video', 'facebook', 'twitter', 'instagram', 'whatsapp'];
 
     public function owner()
     {

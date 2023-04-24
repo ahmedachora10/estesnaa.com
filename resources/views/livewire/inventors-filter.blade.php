@@ -2,9 +2,10 @@
     <div class="container">
 
         @auth
-            @if (auth()->user()->role == 'admin')
+            @if (auth()->user()->role == 'inventor')
                 <div class="mb-3 d-flex justify-content-end mt-3">
-                    <a href="{{ route('inventions.create') }}" class="btn custom-main-bg-color text-white" style="width:200px">
+                    <a href="{{ route('users.show', auth()->id()) }}" class="btn custom-main-bg-color text-white"
+                        style="width:200px">
                         عرف بنفسك
                     </a>
                 </div>

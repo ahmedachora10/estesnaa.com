@@ -84,42 +84,5 @@
     @push('styles')
         <link rel="stylesheet" href="{{ asset('front/css/services.css') }}">
         <link rel="stylesheet" href="{{ asset('front/css/skin.deepblue.css') }}">
-
-        <style>
-            .description-container h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                line-height: 1.6em;
-                font-weight: bold;
-                margin-bottom: 1rem
-            }
-
-            .description-container h1 {
-                font-size: 26px;
-            }
-
-            .description-container h2 {
-                font-size: 24px;
-            }
-
-            .description-container h3 {
-                font-size: 19px;
-            }
-
-            .description-container h4 {
-                font-size: 16px;
-            }
-
-            .description-container p {
-                font-size: 16px;
-                line-height: 1.5em;
-                font-weight: normal;
-
-                margin-bottom: 10px;
-            }
-        </style>
     @endpush
 </x-front>

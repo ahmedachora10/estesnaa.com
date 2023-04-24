@@ -71,7 +71,15 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.profile', compact('user'));
+        $inventorProfilePlan = null;
+        if($user->role == 'inventor') {
+            if(!$user->inventorProfile) {
+                $user->inventorProfile()->create([]);
+            }
+            $user->load('inventorProfile');
+            $inventorProfilePlan = $user->inventorProfilePlan;
+        }
+        return view('admin.users.profile', compact('user', 'inventorProfilePlan'));
     }
 
     /**
@@ -184,5 +192,35 @@ class UserController extends Controller
         }
 
         return false;
+    }
+
+    public function updateInventorProfile(Request $request)
+    {
+        $request->validate([
+            'video' => ['nullable', 'file'],
+            'facebook' => ['nullable', 'string'],
+            'twitter' => ['nullable', 'string'],
+            'instagram' => ['nullable', 'string'],
+            'whatsapp' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+        ], $request->all());
+
+        $user = User::find(auth()->id());
+
+
+        if(!$user) {
+            return redirect()->back();
+        }
+
+        $file = [];
+        if($request->hasFile('video')) {
+            $video = $request->video;
+            $video_path = str_replace('public', 'storage', $video->storeAs('public/inventors/videos', date('Y-m-d').auth()->id().str()->random(4). '.'.$video->extension()));
+            $file = ['video' => $video_path];
+        }
+
+        $user->inventorProfile()->update($request->only(['facebook', 'whatsapp', 'instagram', 'twitter', 'description']) + $file);
+
+        return redirect()->route('users.show', $user)->with('success', trans('message.update'));
     }
 }

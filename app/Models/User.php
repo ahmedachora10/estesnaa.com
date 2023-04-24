@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
 
+use function Clue\StreamFilter\fun;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use LaratrustUserTrait;
@@ -84,6 +86,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Subscription::class)->active();
     }
 
+    public function inventorProfilePlan()
+    {
+        return $this->hasOne(Subscription::class)->whereHas('package', function ($query)
+        {
+            $query->where('group', 'inventor_profile');
+        })->active();
+    }
+
     public function expiredPlan()
     {
         return $this->hasOne(Subscription::class)->where('end_date', '<', date('Y-m-d'));
@@ -120,4 +130,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $avatarExists ? $this->avatar : 'assets/avatar.jpg';
     }
 
+    public function inventorProfile()
+    {
+        return $this->hasOne(InventorProfile::class, 'inventor_id');
+    }
 }

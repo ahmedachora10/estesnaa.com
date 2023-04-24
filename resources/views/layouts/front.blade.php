@@ -31,7 +31,10 @@
     <link href="{{ asset('assets/fontawesome/solid.css') }}" rel="stylesheet">
 
     {{-- <link rel="stylesheet" href="assets/css/fontawesome.css"> --}}
-    @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
+    @if (
+        !request()->routeIs('front.packages') &&
+            !request()->routeIs('front.service-provider.plan') &&
+            !request()->routeIs('front.inventor.profile.plan'))
         <link href="{{ asset('front/css/general.css') }}" rel="stylesheet">
         <link href="{{ asset('front/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
         <link href="{{ asset('front/vendor/aos/aos.css') }}" rel="stylesheet">
@@ -74,7 +77,10 @@
 <body>
     <main>
         {{-- Header Section --}}
-        @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
+        @if (
+            !request()->routeIs('front.packages') &&
+                !request()->routeIs('front.service-provider.plan') &&
+                !request()->routeIs('front.inventor.profile.plan'))
             @include('layouts.front.header', ['sliders' => $sliders])
         @endif
 
@@ -82,7 +88,10 @@
         {{ $slot }}
     </main>
 
-    @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
+    @if (
+        !request()->routeIs('front.packages') &&
+            !request()->routeIs('front.service-provider.plan') &&
+            !request()->routeIs('front.inventor.profile.plan'))
         {{-- Footer Section --}}
         @include('layouts.front.footer')
     @endif
@@ -95,7 +104,10 @@
 
     {{-- <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
 
-    @if (!request()->routeIs('front.packages') && !request()->routeIs('front.service-provider.plan'))
+    @if (
+        !request()->routeIs('front.packages') &&
+            !request()->routeIs('front.service-provider.plan') &&
+            !request()->routeIs('front.inventor.profile.plan'))
         <!-- Template Main JS File -->
         {{-- <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
         <script src="{{ asset('front/js/main.js') }}"></script>

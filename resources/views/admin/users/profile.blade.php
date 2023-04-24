@@ -40,53 +40,141 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-6">
+            <x-dashboard.cards.sample column="col-12">
+                <h4>تحديث البيانات الشخصية</h4>
+                <form action="{{ route('users.profile') }}" method="post" class="row" enctype="multipart/form-data">
+                    @csrf
 
-    <x-dashboard.cards.sample column="col-12" title="تحديث البيانات الشخصية">
-        <form action="{{ route('users.profile') }}" method="post" class="row" enctype="multipart/form-data">
-            @csrf
+                    <div class="col-md-6 col-12 mb-3">
+                        <x-input-group :value="$user->avatar" type="file" name="avatar" :title="trans('table.columns.image')" />
+                    </div> {{-- / Avatar --}}
 
-            {{-- <div class="col-md-8 col-12 mx-auto">
-                @if ($user->avatar)
-                    <img src="{{ asset($user->avatar) }}" alt="avatar" class=" img-thumbnail" width="80px"
-                        height="80px">
-                @endif
-            </div> --}}
+                    <div class="col-md-6 col-12 mb-3">
+                        <x-input-group :value="$user->name" type="text" name="name" :title="trans('table.columns.name')" />
+                    </div> {{-- / Name --}}
 
-            <div class="col-md-6 col-12 mb-3">
-                <x-input-group :value="$user->avatar" type="file" name="avatar" :title="trans('table.columns.image')" />
-            </div> {{-- / Avatar --}}
-
-            <div class="col-md-6 col-12 mb-3">
-                <x-input-group :value="$user->name" type="text" name="name" :title="trans('table.columns.name')" />
-            </div> {{-- / Name --}}
-
-            <div class="col-md-6 col-12 mb-3">
-                <x-input-group :value="$user->email" type="email" name="email" :title="trans('table.columns.email')" />
-            </div> {{-- / Email --}}
+                    <div class="col-md-6 col-12 mb-3">
+                        <x-input-group :value="$user->email" type="email" name="email" :title="trans('table.columns.email')" />
+                    </div> {{-- / Email --}}
 
 
-            <div class="col-md-6 col-12 mb-3">
-                <x-input-group :value="$user->phone" type="phone" name="phone" :title="trans('table.columns.phone')" />
-            </div> {{-- / Phone --}}
+                    <div class="col-md-6 col-12 mb-3">
+                        <x-input-group :value="$user->phone" type="phone" name="phone" :title="trans('table.columns.phone')" />
+                    </div> {{-- / Phone --}}
 
-            <div class="col-md-6 col-12 mb-3">
-                <x-input-group type="password" name="password" :title="trans('table.columns.password')" />
-            </div> {{-- / Password --}}
+                    <div class="col-md-6 col-12 mb-3">
+                        <x-input-group type="password" name="password" :title="trans('table.columns.password')" />
+                    </div> {{-- / Password --}}
 
-            <div class="col-md-6 col-12 mb-3">
-                <x-input-group type="password" name="password_confirmation" :title="trans('table.columns.password confirmation')" />
-            </div> {{-- / Confirm Password --}}
+                    <div class="col-md-6 col-12 mb-3">
+                        <x-input-group type="password" name="password_confirmation" :title="trans('table.columns.password confirmation')" />
+                    </div> {{-- / Confirm Password --}}
 
-            <div class="col-12">
-                <x-dashboard.button type="submit" name="Save" class="btn-primary" />
+                    <div class="col-12">
+                        <x-dashboard.button type="submit" name="Save" class="btn-primary" />
+                    </div>
+
+                </form>
+            </x-dashboard.cards.sample>
+        </div>
+
+        @if ($user->role == 'admin' || ($user->role == 'inventor' && $inventorProfilePlan))
+            <div class="col-6">
+                <x-dashboard.cards.sample column="col-12">
+                    <h4>التعريف بالمخترع</h4>
+                    <form action="{{ route('inventors.profile') }}" method="post" class="row"
+                        enctype="multipart/form-data">
+                        @csrf
+
+                        @if ($user->inventorProfile->video != null)
+                            <div class="col-12">
+                                <iframe src="{{ asset($user->inventorProfile->video) }}" width="100%" height="300px"
+                                    controls>
+                                </iframe>
+                            </div>
+                        @endif
+
+                        <div class="col-12 mb-3">
+                            <x-input-group :value="$user->inventorProfile->video" type="file" name="video" :title="trans('table.columns.video')" />
+                        </div> {{-- / video --}}
+
+                        <div class="col-md-6 col-12 mb-3">
+                            <x-input-group :value="$user->inventorProfile->facebook" type="text" name="facebook" :title="trans('settings.facebook')" />
+                        </div> {{-- / Social Media --}}
+
+                        <div class="col-md-6 col-12 mb-3">
+                            <x-input-group :value="$user->inventorProfile->twitter" type="text" name="twitter" :title="trans('settings.twitter')" />
+                        </div> {{-- / Social Media --}}
+
+                        <div class="col-md-6 col-12 mb-3">
+                            <x-input-group :value="$user->inventorProfile->instagram" type="text" name="instagram" :title="trans('settings.instagram')" />
+                        </div> {{-- / Social Media --}}
+
+                        <div class="col-md-6 col-12 mb-3">
+                            <x-input-group :value="$user->inventorProfile->whatsapp" type="text" name="whatsapp" :title="trans('settings.whatsapp')" />
+                        </div> {{-- / Social Media --}}
+
+                        <div class="col-md-12 col-12 mb-3">
+                            <x-text-area-group name="description" :title="trans('settings.description')">
+                                {{ $user->inventorProfile->description }}</x-text-area-group>
+                        </div> {{-- / Social Media --}}
+
+
+
+                        <div class="col-12">
+                            <x-dashboard.button type="submit" name="Save" class="btn-primary" />
+                        </div>
+
+                    </form>
+                </x-dashboard.cards.sample>
+            </div>
+        @else
+            <div class="col-md-6">
+                <x-dashboard.cards.sample column="col-12">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="form-check custom-option custom-option-icon checked shadow bg-white">
+                            <label class="form-check-label custom-option-content" for="customRadioSvg1">
+                                <span class="custom-option-body">
+                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/icons/unicons/paypal.png"
+                                        class="w-px-40 mb-2" alt="paypal">
+                                    <span class="custom-option-title"> التعريف بالمخترعين </span>
+                                    <small>Cake sugar plum fruitcake I love sweet roll jelly-o.</small>
+                                </span>
+
+                                <a href="{{ route('front.inventor.profile.plan') }}"
+                                    class="btn btn-sm btn-outline-danger">
+                                    <span class="tf-icons bx bx-package me-1"></span>
+                                    الاشتراك
+                                </a>
+                            </label>
+                        </div>
+                    </div>
+                </x-dashboard.cards.sample>
             </div>
 
-        </form>
 
-    </x-dashboard.cards.sample>
+        @endif
+    </div>
 
     @push('component-styles')
         <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
+    @endpush
+
+    @push('scripts')
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ar.js"></script>
+
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#description'), {
+                    language: 'ar'
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
     @endpush
 
 </x-app-layout>
