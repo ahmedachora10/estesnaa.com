@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function showInventor(User $inventor)
     {
-        abort_if(!$inventor->hasRole('inventor'), 404);
+        abort_if(!$inventor->hasRole('inventor') || !$inventor->inventorProfilePlan, 404);
 
         return view('front.inventions.inventor', compact('inventor'));
     }
