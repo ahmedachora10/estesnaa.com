@@ -30,7 +30,7 @@ class UpdateInventionRequest extends FormRequest
             'name' => 'required|string',
             'image' => 'nullable|image',
             'description' => 'required|string',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'discount' => 'nullable|integer',
             'keywords' => 'nullable|string',
             'status' => ['required', Rule::enum(Status::class)]
