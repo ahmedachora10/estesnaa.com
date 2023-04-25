@@ -6,6 +6,17 @@
             @csrf
             @method('PUT')
 
+            <div class="col-md-8 col-12 mx-auto">
+                @if ($category->image)
+                    <img src="{{ asset($category->image) }}" alt="image" class=" img-thumbnail" width="110px"
+                        height="110px">
+                @endif
+            </div>
+
+            <div class="col-md-6 col-12 mb-3">
+                <x-input-group type="file" name="image" :title="trans('table.columns.image')" />
+            </div> {{-- / Image --}}
+
             <div class="col-md-6 col-12 mb-3">
                 <x-input-group :value="$category->name" type="text" name="name" :title="trans('table.columns.name')" />
             </div> {{-- / Name --}}

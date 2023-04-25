@@ -1,7 +1,10 @@
 <div>
-    <x-dashboard.tables.table1 title="sidebar.categories" :action="route('categories.create')" :columns="['name', 'description', 'section', 'actions']">
+    <x-dashboard.tables.table1 title="sidebar.categories" :action="route('categories.create')" :columns="['image', 'name', 'description', 'section', 'actions']">
         @forelse ($categories as $category)
             <tr>
+                <td><img src="{{ asset($category->thumb) }}" alt="image" class="rounded-circle" width="40"
+                        height="40">
+                </td>
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->description ? $category->description : '-' }}</td>
                 <td>

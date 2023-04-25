@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Utils\CategoryType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -39,6 +40,12 @@ class Category extends Model
     public function scopeInventionsSection($query)
     {
         $query->where('parent_id', CategoryType::INVENTIONS->value);
+    }
+
+    public function getThumbAttribute()
+    {
+        $thumb = Storage::disk('public')->exists(str_replace('storage/', '', $this->image));
+        return $thumb && !empty($this->image) ? $this->image : 'assets/default-category-1.png';
     }
 
 }

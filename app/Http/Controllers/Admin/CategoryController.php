@@ -7,9 +7,12 @@ use App\Models\Category;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Utils\CategoryType;
+use App\Utils\UploadImage;
 
 class CategoryController extends Controller
 {
+    use UploadImage;
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +42,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        Category::create($request->validated());
+        $request->validated();
+        Category::create($request->safe()->except('image') + $this->saveImage($request->image, 'categories'));
 
         return redirect()->route('categories.index')->with('success', trans('message.create'));
     }
@@ -76,7 +80,16 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $category->update($request->validated());
+
+        $request->validated();
+
+        $data = [];
+        if($request->exists('image') && $request->image != null) {
+            $this->removeImage($category->image);
+            $data = $this->saveImage($request->image, 'categories');
+        }
+
+        $category->update($request->safe()->except('image') + $data);
 
         return redirect()->route('categories.index')->with('success', trans('message.update'));
     }
@@ -89,6 +102,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if($category->image) {
+            $this->removeImage($category->image);
+        }
+
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', trans('message.delete'));

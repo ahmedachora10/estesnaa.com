@@ -29,6 +29,7 @@ class StoreServiceRequest extends FormRequest
             'category_id' => 'required|integer|exists:categories,id',
             'name' => 'required|string',
             'image' => 'required|image',
+            'price' => 'required|integer',
             'description' => 'required|string',
             'keywords' => 'nullable|string',
             'status' => ['required', Rule::enum(Status::class)]

@@ -38,6 +38,6 @@ class ServiceController extends Controller
 
         $services = $category->services;
 
-        return view('front.services.services', compact('services'));
+        return view('front.services.services', compact('services', 'category'));
     }
 }

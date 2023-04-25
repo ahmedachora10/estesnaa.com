@@ -9,7 +9,7 @@
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                         <div class="services-body">
                             <div class="services-img">
-                                <img src="{{ asset($serviceCategory->image) }}" alt=""
+                                <img src="{{ asset($serviceCategory->thumb) }}" alt=""
                                     style="height:100px; width:150px">
                             </div>
                             <div class="services-title">
@@ -27,5 +27,6 @@
 
     @push('styles')
         <link rel="stylesheet" href="{{ asset('front/css/skin.deepblue.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/css/services.css') }}">
     @endpush
 </x-front>

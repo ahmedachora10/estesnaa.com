@@ -26,6 +26,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
+            'image' => 'required|image',
             'parent_id' => ['required', Rule::enum(CategoryType::class)],
             'name' => 'required|string',
             'description' => 'nullable|string',

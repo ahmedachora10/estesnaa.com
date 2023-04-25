@@ -1,4 +1,4 @@
-<section id="topbar" class="d-flex align-items-center">
+<div id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
             <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
             @endguest
         </div>
     </div>
-</section>
+</div>
 <header>
     <div class="header-inner" style="background-image: url({{ asset('front/images/backgrounds/bg-1.jpg') }})">
 

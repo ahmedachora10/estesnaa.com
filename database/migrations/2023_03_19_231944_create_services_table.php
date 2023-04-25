@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->string('name');
             $table->string('image');
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('keywords')->nullable();
             $table->tinyInteger('status')->default(Status::ENABLED->value);
             $table->timestamps();

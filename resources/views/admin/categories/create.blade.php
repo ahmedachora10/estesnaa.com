@@ -5,6 +5,10 @@
             @csrf
 
             <div class="col-md-6 col-12 mb-3">
+                <x-input-group type="file" name="image" :title="trans('table.columns.image')" />
+            </div> {{-- / Image --}}
+
+            <div class="col-md-6 col-12 mb-3">
                 <x-input-group type="text" name="name" :title="trans('table.columns.name')" />
             </div> {{-- / Name --}}
 

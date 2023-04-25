@@ -1,9 +1,9 @@
 @php
     $isAdmin = auth()->user()->role == 'admin';
     if ($isAdmin) {
-        $columns = ['image', 'name', 'owner', 'category', 'status', 'actions'];
+        $columns = ['image', 'name', 'owner', 'category', 'price', 'status', 'actions'];
     } else {
-        $columns = ['image', 'name', 'category', 'status', 'actions'];
+        $columns = ['image', 'name', 'category', 'price', 'status', 'actions'];
     }
 @endphp
 
@@ -18,6 +18,8 @@
                     <td><span class="badge badge bg-label-success">{{ $service->owner->name }}</span></td>
                 @endif
                 <td><span class="badge badge bg-label-primary">{{ $service->category->name }}</span></td>
+
+                <td><span class="badge badge bg-label-danger fw-bold">${{ $service->price }}</span></td>
 
                 <td> <span class="badge badge bg-label-{{ $service->status->color() }}" style="cursor: pointer"
                         wire:click="updateStatus({{ $service->id }})">{{ $service->status->name() }}</span>

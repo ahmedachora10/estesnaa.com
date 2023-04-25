@@ -35,6 +35,10 @@
             </div> {{-- / Keywords --}}
 
             <div class="col-md-12 col-12 mb-3">
+                <x-input-group type="number" :value="$service->price" name="price" :title="trans('table.columns.price')" />
+            </div> {{-- / Price --}}
+
+            <div class="col-md-12 col-12 mb-3">
                 <x-text-area-group :value="$service->description" name="description" :title="trans('table.columns.description')" />
             </div> {{-- / Description --}}
 
@@ -58,5 +62,20 @@
         </form>
 
     </x-dashboard.cards.sample>
+
+    @push('scripts')
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ar.js"></script>
+
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#description'), {
+                    language: 'ar'
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+    @endpush
 
 </x-app-layout>

@@ -28,7 +28,8 @@ class UpdateServiceRequest extends FormRequest
         return [
             'category_id' => 'required|integer|exists:categories,id',
             'name' => 'required|string',
-            'image' => 'required|image',
+            'image' => 'nullable|image',
+            'price' => 'required|numeric',
             'description' => 'required|string',
             'keywords' => 'nullable|string',
             'status' => ['required', Rule::enum(Status::class)]
