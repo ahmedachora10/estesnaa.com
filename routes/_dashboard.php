@@ -33,7 +33,8 @@ Route::get('/assing_role', function ()
     return auth()->user();
 });
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
+// 'verified'
+Route::middleware(['auth'])->prefix('admin')->group(function ()
 {
 
     Route::middleware('role:admin')->group(function ()
