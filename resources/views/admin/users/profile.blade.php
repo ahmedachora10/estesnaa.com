@@ -41,7 +41,10 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
+        <div @class([
+            'col-md-6' => $user->role == 'inventor' || $user->role == 'admin',
+            'col-md-12' => !in_array($user->role, ['inventor', 'admin']),
+        ])>
             <x-dashboard.cards.sample column="col-12">
                 <h4>تحديث البيانات الشخصية</h4>
                 <form action="{{ route('users.profile') }}" method="post" class="row" enctype="multipart/form-data">
@@ -130,7 +133,7 @@
                     </form>
                 </x-dashboard.cards.sample>
             </div>
-        @else
+        @elseif($user->role == 'inventor' && !$inventorProfilePlan)
             <div class="col-md-6">
                 <x-dashboard.cards.sample column="col-12">
                     <div class="d-flex align-items-center justify-content-center">

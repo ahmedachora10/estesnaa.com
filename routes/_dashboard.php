@@ -64,7 +64,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
         /**
          * Users Routes
          */
-        Route::resource('users', UserController::class)->only('index', 'create', 'store','delete');
+        Route::resource('users', UserController::class)->only('index', 'create', 'store','delete', 'edit', 'destroy');
 
         /**
          * Role Routes

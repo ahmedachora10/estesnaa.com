@@ -60,6 +60,13 @@
         <link rel="stylesheet" href="{{ asset('front/css/pricing-plan.css') }}">
     @endif
 
+    <style>
+        #user-menu {
+            width: 210px;
+            z-index: 999999;
+            top: 35px
+        }
+    </style>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -113,6 +120,17 @@
         <script src="{{ asset('front/js/main.js') }}"></script>
     @endif
 
+    <script>
+        $(document).ready(function() {
+            const userMenuBtn = $('#user-menu-btn');
+
+            if (userMenuBtn.length) {
+                userMenuBtn.click(function() {
+                    $('#user-menu').slideToggle();
+                });
+            }
+        });
+    </script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->

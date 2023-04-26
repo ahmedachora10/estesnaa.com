@@ -1590,31 +1590,31 @@ h3,
 h4,
 h5,
 h6 {
-    line-height: 1.6em;
-    font-weight: bold;
-    margin-bottom: 1rem
+    line-height: 1.2em !important;
+    font-weight: bold !important;
+    margin-bottom: 1rem !important
 }
 
 .description-container h1 {
-    font-size: 26px;
+    font-size: 26px !important;
 }
 
 .description-container h2 {
-    font-size: 24px;
+    font-size: 24px !important;
 }
 
 .description-container h3 {
-    font-size: 19px;
+    font-size: 19px !important;
 }
 
 .description-container h4 {
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 .description-container p {
-    font-size: 16px;
-    line-height: 1.5em;
-    font-weight: normal;
+    font-size: 16px !important;
+    line-height: 1.5em !important;
+    font-weight: normal !important;
 
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }

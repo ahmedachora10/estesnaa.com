@@ -1,24 +1,24 @@
 <div id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
             <a href="#">{{ date('Y-m-d') }}</a>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
             <span class="TopBorder"> | </span>
-            <i class="fa fa-clock-o"></i>
-            <a href="#">
+            <a href="#" dir="rtl">
                 {{ date('H:i') }} {{ get_time(date('H')) }}
             </a>
+            <i class="fa fa-clock-o"></i>
 
             <span class="TopPhone">
                 <span class="TopBorder"> |</span>
-                <i class="fa fa-phone"></i>
                 {{ setting('phone') }}
+                <i class="fa fa-phone"></i>
             </span>
         </div>
         <div class="social-links d-none d-md-block">
 
             {{-- Social Media Buttons --}}
-            @foreach (['facebook', 'twitter', 'youtube', 'instagrame', 'whatsapp'] as $media)
+            @foreach (['facebook', 'twitter', 'youtube', 'instagram', 'whatsapp'] as $media)
                 @if ($link = setting($media))
                     <a href="{{ $link }}" class="twitter" target="_blank"><i
                             class="fab fa-{{ $media }}"></i></a>
@@ -27,8 +27,40 @@
 
             <a href="#" class="">|</a>
             @auth
-                <div class="d-inline-block">
-                    <x-dashboard.logout class="sign-in"><i class="fa fa-sign-out text-danger"></i></x-dashboard.logout>
+                {{-- User Dropdown Menu --}}
+                <div class="d-inline-block position-relative" dir="rtl">
+                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset(auth()->user()->image) }}" alt="user avatar"
+                            class="rounded-circle position-relative" style="top:3px" id="user-menu-btn" width="20"
+                            height="20">
+                        <span class="arrow icon-keyboard_arrow_down"></span>
+                    </a>
+
+                    <div class="bg-white px-3 py-4 position-absolute" id="user-menu" style="display: none">
+                        <ul class="list-unstyled">
+                            <li class="py-3 border-bottom">
+                                <a href="{{ route('dashboard') }}" class="text-dark fw-normal" style="font-size: 13px">
+                                    <i class="fas fa-dashboard text-secondary"></i> لوحة التحكم
+                                </a>
+                            </li>
+
+                            <li class="py-3 border-bottom">
+                                <a href="{{ route('users.show', auth()->user()) }}" class="text-dark fw-normal"
+                                    style="font-size: 13px">
+                                    <i class="fas fa-user text-secondary"></i> الملف الشخصي
+                                </a>
+                            </li>
+
+
+                            <li class="pt-3">
+                                <x-dashboard.logout class="sign-in text-danger fw-bold" style="font-size:13px"><i
+                                        class="fa fa-sign-out text-danger"></i> الخروج
+                                </x-dashboard.logout>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {{-- <x-dashboard.logout class="sign-in"><i class="fa fa-sign-out text-danger"></i></x-dashboard.logout> --}}
                 </div>
             @endauth
             @guest
