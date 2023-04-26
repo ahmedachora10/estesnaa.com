@@ -1621,6 +1621,7 @@ h6 {
 
 .description-container blockquote {
     margin-bottom: 1rem;
+    margin-top: 1.5rem;
     font-size: 1.25rem;
     background-color: #ebedef;
     border-color: #565e6c;
@@ -1631,5 +1632,6 @@ h6 {
     --mdb-note-border-radius: 5px;
     --mdb-note-strong-font-weight: 600;
     border-right: var(--mdb-note-border-width) solid;
-    border-radius: var(--mdb-note-border-radius)
+    border-radius: var(--mdb-note-border-radius);
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
