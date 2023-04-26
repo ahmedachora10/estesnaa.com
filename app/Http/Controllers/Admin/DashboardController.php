@@ -56,7 +56,7 @@ class DashboardController extends Controller
 
         $user_bank_amount = null;
         if(in_array(auth()->user()->role, ['service_provider', 'inventor'])) {
-            $user_bank_amount = auth()->user()->profit->total;
+            $user_bank_amount =  auth()->user()->profit ? auth()->user()->profit->total : 0;
         }
 
         $inventions_orders_total_amount = null;
