@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::controller(HomeController::class)->group(function ()
 {
     Route::get('/', 'index')->name('home');
@@ -62,6 +63,7 @@ Route::controller(PaymentController::class)->name('payment.')->middleware(['auth
     Route::get('/success', 'success')->name('success');
     Route::get('/cancel', 'cancel')->name('cancel');
     Route::get('/invention/{invention}', 'inventionOrderPayment')->name('invention.order');
+    Route::get('/service/{service}', 'serviceOrderPayment')->name('service.order');
     Route::get('direct', 'direct')->name('direct');
     Route::get('/{package}', 'pay')->name('pay');
 });

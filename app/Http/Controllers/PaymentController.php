@@ -7,6 +7,10 @@ use App\Casts\UserActivityType;
 use App\Models\Invention;
 use App\Models\InventionOrder;
 use App\Models\Package;
+use App\Models\PendingBalance;
+use App\Models\PlatformProfitBalance;
+use App\Models\Service;
+use App\Models\ServiceOrder;
 use App\Models\Subscription;
 use App\Models\Transaction;
 use App\Models\User;
@@ -85,6 +89,34 @@ class PaymentController extends Controller
         }
     }
 
+    public function serviceOrderPayment(Service $service)
+    {
+        abort_if($service->status->value == Status::DISABLED->value, 404);
+
+        if($service->price == 0) {
+            return back();
+        }
+
+        try {
+            $response = $this->geteway->purchase([
+                'amount' => $service->price,
+                'currency' => 'USD',
+                'returnUrl' => route('payment.success'),
+                'cancelUrl' => route('payment.cancel'),
+            ])->send();
+
+            if($response->isRedirect()) {
+                session()->put('serviceID', $service->id);
+                return $response->redirect();
+            } else {
+                return $response->getMessage();
+            }
+
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function success(Request $request)
     {
         if($request->input('paymentId') && $request->input('PayerID')) {
@@ -98,7 +130,7 @@ class PaymentController extends Controller
                 DB::transaction(function () use($data)
                 {
 
-                    // TODO: when buy service & save user profit take platform percentage profit
+                    // TODO: when buy service & save user profit, take platform percentage profit
 
                     $transaction = $this->saveTransaction($data);
                     if($transaction !== false) {
@@ -142,6 +174,39 @@ class PaymentController extends Controller
                                 ]);
 
                                 session()->remove('inventionID');
+                            }
+                        }elseif(session()->exists('serviceID')) {
+                            $service = Service::find(session()->get('serviceID'));
+
+                            if($service) {
+                                ServiceOrder::create([
+                                    'buyer_id' => auth()->id(),
+                                    'transaction_id' => $transaction->id,
+                                    'service_id' => $service->id,
+                                    'service_provider_id' => $service->user_id,
+                                    'amount' => $transaction->amount
+                                ]);
+
+                                PendingBalance::create(['user_id' => $service->user_id, 'amount' => calc_service_provider_profit($transaction->amount)]);
+
+                                PlatformProfitBalance::create(['service_id' => $service->id, 'amount' => calc_platform_profit($transaction->amount)]);
+
+                                $userProfit = UserProfit::firstWhere('user_id', $service->user_id);
+
+                                if(!$userProfit) {
+                                    $userProfit = new UserProfit();
+                                    $userProfit->user_id = $service->user_id;
+                                    $userProfit->total = 0;
+                                    $userProfit->save();
+                                }
+
+                                UserBankActivity::create([
+                                    'user_id' => $service->user_id,
+                                    'activity_type' => UserActivityType::RECEIVED,
+                                    'amount' => calc_service_provider_profit($transaction->amount)
+                                ]);
+
+                                session()->remove('serviceID');
                             }
                         }
                     }

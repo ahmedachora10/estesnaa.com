@@ -24,7 +24,7 @@ class Category extends Model
 
     public function services()
     {
-        return $this->hasMany(Service::class)->active();
+        return $this->hasMany(Service::class)->whereRelation('owner', 'service_provider_subscription_paid', true)->active();
     }
 
     public function scopeServicesSection($query)

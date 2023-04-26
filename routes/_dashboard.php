@@ -133,6 +133,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
     {
         Route::get('/', 'index')->name('dashboard');
         Route::post('/inventors/profile', [UserController::class, 'updateInventorProfile'])->name('inventors.profile');
+        Route::post('users/inventors/video/upload', [UserController::class, 'uploadVideo'])->name('users.upload.video');
         Route::resource('users', UserController::class)->only('show', 'update');
     });
 

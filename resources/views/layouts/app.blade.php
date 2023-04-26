@@ -244,7 +244,7 @@
             $('.modal .btn-close').trigger('click');
 
             if ($('#user-profit-amount').length) {
-                $('#user-profit-amount').find('h3.card-title').text('$' + target.updatedAmount);
+                $('#user-profit-amount').find('h3.card-title').text('$' + target.updatedAmount.toLocaleString());
             }
         });
     </script>

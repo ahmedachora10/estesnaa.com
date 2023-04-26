@@ -81,6 +81,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->service_provider_subscription_paid == true;
     }
 
+    public function inventorProfile()
+    {
+        return $this->hasOne(InventorProfile::class, 'inventor_id');
+    }
+
     public function plan()
     {
         return $this->hasOne(Subscription::class)->active();
@@ -124,14 +129,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserProfit::class);
     }
 
+    public function pendingBalance()
+    {
+        return $this->hasMany(PendingBalance::class);
+    }
+
+    public function getPendingBalanceAttribute()
+    {
+        return $this->pendingBalance()->sum('amount');
+    }
+
     public function getImageAttribute()
     {
         $avatarExists = Storage::disk('public')->exists(str_replace('storage/', '', $this->avatar));
         return $avatarExists ? $this->avatar : 'assets/avatar.jpg';
-    }
-
-    public function inventorProfile()
-    {
-        return $this->hasOne(InventorProfile::class, 'inventor_id');
     }
 }

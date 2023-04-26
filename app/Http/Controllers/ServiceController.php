@@ -29,6 +29,8 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
+        abort_if(!$service->owner->service_provider_subscription_paid, 404);
+
         return view('front.services.show', compact('service'));
     }
 

@@ -57,3 +57,24 @@ if (! function_exists('views_for_humans')) {
         return  $view .' '. $view_for_humans;
     }
 }
+
+
+if (! function_exists('calc_platform_profit')) {
+
+    function calc_platform_profit(float|int $amount)
+    {
+        if($amount == 0) {
+            return 0;
+        }
+
+        return ($amount * setting('percentage')) / 100;
+    }
+}
+
+if (! function_exists('calc_service_provider_profit')) {
+
+    function calc_service_provider_profit(float|int $amount)
+    {
+        return $amount - calc_platform_profit($amount);
+    }
+}

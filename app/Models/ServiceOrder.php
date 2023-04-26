@@ -9,7 +9,7 @@ class ServiceOrder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['buyer_id', 'service_id', 'service_provider_id', 'category_id', 'amount'];
+    protected $fillable = ['buyer_id', 'service_id', 'service_provider_id', 'transaction_id', 'amount'];
 
     public function buyer()
     {
@@ -29,5 +29,10 @@ class ServiceOrder extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
     }
 }

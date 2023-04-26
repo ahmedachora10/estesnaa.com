@@ -24,6 +24,12 @@ return [
     'youtube' => 'اليوتوب',
 
     'percentage' => 'نسبة المنصة',
+    'pending balance duration' => 'مدة تعليق الرصيد',
+
+    'paypal' => 'اعدادات البايبال',
+    'paypal client id' => 'Client ID',
+    'paypal client secret' => 'Client Secret',
+    'live mode?' => 'في حالة Production؟',
 
     'save' => 'حفظ الاعدادات',
     'pagination' => 'عدد العناصر',

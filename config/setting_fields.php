@@ -194,7 +194,7 @@ return [
                 'type' => 'select',
                 'data' => 'string',
                 'name' => 'paypal_live_mode',
-                'label' => 'Live mode?',
+                'label' => 'live mode?',
                 'rules' => 'nullable|integer|in:0,1',
                 'class' => '',
                 'value' => '',
@@ -239,27 +239,8 @@ return [
                 'label' => 'Pagination',
                 'rules' => 'nullable|integer',
                 'class' => '',
-                'value' => ''
-
-            ]
-        ]
-    ],
-
-    'footer' => [
-
-        'title' => 'Footer',
-        'desc' => '',
-        'icon' => 'menu-icon tf-icons bx bx-user-pin',
-
-        'elements' => [
-            [
-                'type' => 'text',
-                'data' => 'string',
-                'name' => 'footer',
-                'label' => 'Footer',
-                'rules' => 'nullable|string',
-                'class' => '',
-                'value' => 'footer'
+                'value' => '',
+                'parent_class' => 'col-12'
 
             ]
         ]
@@ -278,10 +259,41 @@ return [
                 'name' => 'percentage',
                 'label' => 'percentage',
                 'rules' => 'nullable|integer|min:0',
-                'parent_class' => 'col-12',
+                'parent_class' => 'col-6',
                 'class' => '',
                 'value' => 0,
             ],
+            [
+                'type' => 'text',
+                'data' => 'number',
+                'name' => 'pending_balance_duration',
+                'label' => 'pending balance duration',
+                'rules' => 'nullable|integer|min:0',
+                'parent_class' => 'col-6',
+                'class' => '',
+                'value' => 0,
+            ],
+        ]
+    ],
+
+    'footer' => [
+
+        'title' => 'Footer',
+        'desc' => '',
+        'icon' => 'menu-icon tf-icons bx bx-user-pin',
+
+        'elements' => [
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'footer',
+                'label' => 'Footer',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => 'footer',
+                'parent_class' => 'col-12',
+
+            ]
         ]
     ],
 ];

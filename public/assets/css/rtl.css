@@ -180,5 +180,5 @@
 .modal .modal-header .btn-close {
     margin-left: 0px !important;
     position: relative;
-    left: -61px;
+    /* left: -61px; */
 }

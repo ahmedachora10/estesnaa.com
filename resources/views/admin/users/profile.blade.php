@@ -50,9 +50,13 @@
                 <form action="{{ route('users.profile') }}" method="post" class="row" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="col-md-6 col-12 mb-3">
-                        <x-input-group :value="$user->avatar" type="file" name="avatar" :title="trans('table.columns.image')" />
-                    </div> {{-- / Avatar --}}
+                    @if ($user->role != 'inventor')
+                        <div class="col-md-6 col-12 mb-3">
+                            <x-input-group :value="$user->avatar" type="file" name="avatar" :title="trans('table.columns.image')" />
+                        </div> {{-- / Avatar --}}
+                    @else
+                        <input type="file" name="avatar" hidden>
+                    @endif
 
                     <div class="col-md-6 col-12 mb-3">
                         <x-input-group :value="$user->name" type="text" name="name" :title="trans('table.columns.name')" />
@@ -92,7 +96,7 @@
                         @csrf
 
                         @if ($user->inventorProfile->video != null)
-                            <div class="col-12">
+                            <div class="col-12 mb-3">
                                 <iframe src="{{ asset($user->inventorProfile->video) }}" width="100%" height="300px"
                                     controls>
                                 </iframe>
@@ -102,6 +106,10 @@
                         <div class="col-12 mb-3">
                             <x-input-group :value="$user->inventorProfile->video" type="file" name="video" :title="trans('table.columns.video')" />
                         </div> {{-- / video --}}
+
+                        <div class="col-md-12 col-12 mb-3">
+                            <x-input-group :value="$user->avatar" type="file" name="avatar" :title="trans('table.columns.image')" />
+                        </div> {{-- / Avatar --}}
 
                         <div class="col-md-6 col-12 mb-3">
                             <x-input-group :value="$user->inventorProfile->facebook" type="text" name="facebook" :title="trans('settings.facebook')" />
@@ -120,8 +128,8 @@
                         </div> {{-- / Social Media --}}
 
                         <div class="col-md-12 col-12 mb-3">
-                            <x-text-area-group name="description" :title="trans('settings.description')">
-                                {{ $user->inventorProfile->description }}</x-text-area-group>
+                            <x-text-area-group name="description" :title="trans('settings.description')" :value="$user->inventorProfile->description">
+                            </x-text-area-group>
                         </div> {{-- / Social Media --}}
 
 
@@ -164,6 +172,46 @@
     @push('component-styles')
         <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
     @endpush
+
+    @if (in_array($user->role, ['inventor', 'admin']) && $inventorProfilePlan)
+        @push('component-styles')
+            <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+            <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+                rel="stylesheet" />
+        @endpush
+        @push('component-scripts')
+            <script
+                src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4.6.10/dist/filepond-plugin-image-preview.min.js">
+            </script>
+            <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+            <script src="{{ asset('assets/js/helpers.js') }}"></script>
+        @endpush
+        @push('scripts')
+            <script defer>
+                FilePond.registerPlugin(FilePondPluginImagePreview);
+
+                const video = document.querySelector('#video');
+
+                if (video != null) {
+                    const videoBond = filePond(video, {
+                        // required: true,
+                        labelIdle: 'سحب وافلات فيديو تعريفي (*)<span class="filepond--label-action text-primary"> تصفح </span> ',
+                    });
+
+                    // Video Preview
+                    // videoBond.preview(
+                    //     "{{ asset($user->inventorProfile->video) }}",
+                    //     "{{ str_replace('storage/inventors/videos/', '', $user->inventorProfile->video) }}",
+                    //     'video'
+                    // );
+
+                    $("#video").on('change drop', () => {
+                        videoBond.setOptions("{{ route('users.upload.video') }}");
+                    });
+                }
+            </script>
+        @endpush
+    @endif
 
     @push('scripts')
         <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>

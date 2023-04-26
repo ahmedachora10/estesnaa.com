@@ -12,6 +12,11 @@ use App\Utils\UploadImage;
 class ServiceController extends Controller
 {
     use UploadImage;
+
+    public function __construct() {
+        $this->middleware('has.plan')->only('create', 'edit');
+    }
+
     /**
      * Display a listing of the resource.
      *

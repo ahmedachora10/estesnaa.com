@@ -57,8 +57,13 @@
             <div class="row">
                 {{-- Users --}}
                 @if (auth()->user()->role == 'admin')
-                    <div class="col-lg-12 col-md-12 col-6 mb-4">
+                    <div class="col-lg-6 col-md-6 col-6 mb-4">
                         <x-dashboard.cards.payment title="مبيعات الموقع" :amount="$total_amount" />
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-6 mb-4">
+                        <x-dashboard.cards.payment title="ارباح الموقع من الخدمات" :amount="$platform_profit"
+                            icon="assets/img/icons/unicons/cc-success.png" />
                     </div>
 
                     <div class="col-lg-6 col-md-12 col-6 mb-4">
@@ -112,6 +117,12 @@
                                     سحب
                                     الارباح</span></a>
                         </x-slot:options>
+                    </x-dashboard.cards.payment>
+                @endif
+
+                @if (auth()->user()->role == 'service_provider')
+                    <x-dashboard.cards.payment title="الرصيد المعلق" class="mt-4" :amount="$service_provider_pending_balance"
+                        id="user-pending-balance" icon="assets/img/icons/unicons/wallet.png">
                     </x-dashboard.cards.payment>
                 @endif
 

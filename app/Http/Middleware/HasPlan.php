@@ -16,10 +16,11 @@ class HasPlan
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check() && auth()->user()->role != 'admin' && !auth()->user()->plan) {
-            if(auth()->user()->role == 'service_provider') {
+        if(auth()->check() && auth()->user()->role != 'admin') {
+
+            if(auth()->user()->role == 'service_provider' && auth()->user()->service_provider_subscription_paid == false) {
                 return redirect()->route('front.service-provider.plan');
-            } else {
+            } elseif(in_array(auth()->user()->role, ['event', 'inventor']) && !auth()->user()->plan) {
                 return redirect()->route('front.packages');
             }
         }

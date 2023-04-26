@@ -9,7 +9,8 @@
                 </div>
 
                 <div class="col-md-4 mt-2">
-                    <a href="#" class="btn btn-warning float-start fw-bold" style="font-size: 14px">
+                    <a href="{{ route('payment.service.order', $service) }}" class="btn btn-warning float-start fw-bold"
+                        style="font-size: 14px">
                         <i class="fas fa-basket-shopping ms-2"></i>
                         اشتري الخدمة
                     </a>

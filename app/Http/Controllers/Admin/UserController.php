@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
@@ -136,7 +137,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore(auth()->user())],
             'password' => ['nullable', 'confirmed', Password::defaults()],
-            'avatar' => ['required', 'image'],
+            'avatar' => ['nullable', 'image'],
             'phone' => ['required', 'string', Rule::unique('users', 'phone')->ignore(auth()->user())],
         ], $request->all());
 
@@ -197,7 +198,8 @@ class UserController extends Controller
     public function updateInventorProfile(Request $request)
     {
         $request->validate([
-            'video' => ['nullable', 'file'],
+            'video' => ['nullable', 'ends_with:.mp4,.mov'],
+            'avatar' => ['nullable', 'image'],
             'facebook' => ['nullable', 'string'],
             'twitter' => ['nullable', 'string'],
             'instagram' => ['nullable', 'string'],
@@ -212,15 +214,33 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $file = [];
-        if($request->hasFile('video')) {
-            $video = $request->video;
-            $video_path = str_replace('public', 'storage', $video->storeAs('public/inventors/videos', date('Y-m-d').auth()->id().str()->random(4). '.'.$video->extension()));
-            $file = ['video' => $video_path];
+        if($request->video != null && $request->video != $user->inventorProfile->video) {
+            $this->removeAvatar($user->inventorProfile->video);
         }
 
-        $user->inventorProfile()->update($request->only(['facebook', 'whatsapp', 'instagram', 'twitter', 'description']) + $file);
+        if($request->hasFile('avatar')) {
+            $avatar = $request->avatar;
+            $avatar_path = str_replace('public', 'storage', $avatar->storeAs('public/images/users', date('Y-m-d').auth()->id().str()->random(4). '.'.$avatar->extension()));
+            $file = ['avatar' => $avatar_path];
+            $user->update($file);
+        }
+
+        $user->inventorProfile()->update($request->only(['facebook', 'whatsapp', 'instagram', 'twitter', 'description', 'video']));
 
         return redirect()->route('users.show', $user)->with('success', trans('message.update'));
+    }
+
+    public function uploadVideo(Request $request)
+    {
+        $validated = Validator::make($request->all(), ['video' => 'required|file']);
+
+        if($validated->fails()) {
+            return false;
+        }
+
+        $video = $request->video;
+        $uploadVideoPath = str_replace('public', 'storage', $video->storeAs('public/inventors/videos', date('Y-m-d').auth()->id().str()->random(4). '.'.$video->extension()));;
+
+        return $uploadVideoPath;
     }
 }

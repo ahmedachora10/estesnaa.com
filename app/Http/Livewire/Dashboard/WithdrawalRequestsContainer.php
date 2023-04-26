@@ -49,7 +49,7 @@ class WithdrawalRequestsContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.withdrawal-requests-container', [
-            'requests' => UserWithdrawalRequest::with('user')->orderBy('status')->paginate(setting('pagination')),
+            'requests' => UserWithdrawalRequest::with('user')->orderBy('status')->latest()->paginate(setting('pagination')),
             'types' => UserWithdrawalRequestType::cases()
         ]);
     }
