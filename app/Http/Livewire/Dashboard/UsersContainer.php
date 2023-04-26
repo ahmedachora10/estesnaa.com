@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Dashboard;
 use App\Casts\Status;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -40,6 +41,12 @@ class UsersContainer extends Component
         if($user) {
             $user->update(['status' => $status]);
         }
+    }
+
+    public function signIn(User $user)
+    {
+        Auth::loginUsingId($user->id);
+        return redirect()->route('home');
     }
 
     public function render()

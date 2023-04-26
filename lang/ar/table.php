@@ -32,6 +32,7 @@ return [
         'group' => 'المجموعة',
         'content' => 'المحتوى',
         'section' => 'القسم',
+        'sign in' => 'الدخول',
         'duration' => 'الفترة',
         'display name' => 'اسم العرض',
         'created at' => 'وقت الانظمام',

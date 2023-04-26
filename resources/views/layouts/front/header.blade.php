@@ -38,18 +38,20 @@
 
                     <div class="bg-white px-3 py-4 position-absolute" id="user-menu" style="display: none">
                         <ul class="list-unstyled">
-                            <li class="py-3 border-bottom">
-                                <a href="{{ route('dashboard') }}" class="text-dark fw-normal" style="font-size: 13px">
-                                    <i class="fas fa-dashboard text-secondary"></i> لوحة التحكم
-                                </a>
-                            </li>
+                            @if (auth()->user()->role != 'user')
+                                <li class="py-3 border-bottom">
+                                    <a href="{{ route('dashboard') }}" class="text-dark fw-normal" style="font-size: 13px">
+                                        <i class="fas fa-dashboard text-secondary"></i> لوحة التحكم
+                                    </a>
+                                </li>
 
-                            <li class="py-3 border-bottom">
-                                <a href="{{ route('users.show', auth()->user()) }}" class="text-dark fw-normal"
-                                    style="font-size: 13px">
-                                    <i class="fas fa-user text-secondary"></i> الملف الشخصي
-                                </a>
-                            </li>
+                                <li class="py-3 border-bottom">
+                                    <a href="{{ route('users.show', auth()->user()) }}" class="text-dark fw-normal"
+                                        style="font-size: 13px">
+                                        <i class="fas fa-user text-secondary"></i> الملف الشخصي
+                                    </a>
+                                </li>
+                            @endif
 
 
                             <li class="pt-3">

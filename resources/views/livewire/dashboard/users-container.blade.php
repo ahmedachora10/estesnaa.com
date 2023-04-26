@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <x-dashboard.tables.table1 title="sidebar.users" :action="route('users.create')" :columns="['image', 'name', 'email', 'role', 'status', 'created at', 'actions']">
+    <x-dashboard.tables.table1 title="sidebar.users" :action="route('users.create')" :columns="['image', 'name', 'email', 'role', 'status', 'created at', 'sign in', 'actions']">
 
         @forelse ($users as $user)
             <tr>
@@ -72,6 +72,11 @@
                     </ul>
                 </td>
                 <td>{{ $user->created_at->diffForHumans() }}</td>
+                <td> <a href="#!" wire:click="signIn({{ $user }})" class="btn btn-sm btn-primary fw-bold">
+                        <i class="bx bx-log-in-circle me-1"></i>
+                        الدخول
+                    </a>
+                </td>
                 <td>
                     <x-dashboard.actions.container>
                         <x-dashboard.actions.edit :href="route('users.edit', $user->id)">{{ __('Edit') }}</x-dashboard.actions.edit>
