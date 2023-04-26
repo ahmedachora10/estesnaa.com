@@ -1625,10 +1625,11 @@ h6 {
     background-color: #ebedef;
     border-color: #565e6c;
     padding: 1.5rem!important;
+    font-style: italic;
     --mdb-note-padding: 10px;
     --mdb-note-border-width: 6px;
     --mdb-note-border-radius: 5px;
     --mdb-note-strong-font-weight: 600;
-    border-left: var(--mdb-note-border-width) solid;
+    border-right: var(--mdb-note-border-width) solid;
     border-radius: var(--mdb-note-border-radius)
 }
