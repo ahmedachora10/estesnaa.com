@@ -1618,3 +1618,11 @@ h6 {
 
     margin-bottom: 10px !important;
 }
+
+.description-container blockquote {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    background-color: #ebedef;
+    border-color: #565e6c;
+    padding: 1.5rem!important;
+}
