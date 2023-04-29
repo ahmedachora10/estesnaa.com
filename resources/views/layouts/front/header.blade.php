@@ -79,8 +79,7 @@
 </div>
 <header>
     <div class="header-inner" style="background-image: url({{ asset('front/images/backgrounds/bg-1.jpg') }})">
-
-        <section class="layout-width clearfix">
+        <section class="layout-width container clearfix">
 
             <div class="site-title fixed">
                 <div class="site-logo">

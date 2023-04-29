@@ -3,28 +3,49 @@
 
     <section id="services" class="services">
         <div class="container">
-
             <div class="row">
                 @foreach ($services as $service)
-                    <div class="col-lg-4 col-md-6 d-flex align-items-start">
-                        <div class="services-body bg-white shadow-sm w-100 mt-2 rounded">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex align-items-start">
+                        <div class="services-body bg-white shadow-sm w-100 my-2 rounded">
                             <div class="services-img w-100"
-                                style="height: 222px; background-image:url({{ asset($service->image) }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+                                style="height: 150px; background-image:url({{ asset($service->image) }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
                                 {{-- <img src="{{ asset($service->image) }}" class="w-100" alt="thumb"> --}}
                             </div>
-                            <div class="px-3 py-4">
-                                <h3 class="mb-2 fw-bold" style=" font-size: 20px;line-height: 1.3em;"><a
+                            <div class="px-3 py-2">
+                                <h3 class="mb-2 fw-bold" style=" font-size: 16px;line-height: 1.3em;"><a
                                         href="{{ route('front.services.show', $service) }}">{{ $service->name }}</a>
                                 </h3>
-                                <h6 class="text-secondary"><i class="fa fa-grid"></i>{{ $category->name }}</h6>
+                                <h6 class="text-secondary my-2" style="font-size:14px !important"><i
+                                        class="fa fa-grid"></i>{{ $category->name }}</h6>
 
-                                <div class="d-flex justify-content-between align-items-center mt-4">
-                                    <div class="d-block fw-bold text-secondary"><span class="position-relative"
-                                            style="top: -4px">السعر :</span>
-                                        <span class="text-danger fs-4">{{ $service->price }}$</span>
+                                <div class="reviews mt-3">
+                                    <ul class="list-unstyled d-flex justify-content-start mb-0">
+                                        <li>
+                                            <i class="fas fa-star fa-sm text-warning"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star fa-sm text-warning"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star fa-sm text-warning"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star fa-sm text-warning"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star-half-alt fa-sm text-warning"></i>
+                                        </li>
+                                        <li>(4.7)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+                                    <div class="d-block text-secondary" style="font-size: 14px;">
+                                        <span class="position-relative" style="top: -2px">المشترين :</span>
+                                        <span class="text-primary fw-bold">10</span>
                                     </div>
-                                    <a href="{{ route('front.services.show', $service) }}"
-                                        class="text-primary fw-bold">التفاصيل
+                                    <a href="{{ route('front.services.show', $service) }}" class="text-primary fw-bold"
+                                        style="font-size: 14px">التفاصيل
                                         <i class="fa fa-arrow-left position-relative mx-1" style="top: 2px"></i></a>
                                 </div>
                             </div>

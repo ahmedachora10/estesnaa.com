@@ -33,7 +33,7 @@
 
                     <hr>
                     <div id="skills" class="skills">
-                        <div class="container aos-init aos-animate" data-aos="fade-up">
+                        <div class=" aos-init aos-animate" data-aos="fade-up">
 
                             <div class="row skills-content">
                                 <div class="col-lg-12">
