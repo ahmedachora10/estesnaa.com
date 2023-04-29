@@ -8,7 +8,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex align-items-start">
                         <div class="services-body bg-white w-100 my-2 rounded shadow">
                             <div class="services-img p-3 shadow-sm w-100"
-                                style="height: 150px; background-image:url({{ asset($service->image) }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+                                style="border:8px solid #fff ;height: 150px; background-image:url({{ asset($service->image) }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
                                 {{-- <img src="{{ asset($service->image) }}" class="w-100" alt="thumb"> --}}
                             </div>
                             <div class="px-3 py-2">
