@@ -58,8 +58,8 @@ return [
             [
                 'type' => 'text',
                 'data' => 'string',
-                'name' => 'instagram',
-                'label' => 'Instagram',
+                'name' => 'linkedin',
+                'label' => 'Linkedin',
                 'rules' => 'nullable|string',
                 'class' => '',
                 'value' => ''

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use FFMpeg\FFMpeg;
+use FFMpeg\Format\Video\X264;
 
 class UserController extends Controller
 {
@@ -199,6 +201,7 @@ class UserController extends Controller
     {
         $request->validate([
             'video' => ['nullable', 'ends_with:.mp4,.mov'],
+            'file' => ['nullable', 'file'],
             'avatar' => ['nullable', 'image'],
             'facebook' => ['nullable', 'string'],
             'twitter' => ['nullable', 'string'],
@@ -225,7 +228,14 @@ class UserController extends Controller
             $user->update($file);
         }
 
-        $user->inventorProfile()->update($request->only(['facebook', 'whatsapp', 'instagram', 'twitter', 'description', 'video']));
+        $file = [];
+        if($request->hasFile('file')) {
+            $certificate = $request->file;
+            $certificate_path = str_replace('public', 'storage', $certificate->storeAs('public/inventors/certificates', date('Y-m-d').auth()->id().str()->random(4). '.'.$certificate->extension()));
+            $file = ['file' => $certificate_path, 'confirmed' => false];
+        }
+
+        $user->inventorProfile()->update($request->only(['facebook', 'whatsapp', 'instagram', 'twitter', 'description', 'video']) + $file);
 
         return redirect()->route('users.show', $user)->with('success', trans('message.update'));
     }
@@ -240,7 +250,35 @@ class UserController extends Controller
 
         $video = $request->video;
         $uploadVideoPath = str_replace('public', 'storage', $video->storeAs('public/inventors/videos', date('Y-m-d').auth()->id().str()->random(4). '.'.$video->extension()));;
+        // Path to the watermark image
+        /*
+        $watermark_path = asset(setting('logo'));
 
+        //putenv('FFPROBE_BINARY=ffmpeg/fftools/ffprobe');
+
+       // Create an FFMpeg instance
+        $ffmpeg = FFMpeg::create(array(
+            //'ffmpeg.binaries'  => "/home/.../usr/bin/ffmpeg/ffmpeg",
+            'ffprobe.binaries' => "C:/xampp/htdocs/mostaqel/estesnaa.com/ffmpeg/fftools/ffprobe",
+            //'timeout'          => 10,
+            //'ffmpeg.threads'   => 12,
+        ));
+
+        // Open the video file
+        $video = $ffmpeg->open(asset($uploadVideoPath));
+
+        // Add the watermark to the video
+        $video->filters()->watermark($watermark_path, [
+            'position' => 'relative',
+            'bottom' => 10,
+            'right' => 10,
+        ])->synchronize();
+
+        // Save the modified video
+        $format = new X264();
+        $format->setAudioCodec("libmp3lame");
+        $video->save($format, 'watermark_video.mp4');
+        */
         return $uploadVideoPath;
     }
 }

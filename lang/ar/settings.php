@@ -22,6 +22,7 @@ return [
     'whatsapp' => 'واتساب',
     'instagram' => 'انستغرام',
     'youtube' => 'اليوتوب',
+    'linkedin' => 'لينكد ان',
 
     'percentage' => 'نسبة المنصة',
     'pending balance duration' => 'مدة تعليق الرصيد',

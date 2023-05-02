@@ -30,6 +30,10 @@ class InventorsFilter extends Component
     {
         return view('livewire.inventors-filter', [
             'inventors' => User::active()->whereRoleIs('inventor')
+            ->whereHas('inventorProfile', function ($query)
+            {
+                $query->hasCertificate();
+            })
             ->whereHas('inventorProfilePlan')
             ->whereHas('country',function ($query)
             {

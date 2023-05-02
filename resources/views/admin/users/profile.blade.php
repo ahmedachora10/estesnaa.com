@@ -85,9 +85,30 @@
 
                 </form>
             </x-dashboard.cards.sample>
+
+            @if ((auth()->user()->role == 'admin' && $user->role == 'inventor') || $user->role == 'inventor')
+                <x-dashboard.cards.sample column="col-12">
+                    <div class="mb-4 d-flex justify-content-between align-items-center">
+                        <h4>
+                            شهادة المخترع
+                        </h4>
+                        @livewire('dashboard.certificate-status-button', ['user' => $user])
+                    </div>
+                    <div class="mt-2">
+                        <a href="{{ asset($user->inventorProfile->file) }}" target="_blank">
+                            <i class="bx bx-file"></i> عرض
+                            الملف
+                        </a>
+                    </div>
+
+                </x-dashboard.cards.sample>
+            @endif
+
         </div>
 
-        @if ($user->role == 'admin' || ($user->role == 'inventor' && $inventorProfilePlan))
+        @if (
+            (auth()->user()->role == 'admin' && $user->role == 'inventor') ||
+                ($user->role == 'inventor' && $inventorProfilePlan))
             <div class="col-6">
                 <x-dashboard.cards.sample column="col-12">
                     <h4>التعريف بالمخترع</h4>
@@ -107,9 +128,13 @@
                             <x-input-group :value="$user->inventorProfile->video" type="file" name="video" :title="trans('table.columns.video')" />
                         </div> {{-- / video --}}
 
-                        <div class="col-md-12 col-12 mb-3">
+                        <div class="col-md-6 col-12 mb-3">
                             <x-input-group :value="$user->avatar" type="file" name="avatar" :title="trans('table.columns.image')" />
                         </div> {{-- / Avatar --}}
+
+                        <div class="col-md-6 col-12 mb-3">
+                            <x-input-group :value="$user->file" type="file" name="file" :title="trans('table.columns.certificate')" />
+                        </div> {{-- / CV Or Certificate --}}
 
                         <div class="col-md-6 col-12 mb-3">
                             <x-input-group :value="$user->inventorProfile->facebook" type="text" name="facebook" :title="trans('settings.facebook')" />
@@ -167,13 +192,14 @@
 
 
         @endif
+
     </div>
 
     @push('component-styles')
         <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
     @endpush
 
-    @if (in_array($user->role, ['inventor', 'admin']) && $inventorProfilePlan)
+    @if (in_array(auth()->user()->role, ['inventor', 'admin']) && $inventorProfilePlan)
         @push('component-styles')
             <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
             <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"

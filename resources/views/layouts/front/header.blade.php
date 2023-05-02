@@ -18,7 +18,7 @@
         <div class="social-links d-none d-md-block">
 
             {{-- Social Media Buttons --}}
-            @foreach (['facebook', 'twitter', 'youtube', 'instagram', 'whatsapp'] as $media)
+            @foreach (['facebook', 'twitter', 'youtube', 'instagram', 'linkedin', 'whatsapp'] as $media)
                 @if ($link = setting($media))
                     <a href="{{ $link }}" class="twitter" target="_blank"><i
                             class="fab fa-{{ $media }}"></i></a>

@@ -34,4 +34,9 @@ class Service extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function rating()
+    {
+        return $this->hasMany(ServiceRating::class);
+    }
+
 }

@@ -1,7 +1,7 @@
 @php
     $isAdmin = auth()->user()->role == 'admin';
     if ($isAdmin) {
-        $columns = ['image', 'name', 'owner', 'category', 'price', 'status', 'actions'];
+        $columns = ['image', 'name', 'owner', 'category', 'price', 'status', 'rating', 'actions'];
     } else {
         $columns = ['image', 'name', 'category', 'price', 'status', 'actions'];
     }
@@ -24,6 +24,12 @@
                 <td> <span class="badge badge bg-label-{{ $service->status->color() }}" style="cursor: pointer"
                         wire:click="updateStatus({{ $service->id }})">{{ $service->status->name() }}</span>
                 </td>
+
+                @if ($isAdmin)
+                    <td>
+                        <x-dashboard.rating :id="$service->id" :rate="$service->rating_avg_rating ?? 0" />
+                    </td>
+                @endif
 
                 <td>
                     <x-dashboard.actions.container>

@@ -9,7 +9,12 @@ class InventorProfile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['inventor_id', 'description', 'file','video', 'facebook', 'twitter', 'instagram', 'whatsapp'];
+    protected $fillable = ['inventor_id', 'description', 'file', 'confirmed','video', 'facebook', 'twitter', 'instagram', 'whatsapp'];
+
+    public function scopeHasCertificate($query)
+    {
+        $query->where('confirmed', true);
+    }
 
     public function owner()
     {
