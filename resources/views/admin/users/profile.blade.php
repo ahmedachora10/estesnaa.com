@@ -86,7 +86,7 @@
                 </form>
             </x-dashboard.cards.sample>
 
-            @if ((auth()->user()->role == 'admin' && $user->role == 'inventor') || $user->role == 'inventor')
+            @if (auth()->user()->role == 'admin' && $user->role == 'inventor')
                 <x-dashboard.cards.sample column="col-12">
                     <div class="mb-4 d-flex justify-content-between align-items-center">
                         <h4>
