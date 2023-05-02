@@ -34,6 +34,8 @@
 
             <x-dashboard.sidebar.link :title="trans('sidebar.roles')" icon="key" :link="route('roles.index')" />
 
+            <x-dashboard.sidebar.link :title="trans('sidebar.deceased')" icon="user" :link="route('deceased.index')" />
+
             <x-dashboard.sidebar.link-head>
                 <span>{{ trans('sidebar.transactions') }} / {{ trans('sidebar.requests') }}</span>
             </x-dashboard.sidebar.link-head>

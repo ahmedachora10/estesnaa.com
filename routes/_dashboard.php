@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DeadInventorController;
 use App\Http\Controllers\Admin\FeaturedServiceController;
 use App\Http\Controllers\Admin\InventionController;
 use App\Http\Controllers\Admin\PackageController;
@@ -101,6 +102,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
          * User Withdrawal Requst Routes
          */
         Route::resource('withdrawal_requests', UserWithdrawalRequestController::class);
+
+        /**
+         * Deceased Inventors
+         */
+        Route::resource('inventors/deceased', DeadInventorController::class);
     });
 
     Route::middleware('role:admin|event')->group(function ()

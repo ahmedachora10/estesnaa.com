@@ -10,6 +10,7 @@
                             -
                         @endif
                     </span>
+                </td>
                 <td> <span class="badge badge bg-label-{{ $service->status->color() }}" style="cursor: pointer"
                         wire:click="updateStatus({{ $service->id }})">{{ $service->status->name() }}</span>
                 </td>

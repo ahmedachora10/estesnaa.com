@@ -4,6 +4,7 @@ return [
     'dashboard' => 'لوحة تحكم',
     'settings' => 'اعدادات عامة',
     'users' => 'المستخدمين',
+    'deceased' => 'المخترعين المتوفين',
     'roles' => 'الادوار',
     'categories' => 'الاصناف',
     'products' => 'المنتجات',
