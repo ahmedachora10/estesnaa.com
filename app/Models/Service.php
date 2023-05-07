@@ -39,4 +39,9 @@ class Service extends Model
         return $this->hasMany(ServiceRating::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(ServiceOrder::class);
+    }
+
 }

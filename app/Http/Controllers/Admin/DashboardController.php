@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Event;
 use App\Models\InventionOrder;
 use App\Models\Package;
+use App\Models\PlatformPendingBalance;
 use App\Models\PlatformProfitBalance;
 use App\Models\ServiceOrder;
 use App\Models\Transaction;
@@ -55,6 +56,7 @@ class DashboardController extends Controller
 
         // Payment Statistics
         $total_amount = Transaction::sum('amount');
+        $platform_pending_balance_total_amount = PlatformPendingBalance::PendingBalance()->sum('amount');
 
         $user_bank_amount = null;
         if(in_array(auth()->user()->role, ['service_provider', 'inventor'])) {
@@ -81,7 +83,7 @@ class DashboardController extends Controller
             'packages_count', 'categories_count', 'service_providers_count',
             'events_count', 'events_providers_count', 'total_amount', 'user_bank_amount',
             'inventions_orders_total_amount', 'services_orders_total_amount',
-            'service_provider_pending_balance', 'platform_profit'
+            'service_provider_pending_balance', 'platform_profit', 'platform_pending_balance_total_amount'
         ));
     }
 }

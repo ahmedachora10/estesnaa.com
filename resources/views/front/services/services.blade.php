@@ -42,7 +42,7 @@
                                 <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
                                     <div class="d-block text-secondary" style="font-size: 14px;">
                                         <span class="position-relative" style="top: -2px">المشترين :</span>
-                                        <span class="text-primary fw-bold">10</span>
+                                        <span class="text-primary fw-bold">{{ $service->orders_count }}</span>
                                     </div>
                                     <a href="{{ route('front.services.show', $service) }}" class="text-primary fw-bold"
                                         style="font-size: 14px">التفاصيل

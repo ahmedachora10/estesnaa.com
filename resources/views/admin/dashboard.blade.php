@@ -57,6 +57,11 @@
             <div class="row">
                 {{-- Users --}}
                 @if (auth()->user()->role == 'admin')
+                    <div class="col-lg-12 col-md-12 col-12 mb-4">
+                        <x-dashboard.cards.payment title="المبلغ المعلق للخدمات" :amount="$platform_pending_balance_total_amount"
+                            icon="assets/img/icons/unicons/cc-warning.png" />
+                    </div>
+
                     <div class="col-lg-6 col-md-6 col-6 mb-4">
                         <x-dashboard.cards.payment title="مبيعات الموقع" :amount="$total_amount" />
                     </div>

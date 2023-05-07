@@ -6,6 +6,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceStageController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +69,22 @@ Route::controller(PaymentController::class)->name('payment.')->middleware(['auth
     Route::get('direct', 'direct')->name('direct');
     Route::get('/{package}', 'pay')->name('pay');
 });
+
+Route::controller(ServiceStageController::class)
+->prefix('user/services/stages')->name('front.services.stage.')
+->middleware('auth')->group(function ()
+{
+    Route::get('change/{service_stage}/{stage}', 'changeStage')->name('change');
+    Route::get('{service_stage}', 'index')->name('index');
+});
+
+Route::controller(UserController::class)->prefix('user')
+->name('front.user.')->middleware('auth')->group(function ()
+{
+    Route::get('purchase', 'purchase')->name('purchase');
+    Route::post('rating/store', 'ratingServiceStore')->name('rating.store');
+});
+
 
 
 require __DIR__.'/auth.php';

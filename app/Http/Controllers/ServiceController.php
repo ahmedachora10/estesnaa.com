@@ -38,7 +38,7 @@ class ServiceController extends Controller
     {
         abort_if($category->parent_id && $category->parent_id->value != CategoryType::SERVICES->value, 404);
 
-        $services = $category->services;
+        $services = $category->services->loadCount('orders');
 
         return view('front.services.services', compact('services', 'category'));
     }

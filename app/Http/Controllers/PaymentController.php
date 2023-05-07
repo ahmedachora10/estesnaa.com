@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Casts\Stage;
 use App\Casts\Status;
 use App\Casts\UserActivityType;
 use App\Models\Invention;
 use App\Models\InventionOrder;
 use App\Models\Package;
 use App\Models\PendingBalance;
+use App\Models\PlatformPendingBalance;
 use App\Models\PlatformProfitBalance;
 use App\Models\Service;
 use App\Models\ServiceOrder;
+use App\Models\ServiceStage;
 use App\Models\Subscription;
 use App\Models\Transaction;
 use App\Models\User;
@@ -187,9 +190,9 @@ class PaymentController extends Controller
                                     'amount' => $transaction->amount
                                 ]);
 
-                                PendingBalance::create(['user_id' => $service->user_id, 'amount' => calc_service_provider_profit($transaction->amount)]);
+                                // PendingBalance::create(['user_id' => $service->user_id, 'amount' => calc_service_provider_profit($transaction->amount)]);
 
-                                PlatformProfitBalance::create(['service_id' => $service->id, 'amount' => calc_platform_profit($transaction->amount)]);
+                                // PlatformProfitBalance::create(['service_id' => $service->id, 'amount' => calc_platform_profit($transaction->amount)]);
 
                                 $userProfit = UserProfit::firstWhere('user_id', $service->user_id);
 
@@ -200,11 +203,24 @@ class PaymentController extends Controller
                                     $userProfit->save();
                                 }
 
-                                UserBankActivity::create([
-                                    'user_id' => $service->user_id,
-                                    'activity_type' => UserActivityType::RECEIVED,
-                                    'amount' => calc_service_provider_profit($transaction->amount)
+                                // Add amount to pending balance untill receipt serevice
+                                PlatformPendingBalance::create([
+                                    'user_id' => auth()->id(),
+                                    'amount' => $transaction->amount,
+                                    'is_service_provider_received_money' => false
                                 ]);
+
+                                ServiceStage::create([
+                                    'buyer_id' => auth()->id(),
+                                    'service_id' => $service->id,
+                                    'stage' => Stage::IMPLEMENT
+                                ]);
+
+                                // UserBankActivity::create([
+                                //     'user_id' => $service->user_id,
+                                //     'activity_type' => UserActivityType::RECEIVED,
+                                //     'amount' => calc_service_provider_profit($transaction->amount)
+                                // ]);
 
                                 session()->remove('serviceID');
                             }

@@ -134,6 +134,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(PendingBalance::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(ServiceOrder::class, 'buyer_id');
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(ServiceStage::class, 'buyer_id');
+    }
+
     public function getPendingBalanceAttribute()
     {
         return $this->pendingBalance()->sum('amount');

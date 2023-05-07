@@ -53,7 +53,8 @@
                                 </li>
                             @else
                                 <li class="py-3 border-bottom">
-                                    <a href="#!" class="text-dark fw-normal" style="font-size: 13px">
+                                    <a href="{{ route('front.user.purchase') }}" class="text-dark fw-normal"
+                                        style="font-size: 13px">
                                         <i class="fas fa-cart-shopping text-secondary"></i> مشترياتي
                                     </a>
                                 </li>

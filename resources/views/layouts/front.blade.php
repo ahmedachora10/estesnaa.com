@@ -91,6 +91,11 @@
             @include('layouts.front.header', ['sliders' => $sliders])
         @endif
 
+        @if (session()->exists('success'))
+            <div class="container">
+                <div class="alert alert-success mb-3">{{ session()->get('success') }}</div>
+            </div>
+        @endif
         {{-- Content --}}
         {{ $slot }}
     </main>

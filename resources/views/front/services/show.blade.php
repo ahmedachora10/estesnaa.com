@@ -40,7 +40,7 @@
 
                     <div class="bg-white">
                         <div class="border-bottom py-3 px-3 bg-light">
-                            <h6 class="fw-bold mb-0" style="font-size: 14px;">بطاقة الخدمة</h6>
+                            <h6 class="fw-bold my-0" style="font-size: 14px;">بطاقة الخدمة</h6>
                         </div>
 
                         <div class="portfolio-info">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="border-top py-3 px-3 bg-light">
-                            <h6 class="fw-bold mb-0" style="font-size: 14px;">صاحب الخدمة</h6>
+                            <h6 class="fw-bold my-0" style="font-size: 14px;">صاحب الخدمة</h6>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center border-top p-3">
