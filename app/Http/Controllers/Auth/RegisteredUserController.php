@@ -77,6 +77,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect( $user->email_verified_at == null ? '/verify-email'  : RouteServiceProvider::HOME);
     }
 }
