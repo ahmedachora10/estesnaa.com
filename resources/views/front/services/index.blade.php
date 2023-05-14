@@ -7,7 +7,7 @@
             <div class="row">
                 @foreach ($servicesCategories as $serviceCategory)
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                        <div class="services-body">
+                        <div class="services-body shadow">
                             <div class="services-img">
                                 <div class="ratio ratio-4x3">
                                     <img src="{{ asset($serviceCategory->thumb) }}" alt=""
