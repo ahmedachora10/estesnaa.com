@@ -72,7 +72,8 @@
                         </a>
                     </div>
 
-                    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                    <div class="w-full sm:max-w-md mt-6 px-5 py-4 bg-white shadow-md position-relative overflow-hidden sm:rounded-lg"
+                        style="z-index: 999999">
                         <div class="mb-4 text-sm text-gray-600">
                             شكرا لتسجيلك! قبل البدء ، هل يمكنك التحقق من عنوان بريدك الإلكتروني من خلال النقر على الرابط
                             الذي أرسلناه إليك عبر البريد الإلكتروني للتو؟ إذا لم تتلق رسالة البريد الإلكتروني ، فسنرسل
