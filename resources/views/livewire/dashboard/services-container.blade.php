@@ -11,8 +11,13 @@
     <x-dashboard.tables.table1 title="sidebar.services" :action="route('services.create')" :columns="$columns">
         @forelse ($services as $service)
             <tr>
-                <td><img src="{{ asset($service->image) }}" class=" rounded-circle" alt="avatar" width="30px"
-                        height="30px"></td>
+                <td>
+                    <span data-id="{{ $service->id }}"
+                        class="target handle px-2 py-0 d-inline border me-2 cursor-pointer"><i
+                            class="fas fa-sort"></i></span>
+                    <img src="{{ asset($service->image) }}" class=" rounded-circle" alt="avatar" width="30px"
+                        height="30px">
+                </td>
                 <td>{{ $service->name }}</td>
                 @if ($isAdmin)
                     <td><span class="badge badge bg-label-success">{{ $service->owner->name }}</span></td>

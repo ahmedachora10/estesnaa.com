@@ -23,7 +23,7 @@ class SlidersContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.sliders-container', [
-            'sliders' => Slider::latest()->paginate(setting('pagination'))
+            'sliders' => Slider::orderBy('sort')->paginate(setting('pagination'))
         ]);
     }
 }

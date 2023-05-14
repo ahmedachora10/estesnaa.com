@@ -4,4 +4,7 @@
         @livewire('dashboard.categories-container')
     </x-dashboard.cards.sample>
 
+
+    <x-sortable-script model="category" />
+
 </x-app-layout>

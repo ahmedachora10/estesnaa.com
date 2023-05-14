@@ -106,11 +106,11 @@
             !request()->routeIs('front.inventor.profile.plan'))
         {{-- Footer Section --}}
         @include('layouts.front.footer')
+        @auth
+            <x-chat-table />
+        @endauth
     @endif
 
-    @auth
-        <x-chat-table />
-    @endauth
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

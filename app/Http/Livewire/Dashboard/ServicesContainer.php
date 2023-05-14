@@ -25,9 +25,9 @@ class ServicesContainer extends Component
         $services = [];
 
         if($user->role == 'admin') {
-            $services = Service::with(['category', 'owner'])->withAvg('rating', 'rating')->latest()->paginate(setting('pagination'));
+            $services = Service::with(['category', 'owner'])->withAvg('rating', 'rating')->orderBy('sort')->paginate(setting('pagination'));
         } elseif(in_array($user->role, ['service_provider', 'inventor'])) {
-            $services = $user->services()->with('category')->latest()->paginate(setting('pagination'));
+            $services = $user->services()->with('category')->orderBy('sort')->paginate(setting('pagination'));
         }
 
         return view('livewire.dashboard.services-container', [

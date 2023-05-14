@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(HomeController::class)->group(function ()
 {
     Route::get('/', 'index')->name('home');
+    Route::get('/inventors/deceased', 'deceasedInventors')->name('front.inventors.deceased');
     Route::get('/inventions', 'inventions')->name('front.inventions.index');
     Route::get('/inventions/{invention}', 'showInvention')->name('front.inventions.show');
     Route::get('/inventors', 'inventors')->name('front.inventors.index');

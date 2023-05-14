@@ -5,8 +5,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="user-profile-header-banner">
-                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/pages/profile-banner.png"
-                        alt="Banner image" class="rounded-top">
+                    <img src="{{ asset('assets/img/default-profile-img.jpg') }}" alt="Banner image" class="rounded-top">
                 </div>
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">

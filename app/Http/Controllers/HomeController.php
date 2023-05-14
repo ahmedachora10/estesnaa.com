@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeadInventor;
 use App\Models\Event;
 use App\Models\FeaturedService;
 use App\Models\Invention;
@@ -77,6 +78,13 @@ class HomeController extends Controller
     public function showPage(Page $page)
     {
         return view('front.page', compact('page'));
+    }
+
+    public function deceasedInventors()
+    {
+        $inventors = DeadInventor::latest()->paginate(setting('pagination'));
+
+        return view('front.inventions.deceased-inventors', compact('inventors'));
     }
 
 }

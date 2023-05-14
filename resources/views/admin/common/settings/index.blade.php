@@ -50,4 +50,18 @@
         </div>
     </form>
 
+    @push('scripts')
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ar.js"></script>
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#about'), {
+                    language: 'ar',
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+    @endpush
+
 </x-app-layout>

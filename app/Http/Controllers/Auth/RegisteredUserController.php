@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
 
             'phone' => ['required', 'integer'],
-            'dob' => ['required', 'date'],
+            // 'dob' => ['required', 'date'],
             'role_id' => ['required', 'integer', 'exists:roles,id'],
             'country_id' => ['required', 'integer', 'exists:countries,id'],
             'country_code' => ['required', 'string', 'min:2', 'max:3'],
@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            'dob' => $request->dob,
+            // 'dob' => $request->dob,
             'city' => $request->city,
             'country_id' => $request->country_id,
             'country_code' => $request->country_code,

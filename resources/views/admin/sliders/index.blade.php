@@ -4,4 +4,7 @@
         @livewire('dashboard.sliders-container')
     </x-dashboard.cards.sample>
 
+
+    <x-sortable-script model="slider" />
+
 </x-app-layout>

@@ -18,6 +18,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\UserWithdrawalRequestController;
+use App\Http\Controllers\SortController;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Package;
@@ -40,6 +41,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
 
     Route::middleware('role:admin')->group(function ()
     {
+
+        Route::post('/records/sort', [SortController::class, 'sort'])->name('sort');
+
         Route::controller(SettingController::class)
         ->prefix('settings')->name('settings.')
         ->group(function ()

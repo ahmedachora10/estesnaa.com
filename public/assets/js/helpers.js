@@ -40,3 +40,63 @@ function filePond(element, options = {}) {
         }
     }
 }
+
+
+/**
+ *
+ * @param {HTMLElement} target list of elements
+ * @param {Closure} handler handling data
+ * @returns Sortable Object
+ */
+ function sortable(/**List*/ target, handler = null, modelName) {
+    const sortable_options = {
+        swap: true,
+        swapClass: 'highlight',
+        animation: 150,
+        handle: '.handle',
+
+        onEnd: function ( /**Event*/ evt) {
+            var itemEl = evt.item;
+
+            const old = evt.oldIndex;
+            const current = evt.newIndex;
+            const tr = target.find('tr .target');
+
+            // if rows has same values
+            if (tr.attr('data-id') === undefined) return console.error('Please make sure you have data-id of element tr');
+
+            if (old === current) return false;
+
+            if (typeof handler == 'function') return handler();
+
+            if (typeof handler != 'object') return console.error('Please Enter a Handler as a Function or Object!');
+
+            const { url, method, response, error } = handler;
+
+
+            $.ajax({
+                url: url,
+                method: method || 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                },
+                data: {
+                    old_place: $(tr[old]).attr('data-id'),
+                    current_place: $(tr[current]).attr('data-id'),
+                    model: modelName
+                },
+                dataType: 'json'
+            }).done(res => response(res))
+                .catch(err => error(err));
+
+        }
+    };
+
+    if (!target.length) {
+        return console.error('target element is null');
+    }
+
+    if (typeof Sortable == "undefined") return console.error('There is no Sortable Object Fount');
+
+    return target.sortable(sortable_options);
+}

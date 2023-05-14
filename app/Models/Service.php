@@ -12,7 +12,7 @@ class Service extends Model
 
     protected $fillable = [
         'user_id', 'category_id', 'name', 'price', 'image', 'description',
-        'keywords', 'status'
+        'keywords', 'status', 'sort'
     ];
 
     protected $casts = [

@@ -2,9 +2,14 @@
     <x-dashboard.tables.table1 title="sidebar.sliders" :action="route('sliders.create')" :columns="['image', 'title', 'description', 'status', 'actions']">
         @forelse ($sliders as $slider)
             <tr>
-                <td><img src="{{ asset($slider->image) }}" class=" rounded-circle" alt="avatar" width="30px"
-                        height="30px"></td>
-                <td>{{ $slider->title }}</td>
+                <td>
+                    <span data-id="{{ $slider->id }}"
+                        class="target handle px-2 py-0 d-inline border me-2 cursor-pointer"><i
+                            class="fas fa-sort"></i></span>
+                    <img src="{{ asset($slider->image) }}" class=" rounded-circle" alt="avatar" width="30px"
+                        height="30px">
+                </td>
+                <td>{{ str($slider->title)->limit(30) }}</td>
                 <td>{{ $slider->description }}</td>
                 <td class="text-{{ $slider->status->color() }}"> <button
                         class="btn btn-ms btn-{{ $slider->status->color() }}"

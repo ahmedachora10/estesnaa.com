@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['parent_id', 'name', 'description', 'image'];
+    protected $fillable = ['parent_id', 'name', 'description', 'image', 'sort'];
 
     protected $casts = [
         'parent_id' => CategoryType::class,
@@ -24,7 +24,7 @@ class Category extends Model
 
     public function services()
     {
-        return $this->hasMany(Service::class)->whereRelation('owner', 'service_provider_subscription_paid', true)->active();
+        return $this->hasMany(Service::class)->whereRelation('owner', 'service_provider_subscription_paid', true)->active()->orderBy('sort');
     }
 
     public function scopeServicesSection($query)

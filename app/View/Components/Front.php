@@ -14,7 +14,7 @@ class Front extends Component
      */
     public function __construct(public $sliders = [])
     {
-        $this->sliders = request()->routeIs('home') ? Slider::active()->latest()->get() : [];
+        $this->sliders = request()->routeIs('home') ? Slider::active()->orderBy('sort')->get() : [];
     }
 
     /**

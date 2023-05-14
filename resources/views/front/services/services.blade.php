@@ -3,6 +3,16 @@
 
     <section id="services" class="services">
         <div class="container">
+            @auth
+                @if (auth()->user()->role == 'service_provider')
+                    <div class="mb-3 d-flex justify-content-end">
+                        <a href="{{ route('services.create') }}" class="btn custom-main-bg-color text-white"
+                            style="width:200px">
+                            اضافة الخدمة
+                        </a>
+                    </div>
+                @endif
+            @endauth
             <div class="row">
                 @foreach ($services as $service)
                     <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex align-items-start">
@@ -13,7 +23,8 @@
                             </div>
                             <div class="px-3 py-2">
                                 <h3 class="mb-2 mt-2 fw-bold" style=" font-size: 16px;line-height: 1.3em;"><a
-                                        href="{{ route('front.services.show', $service) }}">{{ $service->name }}</a>
+                                        href="{{ route('front.services.show', $service) }}"
+                                        title="{{ $service->name }}">{{ str($service->name)->limit(21) }}</a>
                                 </h3>
                                 <h6 class="text-secondary my-2" style="font-size:14px !important"><i
                                         class="fa fa-grid"></i>{{ $category->name }}</h6>

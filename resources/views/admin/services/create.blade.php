@@ -17,7 +17,7 @@
             </div> {{-- / Categories --}}
 
             <div class="col-md-6 col-12 mb-3">
-                <x-input-group type="text" name="name" :title="trans('table.columns.name')" />
+                <x-input-group type="text" name="name" title=" اسم الخدمة" />
             </div> {{-- / Name --}}
 
             <div class="col-md-6 col-12 mb-3">

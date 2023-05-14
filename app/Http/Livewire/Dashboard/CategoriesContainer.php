@@ -15,7 +15,7 @@ class CategoriesContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.categories-container',[
-            'categories' => Category::latest()->paginate(setting('pagination'))
+            'categories' => Category::orderBy('sort')->paginate(setting('pagination'))
         ]);
     }
 }

@@ -18,7 +18,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $servicesCategories = Category::servicesSection()->latest()->get();
+        $servicesCategories = Category::servicesSection()->orderBy('sort')->get();
         return view('front.services.index', compact('servicesCategories'));
     }
 

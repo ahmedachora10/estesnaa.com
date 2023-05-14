@@ -133,9 +133,9 @@
                                     style="background-image: url({{ asset($item->image) }})">
 
                                     <div class="container">
-                                        <h2>{{ $item->title }}</h2>
+                                        <h2 style="font-size:20px !important">{{ $item->title }}</h2>
                                         <p>{{ $item->description }}</p>
-                                        <a href="#about" class="btn-get-started scrollto">تفاصيل اكثر</a>
+                                        {{-- <a href="#about" class="btn-get-started scrollto">تفاصيل اكثر</a> --}}
                                     </div>
                                 </div>
                             @endforeach

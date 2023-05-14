@@ -32,7 +32,7 @@
                         <p>{{ setting('about') }}</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="#">من نحن</a>
+                        <a class="cta-btn align-middle" href="#cta">من نحن</a>
                     </div>
                 </div>
             </div>

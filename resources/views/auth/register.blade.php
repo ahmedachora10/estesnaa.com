@@ -46,14 +46,15 @@
                                 <hr>
                                 <div class="col-lg-9 col-md-9">
                                     <div class="form-group">
-                                        <label for="firstName" class="form-label">الاسم الرباعي من واقع الهوية</label>
+                                        <label for="firstName" class="form-label"> اسم الموسسة / اسم المستخدم الثلاثي
+                                        </label>
                                         <input type="text" name="name" class="form-control"
                                             style="width:100%;padding:.375rem .75rem;" maxlength="100" required="">
                                         <x-error field="name" />
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 col-md-3">
+                                {{-- <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
                                         <label for="firstName" class="form-label">تاريخ الميلاد</label>
                                         <input type="date" name="dob" class="form-control"
@@ -61,7 +62,7 @@
                                             required="">
                                         <x-error field="dob" />
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-4">
                                     <label for="firstName" class="form-label">الدولة/الجنسية</label>
@@ -84,8 +85,10 @@
 
                                 <div class="col-md-3">
                                     <label for="firstName" class="form-label">رقم التلفون/الجوال</label>
-                                    <input dir="ltr" type="text" name="phone"
+                                    <input dir="ltr" type="text" name="phone" id="phone"
                                         style="width:100%;padding:.375rem .75rem;" class="form-control" maxlength="20">
+                                    <small class="d-block mt-2 text-primary" style="font-size: 14px">ادخل الرقم بدون
+                                        0</small>
                                     <x-error field="phone" />
                                 </div>
 
@@ -108,8 +111,7 @@
                                     <div class="col-md-12">
                                         <label for="firstName" class="form-label">كلمة المرور</label>
                                         <input type="password" name="password" class="form-control"
-                                            style="width:100%;padding:.375rem .75rem;" maxlength="100"
-                                            required="">
+                                            style="width:100%;padding:.375rem .75rem;" maxlength="100" required="">
                                         <x-error field="password" />
                                     </div>
                                 </div>
@@ -126,10 +128,10 @@
                                 <div class="col-md-12">
                                     <br>
                                     <br>
-                                    <label for="firstName" class="form-label" style="color:#0e75ce;font-size:20px;">
+                                    {{-- <label for="firstName" class="form-label" style="color:#0e75ce;font-size:20px;">
                                         * سؤال
                                         التحقق</label>
-                                    <hr>
+                                    <hr> --}}
 
                                     <div class="col-md-6">
                                         <label for="firstName" class="form-label">ماهو المفتــاح الـدولى للاتصالات في
@@ -182,5 +184,20 @@
                 padding: 3% 0;
             }
         </style>
+    @endpush
+
+    @push('scripts')
+        <script>
+            const phone = $('#phone');
+
+            if (phone.length) {
+                phone.on('input', function() {
+                    if (/^[0]+/.test($(this).val())) {
+                        $(this).val('');
+                        // console.log('running');
+                    }
+                });
+            }
+        </script>
     @endpush
 </x-guest-layout>
