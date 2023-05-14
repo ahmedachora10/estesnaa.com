@@ -108,7 +108,7 @@
         @if (
             (auth()->user()->role == 'admin' && $user->role == 'inventor') ||
                 ($user->role == 'inventor' && $inventorProfilePlan))
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <x-dashboard.cards.sample column="col-12">
                     <h4>التعريف بالمخترع</h4>
                     <form action="{{ route('inventors.profile') }}" method="post" class="row"
@@ -155,8 +155,6 @@
                             <x-text-area-group name="description" :title="trans('settings.description')" :value="$user->inventorProfile->description">
                             </x-text-area-group>
                         </div> {{-- / Social Media --}}
-
-
 
                         <div class="col-12">
                             <x-dashboard.button type="submit" name="Save" class="btn-primary" />

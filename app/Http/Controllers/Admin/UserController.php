@@ -63,6 +63,10 @@ class UserController extends Controller
 
         $user->update(['role' => $user->roles->first()->name]);
 
+        if($user->role != 'user'){
+            $user->profit()->create(['total' => 0]);
+        }
+
         return redirect()->route('users.index')->with('success', trans('message.create'));
     }
 
@@ -129,6 +133,10 @@ class UserController extends Controller
         $user->syncRoles([$request->roles]);
 
         $user->update(['role' => $user->roles->first()->name]);
+
+        if($user->role != 'user' && !$user->profit){
+            $user->profit()->create(['total' => 0]);
+        }
 
         return redirect()->route('users.index')->with('success', trans('message.update'));
     }
@@ -242,10 +250,10 @@ class UserController extends Controller
 
     public function uploadVideo(Request $request)
     {
-        $validated = Validator::make($request->all(), ['video' => 'required|file']);
+        $validated = Validator::make($request->all(), ['video' => 'required|file|max:30720']); // 30MB
 
         if($validated->fails()) {
-            return false;
+            return response()->json(['errors' => true, 'messages' => $validated->errors()->all()],401);
         }
 
         $video = $request->video;

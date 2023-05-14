@@ -100,13 +100,16 @@
                         </div>
 
                         <div class="p-3 border-top">
-                            @if ($service->user_id != auth()->id() && count($service->rating) < 1)
+                            @if (
+                                $service->user_id != auth()->id() &&
+                                    count($service->rating) < 1 &&
+                                    ($service_stage->is_canceled || $service_stage->is_receipted))
                                 <a href="" class="btn btn-primary py-1 px-4 fw-bold rounded-1"
                                     style="font-size: 14px" data-bs-toggle="modal" data-bs-target="#add-rating">اضافة
                                     تقييم</a>
                             @endif
 
-                            @if (count($service->rating) > 0 && (auth()->user()->role == 'admin' || $service->user_id == auth()->id()))
+                            @if ($service->rating->count() > 0 || (auth()->user()->role == 'admin' || $service->user_id == auth()->id()))
                                 {{-- <div id="display-rating"></div> --}}
                                 {{-- <blockquote class="blockquote mt-3">
                                     <p>{{ $service->rating->first()->comment }}</p>
