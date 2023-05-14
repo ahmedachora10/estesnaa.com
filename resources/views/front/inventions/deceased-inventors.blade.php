@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-            <main class="col-md-9 bd-content" role="main">
+            <main class="col-md-12 bd-content" role="main">
                 <div class="card-group">
 
                     @foreach ($inventors as $inventor)

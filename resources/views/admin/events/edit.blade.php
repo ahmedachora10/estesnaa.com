@@ -1,5 +1,14 @@
 <x-app-layout>
 
+    <div class="alert alert-warning d-flex" role="alert">
+        <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i
+                class="bx bx-command fs-6"></i></span>
+        <div class="d-flex flex-column ps-1">
+            <h6 class="alert-heading d-flex align-items-center fw-bold mb-1">الكتابة باللغة العربية!</h6>
+            <span>المرجو الكتابة باللغة العربية فقط وشكرا.</span>
+        </div>
+    </div>
+
     <x-dashboard.cards.sample column="col-12" title="تحديث الفعالية">
         <form action="{{ route('events.update', $event) }}" method="post" class="row" enctype="multipart/form-data">
             @csrf
