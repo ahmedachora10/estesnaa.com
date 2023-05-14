@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Casts\Stage;
 use App\Casts\Status;
 use App\Casts\UserActivityType;
+use App\Models\Chat;
 use App\Models\Invention;
 use App\Models\InventionOrder;
 use App\Models\Package;
@@ -222,6 +223,20 @@ class PaymentController extends Controller
                                 //     'activity_type' => UserActivityType::RECEIVED,
                                 //     'amount' => calc_service_provider_profit($transaction->amount)
                                 // ]);
+
+                                if(!Chat::firstWhere([
+                                    ['service_provider_id', '=', $service->user_id],
+                                    ['service_id', '=', $service->id],
+                                    ['user_id', '=', auth()->id()],
+                                    ['deal_id', '=', null],
+                                ])) {
+                                    Chat::create([
+                                        'service_provider_id' => $service->user_id,
+                                        'service_id' => $service->id,
+                                        'user_id' => auth()->id(),
+                                        'deal_id' => $service_stage->id,
+                                    ]);
+                                }
 
                                 $service_stage->service->owner->notify(new SendUserMoney([
                                     'title' => "مبروك! تم اختيارك للعمل على المشروع <a href='".route('front.services.stage.index', $service_stage)."'>{$service_stage->service->name}</a>",
