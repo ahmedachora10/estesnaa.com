@@ -67,7 +67,7 @@
                 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
                     <div>
                         <a href="/">
-                            <x-application-logo image="{{ asset('storage/images/logo/' . setting('logo')) }}"
+                            <x-application-logo path="{{ asset('storage/images/logo/' . setting('logo')) }}"
                                 class="w-20 h-20 fill-current text-gray-500" width="120" />
                         </a>
                     </div>
