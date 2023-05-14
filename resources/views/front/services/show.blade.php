@@ -64,6 +64,14 @@
                                 <a href="#!" class="fs-6 text-dark me-2"
                                     style="font-weight: 500">{{ $service->owner->name }}</a>
                             </div>
+                            @if (auth()->check() && auth()->id() != $service->user_id)
+                                <div>
+                                    <a href="{{ route('chat.new', [$service->user_id, $service->id]) }}"
+                                        class="btn btn-outline-success py-1 fw-bold rounded-1" style="font-size: 14px">
+                                        تواصل
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -20,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
+    private $column;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -147,6 +149,36 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getPendingBalanceAttribute()
     {
         return $this->pendingBalance()->sum('amount');
+    }
+
+    public function serviceProviderChat()
+    {
+        return $this->hasMany(Chat::class, 'service_provider_id');
+    }
+
+    public function userChat()
+    {
+        return $this->hasMany(Chat::class, 'user_id');
+    }
+
+    public function chat()
+    {
+        if(in_array($this->role, ['service_provider', 'inventor'])) {
+            return $this->serviceProviderChat();
+        }else {
+            return $this->userChat();
+        }
+    }
+
+    public function messages()
+    {
+        $column =  in_array($this->role, ['service_provider', 'inventor']) ? 'service_provider_id' : 'user_id';
+        return $this->hasManyThrough(Message::class, Chat::class, $column, 'chat_id', 'id', 'id')->where('messages.user_id', '!=', auth()->id());
+    }
+
+    public function getMessagesCountAttribute()
+    {
+        return $this->messages()->whereNull('seen')->count();
     }
 
     public function getImageAttribute()

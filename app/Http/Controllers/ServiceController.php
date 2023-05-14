@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Casts\Status;
 use App\Models\Category;
+use App\Models\Chat;
 use App\Models\Service;
 use App\Utils\CategoryType;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         abort_if(!$service->owner->service_provider_subscription_paid, 404);
+
 
         return view('front.services.show', compact('service'));
     }

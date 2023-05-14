@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Casts\Stage;
 use App\Casts\UserActivityType;
+use App\Models\Chat;
+use App\Models\Message;
 use App\Models\PendingBalance;
 use App\Models\PlatformPendingBalance;
 use App\Models\PlatformProfitBalance;
@@ -21,13 +23,39 @@ class ServiceStageController extends Controller
     {
         abort_if(auth()->user()->role != 'admin' && $service_stage->buyer_id != auth()->id() && $service_stage->service->user_id != auth()->id(), 404);
 
-        $service = $service_stage->service->load(['rating' => function ($query)
+        $service = $service_stage->service->load(['rating' => function ($query) use($service_stage)
         {
-            $query->where('user_id', auth()->id());
+            $query->where('user_id', $service_stage->buyer_id)->where('service_stage_id', $service_stage->id);
         }]);
 
+        $chat = Chat::firstWhere([
+            ['service_id', '=', $service->id],
+            ['service_provider_id', '=', $service->user_id],
+            ['user_id', '=', $service_stage->buyer_id],
+            ['deal_id', '=', $service_stage->id],
+        ]);
 
-        return view('front.service-stage', compact('service_stage', 'service'));
+        if(!$chat) {
+            $chat = Chat::firstWhere([
+                ['service_id', '=', $service->id],
+                ['service_provider_id', '=', $service->user_id],
+                ['user_id', '=', $service_stage->buyer_id],
+            ]);
+
+            if($chat) {
+                $chat->deal_id = $service_stage->id;
+                $chat->save();
+            }
+
+        }
+
+        if($chat) {
+            $chat->messages()->where('user_id', '!=', auth()->id())->update(['seen' => now()]);
+        }
+
+        // dd($chat);
+
+        return view('front.service-stage', compact('service_stage', 'service', 'chat'));
     }
 
     public function changeStage(ServiceStage $service_stage, $stage)

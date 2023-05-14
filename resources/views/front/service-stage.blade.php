@@ -11,7 +11,8 @@
                 <div class="col-md-4 mt-2">
                     <!-- Example split danger button -->
                     <div class="btn-group flex-row-reverse float-start">
-                        @if (!$service_stage->is_canceled && !$service_stage->is_receipted && $service->user_id != auth()->id())
+                        @if (auth()->user()->role == 'admin' ||
+                                (!$service_stage->is_canceled && !$service_stage->is_receipted && $service->user_id != auth()->id()))
                             <button type="button"
                                 class="btn btn-outline-{{ $service_stage->stage->color() }} py-1 dropdown-toggle dropdown-toggle-split rounded-0"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,7 +26,8 @@
                                 تم {{ $service_stage->stage->name() }} المشروع
                             @endif
                         </button>
-                        @if (!$service_stage->is_canceled && !$service_stage->is_receipted && $service->user_id != auth()->id())
+                        @if (auth()->user()->role == 'admin' ||
+                                (!$service_stage->is_canceled && !$service_stage->is_receipted && $service->user_id != auth()->id()))
                             <ul class="dropdown-menu dropstart text-end">
                                 <li><a class="dropdown-item text-{{ App\Casts\Stage::RECEIPT->color() }}"
                                         href="{{ route('front.services.stage.change', [$service_stage, App\Casts\Stage::RECEIPT]) }}">{{ App\Casts\Stage::RECEIPT->name() }}
@@ -104,7 +106,7 @@
                                     تقييم</a>
                             @endif
 
-                            @if (count($service->rating) > 0)
+                            @if (count($service->rating) > 0 && (auth()->user()->role == 'admin' || $service->user_id == auth()->id()))
                                 {{-- <div id="display-rating"></div> --}}
                                 {{-- <blockquote class="blockquote mt-3">
                                     <p>{{ $service->rating->first()->comment }}</p>
@@ -114,7 +116,7 @@
                                     <blockquote class="blockquote">
                                         <div id="display-rating"></div>
                                     </blockquote>
-                                    <figcaption class="blockquote-footer mt-3 fw-bold">
+                                    <figcaption class="blockquote-footer mt-3" style="line-height: 1.5em">
                                         {{ $service->rating->first()->comment }}
                                     </figcaption>
                                 </figure>
@@ -122,6 +124,13 @@
                         </div>
                     </div>
                 </div>
+
+                @if ($chat)
+                    <div class="col-lg-8 mt-0">
+                        <h3 class="mt-0">نقاش الصفقة</h3>
+                        @livewire('chat-container', ['chat' => $chat])
+                    </div>
+                @endif
 
             </div>
 
@@ -142,6 +151,8 @@
                         <div class="form-group mb-4">
                             <div id="rateYo"></div>
                             <input type="hidden" name="service_id" id="service_id" value="{{ $service->id }}">
+                            <input type="hidden" name="service_stage_id" id="service_stage_id"
+                                value="{{ $service_stage->id }}">
                             <input type="hidden" name="rating" id="rating">
                             @error('rating')
                                 <span class="d-block mt-2 text-danger"> {{ $message }} </span>
@@ -171,8 +182,8 @@
     </div>
 
     @push('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css" <link
-            rel="stylesheet" href="{{ asset('front/css/services.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+        <link rel="stylesheet" href="{{ asset('front/css/services.css') }}">
         <link rel="stylesheet" href="{{ asset('front/css/skin.deepblue.css') }}">
     @endpush
 

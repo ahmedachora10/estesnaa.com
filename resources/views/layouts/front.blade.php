@@ -108,6 +108,10 @@
         @include('layouts.front.footer')
     @endif
 
+    @auth
+        <x-chat-table />
+    @endauth
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>

@@ -60,6 +60,29 @@
                                 </li>
                             @endif
 
+                            @if (in_array(auth()->user()->role, ['user', 'service_provider', 'inventor']))
+                                <li class="py-3 border-bottom">
+                                    @php
+                                        $messages_counter = auth()->user()->messages_count;
+                                    @endphp
+                                    <a href="#" @class([
+                                        'fw-normal',
+                                        'text-danger' => $messages_counter > 0,
+                                        'text-dark' => $messages_counter < 1,
+                                    ]) style="font-size: 13px" type="button"
+                                        data-bs-toggle="offcanvas" data-bs-target="#chats" aria-controls="chats">
+                                        <i @class([
+                                            'fas fa-message',
+                                            'text-danger' => $messages_counter > 0,
+                                            'text-secondary' => $messages_counter < 1,
+                                        ])></i> الرسائل
+                                        @if ($messages_counter > 0)
+                                            ({{ $messages_counter }})
+                                        @endif
+                                    </a>
+                                </li>
+                            @endif
+
 
                             <li class="pt-3">
                                 <x-dashboard.logout class="sign-in text-danger fw-bold" style="font-size:13px"><i

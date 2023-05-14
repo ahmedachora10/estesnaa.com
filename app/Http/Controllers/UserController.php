@@ -17,6 +17,7 @@ class UserController extends Controller
     public function ratingServiceStore(Request $request)
     {
         $request->validate([
+            'service_stage_id' => 'required|exists:service_stages,id',
             'service_id' => 'required|exists:services,id',
             'rating' => 'required|numeric|min:0|max:5',
             'comment' => 'required|string|max:250'
@@ -25,6 +26,7 @@ class UserController extends Controller
         ServiceRating::create([
             'user_id' => auth()->id(),
             'service_id' => $request->service_id,
+            'service_stage_id' => $request->service_stage_id,
             'rating' => $request->rating,
             'comment' => $request->comment
         ]);

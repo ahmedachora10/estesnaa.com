@@ -9,11 +9,16 @@ class ServiceRating extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_id', 'user_id', 'rating', 'comment'];
+    protected $fillable = ['service_stage_id', 'service_id', 'user_id', 'rating', 'comment'];
 
     public function service()
     {
         return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function serviceStage()
+    {
+        return $this->belongsTo(ServiceStage::class, 'service_stage_id');
     }
 
     public function user()

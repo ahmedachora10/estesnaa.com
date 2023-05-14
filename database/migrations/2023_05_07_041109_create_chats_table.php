@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('service_provider_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
+            $table->unsignedBigInteger('deal_id')->nullable();
+            // $table->foreignId('deal_id')->constrained('service_stages')->cascadeOnDelete();
+            $table->foreign('deal_id')->references('id')->on('service_stages')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserBankActivity;
 use App\Models\UserProfit;
+use App\Notifications\SendUserMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Omnipay\Omnipay;
@@ -210,7 +211,7 @@ class PaymentController extends Controller
                                     'is_service_provider_received_money' => false
                                 ]);
 
-                                ServiceStage::create([
+                                $service_stage = ServiceStage::create([
                                     'buyer_id' => auth()->id(),
                                     'service_id' => $service->id,
                                     'stage' => Stage::IMPLEMENT
@@ -221,6 +222,11 @@ class PaymentController extends Controller
                                 //     'activity_type' => UserActivityType::RECEIVED,
                                 //     'amount' => calc_service_provider_profit($transaction->amount)
                                 // ]);
+
+                                $service_stage->service->owner->notify(new SendUserMoney([
+                                    'title' => "مبروك! تم اختيارك للعمل على المشروع <a href='".route('front.services.stage.index', $service_stage)."'>{$service_stage->service->name}</a>",
+                                    'content' => ''
+                                ]));
 
                                 session()->remove('serviceID');
                             }

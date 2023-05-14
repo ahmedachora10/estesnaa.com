@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
@@ -85,6 +86,13 @@ Route::controller(UserController::class)->prefix('user')
     Route::post('rating/store', 'ratingServiceStore')->name('rating.store');
 });
 
+Route::controller(ChatController::class)
+->prefix('chat')->name('chat.')->middleware(['auth'])
+->group(function ()
+{
+    Route::get('/new/{service_provider}/{service}', 'newChat')->name('new');
+    Route::get('/{chat}', 'chat')->name('index');
+});
 
 
 require __DIR__.'/auth.php';
