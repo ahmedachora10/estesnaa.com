@@ -14,6 +14,10 @@
                 <span class="tf-icons bx bx-plus"></span>
                 {{-- {{ __('Add') }} --}}
             </a>
+            <a href="{{ route('services.create') }}" class="btn btn-icon btn-warning mx-4 btn-sm ">
+                <span class="tf-icons bx bx-reset"></span>
+                {{-- {{ __('Add') }} --}}
+            </a>
             </x-slot>
             @forelse ($services as $service)
                 <tr>
