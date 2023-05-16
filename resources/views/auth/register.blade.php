@@ -1,10 +1,12 @@
 <x-guest-layout>
 
-    <section class="breadcrumbs">
+    {{-- <section class="breadcrumbs">
         <div class="d-flex justify-content-between align-items-center">
-            <h2>تسجيل عضو جديد</h2>
+            <h2></h2>
         </div>
-    </section>
+    </section> --}}
+
+    <x-breadcrumb title="تسجيل عضو جديد" />
 
     <div class="register">
         <div class="container">
