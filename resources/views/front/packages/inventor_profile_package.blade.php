@@ -32,9 +32,7 @@
                                 @endif
                             </ul>
                             @if (
-                                (!is_null($user_plan) && $user_plan->plan_id == $package->id) ||
-                                    // (!is_null($user_expired_plan) && $user_expired_plan->plan_id == $package->id) ||
-                                    $package->amount == 0)
+                                !is_null($user_plan) && $user_plan->plan_id == $package->id)
                                 <a href="#" class="btn pricing-plan-purchase-btn bg-secondary disabled">اشتراك</a>
                             @else
                                 <a href="{{ route('payment.pay', $package) }}"
