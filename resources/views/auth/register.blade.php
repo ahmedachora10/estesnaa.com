@@ -1,11 +1,8 @@
 <x-guest-layout>
 
     <section class="breadcrumbs">
-        <div class="container">
-
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>تسجيل عضو جديد</h2>
-            </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>تسجيل عضو جديد</h2>
         </div>
     </section>
 
