@@ -10,14 +10,16 @@
 <div>
     <x-dashboard.tables.table1 title="sidebar.services" :columns="$columns">
         <x-slot:action>
-            <a href="{{ route('services.create') }}" class="btn btn-icon btn-primary mx-4 btn-sm ">
-                <span class="tf-icons bx bx-plus"></span>
-                {{-- {{ __('Add') }} --}}
-            </a>
-            <a href="{{ route('services.create') }}" class="btn btn-icon btn-warning mx-4 btn-sm ">
-                <span class="tf-icons bx bx-reset"></span>
-                {{-- {{ __('Add') }} --}}
-            </a>
+            <div>
+                <a href="{{ route('services.create') }}" class="btn btn-icon btn-primary mx-4 btn-sm ">
+                    <span class="tf-icons bx bx-plus"></span>
+                    {{-- {{ __('Add') }} --}}
+                </a>
+                <a href="{{ route('services.create') }}" class="btn btn-icon btn-warning mx-4 btn-sm ">
+                    <span class="tf-icons bx bx-reset"></span>
+                    {{-- {{ __('Add') }} --}}
+                </a>
+            </div>
             </x-slot>
             @forelse ($services as $service)
                 <tr>
