@@ -9,8 +9,8 @@
 
 <div>
     <x-dashboard.tables.table1 title="sidebar.services" :columns="$columns">
-        <x-slot:action>
-            <div>
+        <x-slot:actions>
+            <div class="d-flex jusitfy-content-end align-items-center">
                 <a href="{{ route('services.create') }}" class="btn btn-icon btn-primary mx-4 btn-sm ">
                     <span class="tf-icons bx bx-plus"></span>
                     {{-- {{ __('Add') }} --}}

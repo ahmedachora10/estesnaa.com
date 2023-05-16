@@ -12,6 +12,10 @@
                 {{-- {{ __('Add') }} --}}
             </a>
         @endif
+
+        @if (!is_null($actions))
+            {{ $actions }}
+        @endif
     </div>
 
     <div class="table-responsive text-nowrap">

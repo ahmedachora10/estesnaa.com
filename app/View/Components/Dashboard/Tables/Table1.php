@@ -11,7 +11,7 @@ class Table1 extends Component
      *
      * @return void
      */
-    public function __construct(public $title = null, public $action = null, public $columns = [])
+    public function __construct(public $title = null, public $action = null, public $columns = [], public $actions = null)
     {
         //
     }
