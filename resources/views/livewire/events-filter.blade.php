@@ -1,7 +1,7 @@
 <section id="events" class="events">
     <div class="container">
         @auth
-            @if (in_array(auth()->user()->rol, ['inventor', 'event']))
+            @if (in_array(auth()->user()->role, ['inventor', 'event']))
                 <div class="mb-3 d-flex justify-content-end">
                     <a href="{{ route('events.create') }}" class="btn custom-main-bg-color text-white"
                         style="width:200px">اضافة
