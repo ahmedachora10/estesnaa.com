@@ -82,7 +82,7 @@ class HomeController extends Controller
 
     public function deceasedInventors()
     {
-        $inventors = DeadInventor::latest()->paginate(setting('pagination'));
+        $inventors = DeadInventor::latest()->paginate(20);
 
         return view('front.inventions.deceased-inventors', compact('inventors'));
     }
