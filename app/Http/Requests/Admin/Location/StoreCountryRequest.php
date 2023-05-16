@@ -27,6 +27,7 @@ class StoreCountryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'flag' => ['nullable', 'string', 'max:3'],
             'status' => ['required', Rule::enum(Status::class)]
         ];
     }

@@ -8,7 +8,13 @@
 @endphp
 
 <div>
-    <x-dashboard.tables.table1 title="sidebar.services" :action="route('services.create')" :columns="$columns">
+    <x-dashboard.tables.table1 title="sidebar.services" :columns="$columns">
+        <x-slot:action>
+            <a href="{{ route('services.create') }}" class="btn btn-icon btn-primary mx-4 btn-sm ">
+                <span class="tf-icons bx bx-plus"></span>
+                {{-- {{ __('Add') }} --}}
+            </a>
+        </x-slot:action>
         @forelse ($services as $service)
             <tr>
                 <td>
@@ -18,7 +24,7 @@
                     <img src="{{ asset($service->image) }}" class=" rounded-circle" alt="avatar" width="30px"
                         height="30px">
                 </td>
-                <td>{{ $service->name }}</td>
+                <td title="{{ $service->name }}">{{ str($service->name)->limit(20) }}</td>
                 @if ($isAdmin)
                     <td><span class="badge badge bg-label-success">{{ $service->owner->name }}</span></td>
                 @endif

@@ -1,8 +1,17 @@
 <div>
-    <x-dashboard.tables.table1 title="sidebar.countries" :action="route('countries.create')" :columns="['name', 'status', 'actions']">
+    <x-dashboard.tables.table1 title="sidebar.countries" :action="route('countries.create')" :columns="['name', 'flag', 'status', 'actions']">
         @forelse ($countries as $country)
             <tr>
                 <td>{{ $country->name }}</td>
+                <td>
+                    <span class="badge bg-label-dark" style="cursor: pointer">
+                        @if ($country->flag)
+                            <x-country-flag :flag="$country->flag" :name="$country->name" />
+                        @else
+                            -
+                        @endif
+                    </span>
+                </td>
                 <td> <span class="badge bg-label-{{ $country->status->color() }}" style="cursor: pointer"
                         wire:click="updateStatus({{ $country->id }})">{{ $country->status->name() }}</span>
                 </td>

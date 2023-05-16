@@ -10,7 +10,7 @@ class Country extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['name', 'flag', 'status'];
 
     protected $casts = [
         'status' => Status::class

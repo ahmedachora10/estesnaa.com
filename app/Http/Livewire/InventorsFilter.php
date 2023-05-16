@@ -18,7 +18,7 @@ class InventorsFilter extends Component
 
     public function mount()
     {
-        $this->countries = Country::withCount('inventors')->whereHas('inventors.inventorProfilePlan')->get();
+        $this->countries = collect(Country::withCount('inventors')->whereHas('inventors.inventorProfilePlan')->get());
     }
 
     public function filter()

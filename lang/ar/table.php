@@ -36,6 +36,7 @@ return [
         'rating' => 'التقييم',
         'sign in' => 'الدخول',
         'duration' => 'الفترة',
+        'flag' => 'العلم',
         'display name' => 'اسم العرض',
         'created at' => 'وقت الانظمام',
         'duration expiration' => 'انتهاء المدة',

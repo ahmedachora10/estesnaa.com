@@ -1,5 +1,4 @@
 <x-front>
-
     {{-- Featured Servives --}}
     @if (count($featuredServices))
         <section class="featured-services" id="featured-services">
@@ -22,6 +21,7 @@
             </div>
         </section>
     @endif
+
 
     {{-- About Us --}}
     @if (setting('about_status') == 1)

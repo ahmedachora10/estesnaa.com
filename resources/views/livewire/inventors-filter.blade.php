@@ -24,12 +24,18 @@
                             @foreach ($countries as $country)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input"
+                                        <input type="checkbox" class="form-check-input mt-0"
                                             id="exampleCheck{{ $country->id }}">
-                                        <label class="form-check-label" for="exampleCheck1">{{ $country->name }}</label>
+                                        <label class="form-check-label" for="exampleCheck1">
+                                            @if ($country->flag)
+                                                <x-country-flag :flag="$country->flag" />
+                                            @endif {{ $country->name }}
+                                        </label>
                                     </div>
 
-                                    <span class="badge badge-primary badge-pill">{{ $country->inventors_count }}</span>
+                                    <span class="badge badge-primary badge-pill">
+                                        {{ $country->inventors_count }}
+                                    </span>
                                 </li>
                             @endforeach
                         </ul>
@@ -49,8 +55,17 @@
                                         <img src="{{ asset($inventor->avatar) }}" class="card-img-top" alt="...">
                                     </div>
                                     <div class="card-footer text-center">
-                                        <h3><a class="person-info"
-                                                href="{{ route('front.inventors.show', $inventor) }}">{{ $inventor->name }}</a>
+                                        <h3>
+                                            <a class="person-info"
+                                                href="{{ route('front.inventors.show', $inventor) }}">
+                                                @php
+                                                    $countryFlag = $countries->firstWhere('id', $inventor->country_id);
+                                                @endphp
+                                                @if ($countryFlag && $countryFlag->flag)
+                                                    <x-country-flag :flag="$countryFlag->flag" />
+                                                @endif
+                                                {{ $inventor->name }}
+                                            </a>
                                         </h3>
                                         <h6>{{ $inventor->dob->format('Y-m-d') }}</h6>
                                     </div>

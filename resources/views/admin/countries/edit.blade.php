@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <x-dashboard.cards.sample column="col-12" title="تصنيف جديد">
+    <x-dashboard.cards.sample column="col-12" title=" تحديث الدولة ">
         <form action="{{ route('countries.update', $country) }}" method="post" class="row"
             enctype="multipart/form-data">
             @csrf
@@ -9,6 +9,10 @@
             <div class="col-md-6 col-12 mb-3">
                 <x-input-group :value="$country->name" type="text" name="name" :title="trans('table.columns.name')" />
             </div> {{-- / Name --}}
+
+            <div class="col-md-6 col-12 mb-3">
+                <x-input-group type="text" name="flag" :value="$country->flag" :title="trans('table.columns.flag')" />
+            </div> {{-- / Flag --}}
 
             <div class="col-12 mb-3 mt-4">
                 <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
