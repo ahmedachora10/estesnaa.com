@@ -113,7 +113,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
         Route::resource('inventors/deceased', DeadInventorController::class);
     });
 
-    Route::middleware('role:admin|event')->group(function ()
+    Route::middleware('role:admin|event|inventor')->group(function ()
     {
         /**
          * Event Routes
@@ -129,7 +129,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
         Route::resource('inventions', InventionController::class);
     });
 
-    Route::middleware('role:admin|service_provider')->group(function ()
+    Route::middleware('role:admin|service_provider|inventor')->group(function ()
     {
         /**
          * Service Routes
