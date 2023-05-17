@@ -4,6 +4,6 @@
         @livewire('dashboard.services-container')
     </x-dashboard.cards.sample>
 
-    <x-sortable-script model="service" />
+    {{-- <x-sortable-script model="service" /> --}}
 
 </x-app-layout>

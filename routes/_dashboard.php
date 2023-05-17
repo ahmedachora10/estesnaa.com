@@ -134,6 +134,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
         /**
          * Service Routes
          */
+        Route::get('services/restore', [ServiceController::class, 'restore'])->name('services.restore');
         Route::resource('services', ServiceController::class);
     });
 

@@ -35,6 +35,11 @@ class HomeController extends Controller
         return view('front.inventions.inventor', compact('inventor'));
     }
 
+    public function showDeceasedInventor(DeadInventor $inventor)
+    {
+        return view('front.inventions.show-deceased', compact('inventor'));
+    }
+
     public function inventions()
     {
         $inventions = Invention::active()->latest()->get();

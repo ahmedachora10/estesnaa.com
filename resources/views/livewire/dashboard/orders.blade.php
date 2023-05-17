@@ -68,6 +68,7 @@
                 <div class="card-body">
                     <ul class="p-0 m-0">
                         @forelse ($servicesOrders as $order)
+                            @continue(!$order->service)
                             <li class="d-flex mb-4 pb-1">
                                 <div class="avatar flex-shrink-0 me-3">
                                     <img src="{{ asset($order->service->image) }}" alt="ENVY Laptop" class="rounded">

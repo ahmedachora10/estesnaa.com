@@ -53,6 +53,7 @@
             @endif
             <!--/ Transactions -->
         </div>
+
         <div class="col-lg-5 col-md-5 order-1">
             <div class="row">
                 {{-- Users --}}

@@ -11,13 +11,12 @@
     <x-dashboard.tables.table1 title="sidebar.services" :columns="$columns">
         <x-slot:actions>
             <div class="d-flex jusitfy-content-end align-items-center">
-                <a href="{{ route('services.create') }}" class="btn btn-icon btn-warning mx-4 btn-sm ">
+                <a href="{{ route('services.restore') }}" class="btn btn-icon btn-warning btn-sm "
+                    title="استعادة المحذوفات">
                     <span class="tf-icons bx bx-reset"></span>
-                    {{-- {{ __('Add') }} --}}
                 </a>
                 <a href="{{ route('services.create') }}" class="btn btn-icon btn-primary mx-4 btn-sm ">
                     <span class="tf-icons bx bx-plus"></span>
-                    {{-- {{ __('Add') }} --}}
                 </a>
             </div>
             </x-slot>

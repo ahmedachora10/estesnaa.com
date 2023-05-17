@@ -27,6 +27,11 @@ class ServiceController extends Controller
         return view('admin.services.index');
     }
 
+    public function restore()
+    {
+        return view('admin.services.restores');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

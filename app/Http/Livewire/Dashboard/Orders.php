@@ -14,7 +14,7 @@ class Orders extends Component
         $servicesOrders = ServiceOrder::with(['buyer', 'service.category']);
         $inventionsOrders = InventionOrder::with(['buyer', 'invention.category']);
 
-        if(auth()->user()->role == 'service_provider') {
+        if(in_array(auth()->user()->role, ['service_provider', 'inventor'])) {
             $servicesOrders->where('service_provider_id', auth()->id());
         } elseif(auth()->user()->role == 'inventor') {
             $inventionsOrders->whereHas('invention', function ($query)
