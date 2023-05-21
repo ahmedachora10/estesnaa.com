@@ -16,15 +16,15 @@
                                     </a>
                                 @elseif (str($message->content)->endsWith(['.docx', '.pdf', '.xlsx']))
                                     <a href="{{ asset($message->content) }}" target="_blank">
-                                        @if (str($message->content)->endsWith('.docx'))
+                                        {{-- @if (str($message->content)->endsWith('.docx'))
                                             <i class="fa-sharp fa-light fa-file-word"></i>
                                         @elseif(str($message->content)->endsWith('.pdf'))
                                             <i class="fa-solid fa-file-pdf"></i>
                                         @elseif(str($message->content)->endsWith('.xlsx'))
                                             <i class="fa-duotone fa-file-excel"></i>
-                                        @else
-                                            <i class="fa-solid fa-file"></i>
-                                        @endif
+                                        @else --}}
+                                        <i class="fa-solid fa-file fa-2xl text-white"></i>
+                                        {{-- @endif --}}
                                         {{-- <img src="{{ asset($message->content) }}" alt="image" width="150px"
                                             class="img-thumbnail"> --}}
                                     </a>
@@ -70,9 +70,4 @@
             <button class="btn btn-primary px-4 py-1 rounded-1 fw-bold" wire:click="save">حفظ </button>
         </div>
     </div>
-
-    @push('scripts')
-        <script src="https://kit.fontawesome.com/b0ade934b3.js" crossorigin="anonymous"></script>
-    @endpush
-
 </div>
