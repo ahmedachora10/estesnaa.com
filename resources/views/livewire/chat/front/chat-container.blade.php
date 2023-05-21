@@ -15,7 +15,7 @@
                                             class="img-thumbnail">
                                     </a>
                                 @elseif (str($message->content)->endsWith(['.docx', '.pdf', '.xlsx']))
-                                    <a href="{{ asset($message->content) }}" target="_blank">
+                                    <a href="{{ asset($message->content) }}" class="p-3" target="_blank">
                                         {{-- @if (str($message->content)->endsWith('.docx'))
                                             <i class="fa-sharp fa-light fa-file-word"></i>
                                         @elseif(str($message->content)->endsWith('.pdf'))
