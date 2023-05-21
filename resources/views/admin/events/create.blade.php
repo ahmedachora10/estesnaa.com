@@ -39,7 +39,7 @@
             </div> {{-- / Date --}}
 
             <div class="col-md-6 col-12 mb-3">
-                <x-input-group type="time" name="time" :title="trans('table.columns.time')" />
+                <x-input-group type="time" name="time" title="التوقيت (توقيت المكة المكرمة)" />
             </div> {{-- / Time --}}
 
             <div class="col-md-12 col-12 mb-3">
