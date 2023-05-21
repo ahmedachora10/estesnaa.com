@@ -9,7 +9,7 @@
                         <p>
                             {{ setting('app_description') }}<br>
                             <br>
-                            <strong>تلفون : </strong> <span dir="ltr">{{ setting('phone') }}</span> <br>
+                            <strong>الهاتف : </strong> <span dir="ltr">{{ setting('phone') }}</span> <br>
                             <strong>البريد الالكتروني : </strong> {{ setting('email') }}<br>
                         </p>
                         <div class="social-links mt-3">

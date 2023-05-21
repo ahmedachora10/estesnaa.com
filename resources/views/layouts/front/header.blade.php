@@ -134,7 +134,8 @@
 
                                     <div class="container">
                                         <h2 style="font-size:20px !important">{{ $item->title }}</h2>
-                                        <p class="fs-5 fw-bold text-start" style="color: #eabe00">{{ $item->description }}</p>
+                                        <p class="fs-5 fw-bold text-start" style="color: #eabe00">
+                                            {{ $item->description }}</p>
                                         {{-- <a href="#about" class="btn-get-started scrollto">تفاصيل اكثر</a> --}}
                                     </div>
                                 </div>
