@@ -36,7 +36,7 @@
             </div> {{-- / Categories --}}
 
             <div class="col-md-6 col-12 mb-3">
-                <x-input-group :value="$event->title" type="text" name="title" :title="trans('table.columns.title')" />
+                <x-input-group :value="$event->title" type="text" name="title" title="عنوان الفعالية" />
             </div> {{-- / Title --}}
 
             <div class="col-md-6 col-12 mb-3">
