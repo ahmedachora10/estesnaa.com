@@ -3,7 +3,7 @@
     if ($isAdmin) {
         $columns = ['image', 'name', 'owner', 'category', 'price', 'status', 'rating', 'actions'];
     } else {
-        $columns = ['image', 'name', 'category', 'price', 'status', 'actions'];
+        $columns = ['image', 'name', 'category', 'price', 'actions'];
     }
 @endphp
 
@@ -37,9 +37,11 @@
 
                     <td><span class="badge badge bg-label-danger fw-bold">${{ $service->price }}</span></td>
 
-                    <td> <span class="badge badge bg-label-{{ $service->status->color() }}" style="cursor: pointer"
-                            wire:click="updateStatus({{ $service->id }})">{{ $service->status->name() }}</span>
-                    </td>
+                    @if ($isAdmin)
+                        <td> <span class="badge badge bg-label-{{ $service->status->color() }}" style="cursor: pointer"
+                                wire:click="updateStatus({{ $service->id }})">{{ $service->status->name() }}</span>
+                        </td>
+                    @endif
 
                     @if ($isAdmin)
                         <td>

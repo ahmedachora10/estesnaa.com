@@ -43,15 +43,17 @@
             </div> {{-- / Description --}}
 
 
-            <div class="col-12 mb-3 mt-4">
-                <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
-                @foreach (App\Casts\Status::cases() as $status)
-                    <x-input-radio name="status" :value="$status->value" :checked="$status->value == $service->status->value">
-                        {{ $status->name() }}
-                    </x-input-radio>
-                @endforeach
-                <x-error field="status" class="d-block" />
-            </div> {{-- / Status --}}
+            @if (auth()->user()->role == 'admin')
+                <div class="col-12 mb-3 mt-4">
+                    <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
+                    @foreach (App\Casts\Status::cases() as $status)
+                        <x-input-radio name="status" :value="$status->value" :checked="$status->value == $service->status->value">
+                            {{ $status->name() }}
+                        </x-input-radio>
+                    @endforeach
+                    <x-error field="status" class="d-block" />
+                </div> {{-- / Status --}}
+            @endif
 
 
 

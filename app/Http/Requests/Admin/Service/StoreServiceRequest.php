@@ -32,7 +32,7 @@ class StoreServiceRequest extends FormRequest
             'price' => 'required|integer',
             'description' => 'required|string',
             'keywords' => 'nullable|string',
-            'status' => ['required', Rule::enum(Status::class)]
+            'status' => ['sometimes', Rule::enum(Status::class)]
         ];
     }
 }
