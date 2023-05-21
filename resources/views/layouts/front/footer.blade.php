@@ -42,16 +42,10 @@
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>خدماتنا</h4>
                     <ul>
-                        <li><i class="fa fa-angle-left"></i> <a href="{{ route('home') }}/services-details/1">تصنيع
-                                الاختراع وافكار المشاريع</a></li>
-                        <li><i class="fa fa-angle-left"></i> <a href="{{ route('home') }}/services-details/2">تسويق
-                                الخدمات</a></li>
-                        <li><i class="fa fa-angle-left"></i> <a href="{{ route('home') }}/services-details/3">استشارات
-                                الاعمال</a></li>
-                        <li><i class="fa fa-angle-left"></i> <a href="{{ route('home') }}/services-details/4">خدمات
-                                قانونية</a></li>
-                        <li><i class="fa fa-angle-left"></i> <a href="{{ route('home') }}/services-details/8">مستلزمات
-                                الاختراعات</a></li>
+                        @foreach (App\Models\Category::servicesSection()->orderBy('sort')->take(4)->get() as $item)
+                            <li><i class="fa fa-angle-left"></i> <a href="{{ route('front.services.all', $item) }}">
+                                    {{ $item->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
 
