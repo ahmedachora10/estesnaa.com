@@ -39,7 +39,7 @@ class InventorsFilter extends Component
             {
                 $query->where('name', 'like', "%{$this->filter()}%");
             })
-            ->latest()->paginate(setting('pagination'))
+            ->latest()->paginate(25)
         ]);
     }
 }
