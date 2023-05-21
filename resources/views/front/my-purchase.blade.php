@@ -5,6 +5,7 @@
             <div class="row gy-4">
                 <div class="row text-end">
                     @foreach ($purchases as $purchase)
+                        @continue(!$purchase->service)
                         @php
                             $service = $purchase->service;
                         @endphp

@@ -37,9 +37,21 @@
             @error('message')
                 <span class="d-block text-danger my-2">{{ $message }}</span>
             @enderror
+        </div>
+        <div class="form-group mt-3">
+            <input type="file" wire:model="file" class="form-control">
+            @error('file')
+                <span class="d-block text-danger my-2">{{ $message }}</span>
+            @enderror
             <span class="d-block mt-2 text-small text-secondary">اسأل مقدم الخدمة ما تريد معرفته عن هذه الخدمة. يمنع
                 وضع وسائل تواصل خارجية.</span>
         </div>
+
+        <div class="my-2">
+            <div wire:loading wire:target="file" class="text-info">جاري تحميل الملف...</div>
+            <div class="text-success" wire:loading.remove>تم اضافة الملف بنجاح</div>
+        </div>
+
         <div class="d-flex justify-content-start mt-4">
             <button class="btn btn-primary px-4 py-1 rounded-1 fw-bold" wire:click="save">حفظ </button>
         </div>

@@ -5,9 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Chat;
 use App\Models\Message;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ChatContainer extends Component
 {
+    use WithFileUploads;
+
+    public $file;
 
     public $message;
 
@@ -27,11 +31,11 @@ class ChatContainer extends Component
 
     public function save()
     {
-        // if(!$this->image) {
-            // } else {
-                //     $this->upload();
-                // }
-        $this->validate();
+        if(!$this->file) {
+            $this->validate();
+        } else {
+            $this->upload();
+        }
 
         $newMessage = Message::create([
             'chat_id' => $this->chat->id,
@@ -56,16 +60,16 @@ class ChatContainer extends Component
 
     }
 
-    // public function upload()
-    // {
-    //     $this->validate(['image' => 'required|image']);
+    public function upload()
+    {
+        $this->validate(['file' => 'required|file']);
 
-    //     $path = str_replace('public', 'storage', $this->image->storeAs('public/images/chat', date('Y-m-d') . str()->random(3) . '.' . $this->image->extension()));
+        $path = str_replace('public', 'storage', $this->file->storeAs('public/images/chat/files', date('Y-m-d') . str()->random(3) . '.' . $this->file->extension()));
 
-    //     $this->message = $path;
+        $this->message = $path;
 
-    //     $this->reset('image');
-    // }
+        $this->reset('file');
+    }
 
     public function render()
     {
