@@ -72,6 +72,15 @@
                                     </a>
                                 </div>
                             @endif
+
+                            @guest
+                                <div>
+                                    <a href="{{ route('login') }}" class="btn btn-outline-dark py-1 fw-bold rounded-1"
+                                        style="font-size: 14px">
+                                        تواصل
+                                    </a>
+                                </div>
+                            @endguest
                         </div>
                     </div>
                 </div>
