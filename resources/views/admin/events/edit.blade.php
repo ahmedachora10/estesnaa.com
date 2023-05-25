@@ -69,7 +69,7 @@
                 <x-error field="status" class="d-block" />
             </div> / Status --}}
 
-            <x-input-group type="hidden" name="status" :value="$event->status->value" />
+            <x-text-input type="hidden" name="status" :value="$event->status->value" />
 
 
 

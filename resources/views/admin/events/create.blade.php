@@ -58,7 +58,7 @@
                 <x-error field="status" class="d-block" />
             </div> / Status --}}
 
-            <x-input-group type="hidden" name="status" :value="App\Casts\Status::DISABLED->value" />
+            <x-text-input type="hidden" name="status" :value="App\Casts\Status::DISABLED->value" />
 
 
             <div class="col-12">
