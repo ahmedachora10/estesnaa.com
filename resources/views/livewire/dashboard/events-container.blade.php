@@ -17,19 +17,19 @@
                     <td><span class="badge badge bg-label-primary fw-bold">{{ $event->owner->name }}</span></td>
                 @endif
                 <td><span class="badge badge bg-label-info fw-bold"> {{ $event->category->name }} </span></td>
-                <td>
-                    {{-- @if ($isAdmin || (!is_null($userPlan) && !$userPlan->expired)) --}}
-                    @if ($isAdmin)
+                @if ($isAdmin)
+                    <td>
+                        {{-- @if ($isAdmin || (!is_null($userPlan) && !$userPlan->expired)) --}}
                         <span wire:click="updateStatus({{ $event->id }})"
                             class="badge badge bg-label-{{ $event->status->color() }} fw-bold" style="cursor: pointer">
                             {{ $event->status->name() }}
                         </span>
-                    @endif
-                    {{-- @else
-                        <span class="badge badge bg-label-warning" style="cursor: pointer"><i
+                        {{-- @else
+                            <span class="badge badge bg-label-warning" style="cursor: pointer"><i
                                 class="bx bx-low-vision"></i></span>
-                    @endif --}}
-                </td>
+                                @endif --}}
+                    </td>
+                @endif
                 <td>
                     <x-dashboard.actions.container>
                         <x-dashboard.actions.edit :href="route('events.edit', $event->id)">{{ __('Edit') }}</x-dashboard.actions.edit>
