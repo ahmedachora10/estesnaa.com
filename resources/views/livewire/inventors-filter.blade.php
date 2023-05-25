@@ -67,7 +67,7 @@
                                                 {{ $inventor->name }}
                                             </a>
                                         </h3>
-                                        <h6>{{ $inventor->dob->format('Y-m-d') }}</h6>
+                                        {{-- <h6>{{ $inventor->dob->format('Y-m-d') }}</h6> --}}
                                     </div>
                                 </div>
                             </div>
