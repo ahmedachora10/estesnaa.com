@@ -68,7 +68,7 @@ class HomeController extends Controller
 
     public function serviceProviderPlan()
     {
-        $package = Package::active()->where('group', auth()->user()->role)->first();
+        $package = Package::active()->where('group', auth()->user()->role == 'inventor' ? 'service_provider' : auth()->user()->role)->first();
         $user_plan = auth()->user()->service_provider_subscription_paid;
         return view('front.packages.service_provider_package', compact('package', 'user_plan'));
     }
