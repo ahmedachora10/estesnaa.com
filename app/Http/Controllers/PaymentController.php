@@ -45,6 +45,18 @@ class PaymentController extends Controller
         if($package->amount == 0 && !$isServiceProvider) {
             $this->saveSubscription($package);
             return redirect()->route('payment.success');
+        }elseif($package->amount == 0 && $isServiceProvider) {
+            $done = DB::transaction(function () use($package)
+            {
+                $this->saveSubscription($package);
+
+                $user = User::find(auth()->id());
+                $user->service_provider_subscription_paid = true;
+                $user->save();
+                return true;
+            });
+
+            return redirect()->route($done ? 'payment.success' : 'payment.cancel');
         }
 
         try {
@@ -147,7 +159,7 @@ class PaymentController extends Controller
                             }
 
                             session()->remove('packageID');
-                        } elseif(auth()->user()->role == 'service_provider') {
+                        } elseif(in_array(auth()->user()->role, ['service_provider', 'inventor']) && !session()->exists('inventionID')) {
                             $user = User::find(auth()->id());
                             $user->service_provider_subscription_paid = true;
                             $user->save();
