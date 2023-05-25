@@ -40,13 +40,13 @@ class PaymentController extends Controller
     {
         abort_if($package->status->value == Status::DISABLED->value,404);
 
-        $isServiceProvider = in_array(auth()->user()->role, ['service_provider', 'inventor']);
+        $isServiceProvider = auth()->user()->role == 'service_provider';
 
-        if($package->amount == 0 && !$isServiceProvider) {
+        if($package->amount == 0 && $package->group != 'service_provider' && !$isServiceProvider) {
             $this->saveSubscription($package);
 
             return redirect()->route('payment.success');
-        }elseif($package->amount == 0 && $isServiceProvider) {
+        }elseif($package->amount == 0 && ($isServiceProvider || auth()->user()->role == 'inventor') && $package->group == 'service_procider') {
             $done = DB::transaction(function () use($package)
             {
                 $this->saveSubscription($package);
