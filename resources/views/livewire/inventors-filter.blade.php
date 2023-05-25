@@ -52,7 +52,10 @@
                             <div class="card home">
                                 <div class="card person">
                                     <div class="card-body">
-                                        <img src="{{ asset($inventor->avatar) }}" class="card-img-top" alt="...">
+                                        <div class="ratio ratio-16x9">
+                                            <img src="{{ asset($inventor->avatar) }}" class="card-img-top"
+                                                alt="...">
+                                        </div>
                                     </div>
                                     <div class="card-footer text-center">
                                         <h3>
