@@ -245,7 +245,7 @@ class UserController extends Controller
 
         $user->inventorProfile()->update($request->only(['facebook', 'whatsapp', 'instagram', 'twitter', 'description', 'video']) + $file);
 
-        return redirect()->route('users.show', $user)->with('success', 'تم تحديث بنجاح المرجو انتظار مراجعة البيانات من قبل الادارة');
+        return redirect()->route('users.show', $user)->with('success', 'تم التحديث بنجاح. المرجو انتظار مراجعة البيانات من قبل الادارة');
     }
 
     public function uploadVideo(Request $request)
