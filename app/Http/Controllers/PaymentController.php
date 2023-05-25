@@ -46,7 +46,7 @@ class PaymentController extends Controller
             $this->saveSubscription($package);
 
             return redirect()->route('payment.success');
-        }elseif($package->amount == 0 && ($isServiceProvider || auth()->user()->role == 'inventor') && $package->group == 'service_procider') {
+        }elseif($package->amount == 0 && ($isServiceProvider || auth()->user()->role == 'inventor') && $package->group == 'service_provider') {
             $done = DB::transaction(function () use($package)
             {
                 $this->saveSubscription($package);
