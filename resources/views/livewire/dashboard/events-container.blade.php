@@ -3,7 +3,7 @@
     if ($isAdmin) {
         $columns = ['image', 'title', 'owner', 'category', 'status', 'actions'];
     } else {
-        $columns = ['image', 'title', 'category', 'status', 'actions'];
+        $columns = ['image', 'title', 'category', 'actions'];
     }
 @endphp
 <div>
@@ -18,15 +18,17 @@
                 @endif
                 <td><span class="badge badge bg-label-info fw-bold"> {{ $event->category->name }} </span></td>
                 <td>
-                    @if ($isAdmin || (!is_null($userPlan) && !$userPlan->expired))
+                    {{-- @if ($isAdmin || (!is_null($userPlan) && !$userPlan->expired)) --}}
+                    @if ($isAdmin)
                         <span wire:click="updateStatus({{ $event->id }})"
                             class="badge badge bg-label-{{ $event->status->color() }} fw-bold" style="cursor: pointer">
                             {{ $event->status->name() }}
                         </span>
-                    @else
+                    @endif
+                    {{-- @else
                         <span class="badge badge bg-label-warning" style="cursor: pointer"><i
                                 class="bx bx-low-vision"></i></span>
-                    @endif
+                    @endif --}}
                 </td>
                 <td>
                     <x-dashboard.actions.container>

@@ -51,7 +51,7 @@ class EventController extends Controller
 
         Event::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
 
-        return redirect()->route('events.index')->with('success', trans('message.create'));
+        return redirect()->route('events.index')->with('success', 'تم اضافة الفعالية بنجاح. المرجو انتظار مراجعة الفعالية من قبل الادارة');
     }
 
     /**
