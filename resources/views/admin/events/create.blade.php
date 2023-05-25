@@ -47,18 +47,20 @@
             </div> {{-- / Description --}}
 
 
-            {{-- <div class="col-12 mb-3 mt-4">
-                <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
-                @foreach (App\Casts\Status::cases() as $status)
-                    @continue(auth()->user()->role == 'event' && $status->value == App\Casts\Status::ENABLED->value && !auth()->user()->plan)
-                    <x-input-radio name="status" :value="$status->value" checked>
-                        {{ $status->name() }}
-                    </x-input-radio>
-                @endforeach
-                <x-error field="status" class="d-block" />
-            </div> / Status --}}
-
-            <x-text-input type="hidden" name="status" :value="App\Casts\Status::DISABLED->value" />
+            @if (auth()->user()->role == 'admin')
+                <div class="col-12 mb-3 mt-4">
+                    <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
+                    @foreach (App\Casts\Status::cases() as $status)
+                        @continue(auth()->user()->role == 'event' && $status->value == App\Casts\Status::ENABLED->value && !auth()->user()->plan)
+                        <x-input-radio name="status" :value="$status->value" checked>
+                            {{ $status->name() }}
+                        </x-input-radio>
+                    @endforeach
+                    <x-error field="status" class="d-block" />
+                </div> {{-- / Status --}}
+            @else
+                <x-text-input type="hidden" name="status" :value="App\Casts\Status::DISABLED->value" />
+            @endif
 
 
             <div class="col-12">

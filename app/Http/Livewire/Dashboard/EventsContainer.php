@@ -34,7 +34,7 @@ class EventsContainer extends Component
 
         if($user->role == 'admin') {
             $events = Event::with(['category', 'owner'])->latest()->paginate(setting('pagination'));
-        } elseif($user->role == 'event') {
+        } elseif(in_array($user->role, ['event', 'inventor'])) {
             $events = $user->events()->with('category')->latest()->paginate(setting('pagination'));
         }
 

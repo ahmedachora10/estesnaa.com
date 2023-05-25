@@ -80,7 +80,7 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="cube-alt" :link="route('services.index')" />
         @endif
 
-        @if ($isAdmin || $isEvent)
+        @if ($isAdmin || $isEvent || $isInventor)
             <x-dashboard.sidebar.link :title="trans('sidebar.events')" icon="calendar-event" :link="route('events.index')" />
         @endif
 
