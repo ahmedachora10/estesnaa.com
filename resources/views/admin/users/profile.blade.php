@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="user-profile-header-banner">
-                    <img src="{{ asset('assets/img/default-profile-img.jpg') }}" alt="Banner image" class="rounded-top">
+                    <img src="{{ asset('assets/img/default-bg.jpg') }}" alt="Banner image" class="rounded-top">
                 </div>
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
@@ -89,7 +89,7 @@
                 <x-dashboard.cards.sample column="col-12">
                     <div class="mb-4 d-flex justify-content-between align-items-center">
                         <h4>
-                            شهادة المخترع
+                            شهادة المخترع أو رقم الطلب المسجل في الهيئة
                         </h4>
                         @livewire('dashboard.certificate-status-button', ['user' => $user])
                     </div>
@@ -118,13 +118,16 @@
                         @if ($user->inventorProfile->video != null)
                             <div class="col-12 mb-3">
                                 <iframe src="{{ asset($user->inventorProfile->video) }}" width="100%" height="300px"
-                                    controls>
+                                    controls autoplay="0">
                                 </iframe>
                             </div>
                         @endif
 
                         <div class="col-12 mb-3">
                             <x-input-group :value="$user->inventorProfile->video" type="file" name="video" :title="trans('table.columns.video')" />
+                            <div id="defaultFormControlHelp" class="form-text text-secondary">
+                                يفضل رفع فيديو بأبعاد (16x9)
+                            </div>
                         </div> {{-- / video --}}
 
                         <div class="col-md-6 col-12 mb-3">
@@ -133,6 +136,9 @@
 
                         <div class="col-md-6 col-12 mb-3">
                             <x-input-group :value="$user->file" type="file" name="file" :title="trans('table.columns.certificate')" />
+                            <div id="defaultFormControlHelp" class="form-text text-secondary">
+                                المطلوب شهادة واحدة فقط
+                            </div>
                         </div> {{-- / CV Or Certificate --}}
 
                         <div class="col-md-6 col-12 mb-3">

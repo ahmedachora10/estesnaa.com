@@ -30,17 +30,17 @@
             <div class="row gy-4">
 
                 <div class="col-lg-4">
-                    <div class="portfolio-info" style="background:#ffffff;">
+                    {{-- <div class="portfolio-info" style="background:#ffffff; padding-top: 0px !important">
 
                         <p>
                         </p>
-                    </div>
+                    </div> --}}
 
 
                     @if ($inventor->inventorProfile->video != null)
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="{{ asset($inventor->inventorProfile->video) }}"
-                                allowfullscreen=""></iframe>
+                                allowfullscreen="" autoplay="0"></iframe>
                         </div>
                     @endif
                 </div>
