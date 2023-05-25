@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Casts\Status;
+use App\Models\Category;
 use App\Models\Event;
 use Livewire\Component;
 use Livewire\WithPagination;

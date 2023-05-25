@@ -25,7 +25,9 @@
                     <div class="sidebar-item categories">
                         <ul>
                             @foreach ($categories as $category)
-                                <li><a href="#">{{ $category->name }}<span> ({{ $category->events_count }})
+                                <li><a href="#!"
+                                        wire:click="selelctCategory({{ $category->id }})">{{ $category->name }}<span>
+                                            ({{ $category->events_count }})
                                         </span></a></li>
                             @endforeach
                         </ul>
