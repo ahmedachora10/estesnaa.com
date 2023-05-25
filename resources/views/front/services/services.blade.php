@@ -4,7 +4,7 @@
     <section id="services" class="services">
         <div class="container">
             @auth
-                @if (auth()->user()->role == 'service_provider')
+                @if (in_array(auth()->user()->role, ['service_provider', 'inventor']))
                     <div class="mb-3 d-flex justify-content-end">
                         <a href="{{ route('services.create') }}" class="btn custom-main-bg-color text-white"
                             style="width:200px">
