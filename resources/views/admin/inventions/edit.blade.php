@@ -27,7 +27,7 @@
             </div> {{-- / Categories --}}
 
             <div class="col-md-6 col-12 mb-3">
-                <x-input-group :value="$invention->name" type="text" name="name" :title="trans('table.columns.name')" />
+                <x-input-group :value="$invention->name" type="text" name="name" title="اسم الاختراع" />
             </div> {{-- / Name --}}
 
             <div class="col-md-6 col-12 mb-3">
@@ -46,16 +46,19 @@
                 <x-text-area-group :value="$invention->description" name="description" :title="trans('table.columns.description')" />
             </div> {{-- / Description --}}
 
-
-            <div class="col-12 mb-3 mt-4">
-                <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
-                @foreach (App\Casts\Status::cases() as $status)
-                    <x-input-radio name="status" :value="$status->value" :checked="$status->value == $invention->status->value">
-                        {{ $status->name() }}
-                    </x-input-radio>
-                @endforeach
-                <x-error field="status" class="d-block" />
-            </div> {{-- / Status --}}
+            @if (auth()->user()->role == 'admin')
+                <div class="col-12 mb-3 mt-4">
+                    <x-label for="status" class="d-block">{{ trans('table.columns.status') }}</x-label>
+                    @foreach (App\Casts\Status::cases() as $status)
+                        <x-input-radio name="status" :value="$status->value" :checked="$status->value == $invention->status->value">
+                            {{ $status->name() }}
+                        </x-input-radio>
+                    @endforeach
+                    <x-error field="status" class="d-block" />
+                </div> {{-- / Status --}}
+            @else
+                <x-text-input type="hidden" name="status" :value="App\Casts\Status::DISABLED->value" />
+            @endif
 
 
 
