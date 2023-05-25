@@ -40,7 +40,7 @@ class PaymentController extends Controller
     {
         abort_if($package->status->value == Status::DISABLED->value,404);
 
-        $isServiceProvider = auth()->user()->role == 'service_provider';
+        $isServiceProvider = in_array(auth()->user()->role, ['service_provider', 'inventor']);
 
         if($package->amount == 0 && !$isServiceProvider) {
             $this->saveSubscription($package);
