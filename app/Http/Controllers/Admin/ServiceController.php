@@ -55,7 +55,7 @@ class ServiceController extends Controller
 
         Service::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
 
-        return redirect()->route('services.index')->with('success', trans('message.create'));
+        return redirect()->route('services.index')->with('success', 'تم اضافة الخدمة بنجاح. المرجو انتظار مراجعة الخدمة من قبل الادارة');
     }
 
     /**
