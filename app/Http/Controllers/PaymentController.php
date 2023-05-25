@@ -44,7 +44,16 @@ class PaymentController extends Controller
 
         if($package->amount == 0 && $package->group != 'service_provider' && !$isServiceProvider) {
             $this->saveSubscription($package);
-            $redirectTO = auth()->user()->role == 'inventor' ? 'inventions.create' : 'events.create';
+
+            $redirectTO = 'payment.success';
+            if($package->group == 'inventor') {
+                $redirectTO = 'inventions.create';
+            } elseif($package->group == 'event') {
+                $redirectTO = 'events.create';
+            } elseif($package->group == 'inventor_profile') {
+                return redirect()->route('users.show', auth()->id());
+            }
+
             return redirect()->route($redirectTO);
         }elseif($package->amount == 0 && ($isServiceProvider || auth()->user()->role == 'inventor') && $package->group == 'service_provider') {
             $done = DB::transaction(function () use($package)
