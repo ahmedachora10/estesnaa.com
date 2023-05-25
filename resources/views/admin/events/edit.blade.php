@@ -44,7 +44,8 @@
             </div> {{-- / Address --}}
 
             <div class="col-md-6 col-12 mb-3">
-                <x-input-group :value="$event->date->format('Y-m-d')" type="date" name="date" :title="trans('table.columns.date')" />
+                <x-input-group :value="$event->date->format('Y-m-d')" type="text" name="date" class="hijri-date-input"
+                    :title="trans('table.columns.date')" />
             </div> {{-- / Date --}}
 
             <div class="col-md-6 col-12 mb-3">
@@ -78,7 +79,15 @@
 
     </x-dashboard.cards.sample>
 
+    @push('styles')
+        <link href="{{ asset('hijri-datepicker/dist/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" />
+    @endpush
+
     @push('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+        <script src="{{ asset('hijri-datepicker/dist/js/bootstrap-hijri-datepicker.min.js') }}"></script>
+
         <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ar.js"></script>
         <script>
@@ -89,6 +98,10 @@
                 .catch(error => {
                     console.error(error);
                 });
+
+            $(function() {
+                $("#date").hijriDatePicker();
+            });
         </script>
     @endpush
 
