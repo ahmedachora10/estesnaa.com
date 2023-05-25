@@ -76,7 +76,7 @@
             <x-dashboard.sidebar.link title="بيع الاختراعات" icon="brain" :link="route('inventions.index')" />
         @endif
 
-        @if ($isAdmin || $isServiceProvider)
+        @if ($isAdmin || $isServiceProvider || $isInventor)
             <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="cube-alt" :link="route('services.index')" />
         @endif
 

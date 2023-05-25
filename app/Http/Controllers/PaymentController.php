@@ -44,6 +44,7 @@ class PaymentController extends Controller
 
         if($package->amount == 0 && !$isServiceProvider) {
             $this->saveSubscription($package);
+
             return redirect()->route('payment.success');
         }elseif($package->amount == 0 && $isServiceProvider) {
             $done = DB::transaction(function () use($package)
@@ -56,7 +57,7 @@ class PaymentController extends Controller
                 return true;
             });
 
-            return redirect()->route($done ?  'services.create' : 'payment.cancel');
+            return redirect()->route($done ? 'services.create' : 'payment.cancel');
         }
 
         try {
