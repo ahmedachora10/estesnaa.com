@@ -50,7 +50,7 @@ class InventionController extends Controller
 
         Invention::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
 
-        return redirect()->route('inventions.index')->with('success', trans('message.create'));
+        return redirect()->route('inventions.index')->with('success', 'تم اضافة الاختراع بنجاح. المرجو انتظار المراجعة من قبل الادارة');
     }
 
     /**

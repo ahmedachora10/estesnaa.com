@@ -3,7 +3,7 @@
     if ($isAdmin) {
         $columns = ['image', 'name', 'owner', 'price', 'discount', 'status', 'actions'];
     } else {
-        $columns = ['image', 'name', 'price', 'discount', 'status', 'actions'];
+        $columns = ['image', 'name', 'price', 'discount', 'actions'];
     }
 @endphp
 
@@ -26,15 +26,17 @@
                     <span class="badge badge bg-label-dark fw-bold">{{ $invention->discount }}%</span>
                 </td>
 
-                <td>
-                    @if ($isAdmin || (!is_null($userPlan) && !$userPlan->expired))
+                @if ($isAdmin)
+                    <td>
+                        {{-- @if ($isAdmin || (!is_null($userPlan) && !$userPlan->expired)) --}}
                         <span class="badge badge bg-label-{{ $invention->status->color() }}" style="cursor: pointer"
                             wire:click="updateStatus({{ $invention->id }})">{{ $invention->status->name() }}</span>
-                    @else
+                        {{-- @else
                         <span class="badge badge bg-label-warning" style="cursor: pointer"><i
                                 class="bx bx-low-vision"></i></span>
-                    @endif
-                </td>
+                    @endif --}}
+                    </td>
+                @endif
 
 
                 <td>
