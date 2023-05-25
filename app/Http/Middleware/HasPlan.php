@@ -18,7 +18,7 @@ class HasPlan
     {
         if(auth()->check() && auth()->user()->role != 'admin') {
 
-            if(auth()->user()->role == 'service_provider' && auth()->user()->service_provider_subscription_paid == false) {
+            if(in_array(auth()->user()->role, ['service_provider', 'inventor']) && auth()->user()->service_provider_subscription_paid == false) {
                 return redirect()->route('front.service-provider.plan');
             } elseif(in_array(auth()->user()->role, ['event', 'inventor']) && !auth()->user()->plan) {
                 return redirect()->route('front.packages');

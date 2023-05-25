@@ -47,7 +47,7 @@ Route::middleware(['user.active'])->group(function ()
         Route::get('/packages', 'packages')->middleware(['auth', 'role:event|inventor|service_provider'])
         ->name('front.packages');
 
-        Route::get('/service_providers/plan', 'serviceProviderPlan')->middleware(['auth', 'role:service_provider'])
+        Route::get('/service_providers/plan', 'serviceProviderPlan')->middleware(['auth', 'role:service_provider|inventor'])
         ->name('front.service-provider.plan');
 
         Route::get('/inventor_profile/plan', 'inventorProfilePlan')->middleware(['auth', 'role:inventor'])
