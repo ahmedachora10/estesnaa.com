@@ -56,7 +56,7 @@ class PaymentController extends Controller
                 return true;
             });
 
-            return redirect()->route($done ? 'payment.success' : 'payment.cancel');
+            return redirect()->route($done ?  'services.create' : 'payment.cancel');
         }
 
         try {
