@@ -16,6 +16,8 @@ class InventorsFilter extends Component
     public $countries = [];
     public $search = '';
 
+    public $searchByCountry = null;
+
     public function mount()
     {
         $this->countries = collect(Country::withCount('inventors')->whereHas('inventors.inventorProfilePlan')->get());
@@ -24,6 +26,11 @@ class InventorsFilter extends Component
     public function filter()
     {
         return $this->search;
+    }
+
+    public function selectCountry(Country $country)
+    {
+        $this->searchByCountry = $country->id;
     }
 
     public function render()
@@ -38,6 +45,10 @@ class InventorsFilter extends Component
             ->whereHas('country',function ($query)
             {
                 $query->where('name', 'like', "%{$this->filter()}%");
+            })
+            ->when($this->searchByCountry, function ($query)
+            {
+                $query->where('country_id', $this->searchByCountry);
             })
             ->latest()->paginate(25)
         ]);

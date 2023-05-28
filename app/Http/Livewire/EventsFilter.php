@@ -36,7 +36,7 @@ class EventsFilter extends Component
     }
 
 
-    public function selelctCategory(Category $category)
+    public function selectCategory(Category $category)
     {
         $this->searchByCategory = $category->id;
     }

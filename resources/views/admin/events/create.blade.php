@@ -31,7 +31,7 @@
             </div> {{-- / Title --}}
 
             <div class="col-md-6 col-12 mb-3">
-                <x-input-group type="text" name="address" :title="trans('table.columns.address')" />
+                <x-input-group type="text" name="address" title="مقر الفعالية" />
             </div> {{-- / Address --}}
 
             <div class="col-md-6 col-12 mb-3">

@@ -25,7 +25,8 @@
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input mt-0"
-                                            id="exampleCheck{{ $country->id }}">
+                                            id="exampleCheck{{ $country->id }}"
+                                            wire:click="selectCountry({{ $country->id }})">
                                         <label class="form-check-label" for="exampleCheck1">
                                             @if ($country->flag)
                                                 <x-country-flag :flag="$country->flag" />

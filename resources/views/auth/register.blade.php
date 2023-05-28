@@ -83,7 +83,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="firstName" class="form-label">رقم التلفون/الجوال</label>
+                                    <label for="firstName" class="form-label">رقم الهاتف/الجوال</label>
                                     <input dir="ltr" type="text" name="phone" id="phone"
                                         style="width:100%;padding:.375rem .75rem;" class="form-control" maxlength="20">
                                     <small class="d-block mt-2 text-primary" style="font-size: 14px">ادخل الرقم بدون

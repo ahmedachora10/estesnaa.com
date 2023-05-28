@@ -26,7 +26,7 @@
                         <ul>
                             @foreach ($categories as $category)
                                 <li><a href="#!"
-                                        wire:click="selelctCategory({{ $category->id }})">{{ $category->name }}<span>
+                                        wire:click="selectCategory({{ $category->id }})">{{ $category->name }}<span>
                                             ({{ $category->events_count }})
                                         </span></a></li>
                             @endforeach
