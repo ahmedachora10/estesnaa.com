@@ -27,7 +27,7 @@
                                         <input type="checkbox" class="form-check-input mt-0"
                                             id="exampleCheck{{ $country->id }}"
                                             wire:click="selectCountry({{ $country->id }})"
-                                            {{ $country->id == $searchByCountry }}>
+                                            {{ $country->id == $searchByCountry ? 'checked' : '' }}>
                                         <label class="form-check-label" for="exampleCheck1">
                                             @if ($country->flag)
                                                 <x-country-flag :flag="$country->flag" />
