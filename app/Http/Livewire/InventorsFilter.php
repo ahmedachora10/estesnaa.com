@@ -20,10 +20,10 @@ class InventorsFilter extends Component
 
     public function mount()
     {
-        $this->countries = collect(Country::withCount(['inventors' => function ($query)
-        {
-            $query->whereHas('inventorProfilePlan');
-        }])->whereHas('inventors.inventorProfilePlan')->get());
+        // $this->countries = collect(Country::withCount(['inventors' => function ($query)
+        // {
+        //     $query->whereHas('inventorProfilePlan');
+        // }])->whereHas('inventors.inventorProfilePlan')->get());
     }
 
     public function filter()
@@ -38,6 +38,11 @@ class InventorsFilter extends Component
 
     public function render()
     {
+        $this->countries = collect(Country::withCount(['inventors' => function ($query)
+        {
+            $query->whereHas('inventorProfilePlan');
+        }])->whereHas('inventors.inventorProfilePlan')->get());
+
         return view('livewire.inventors-filter', [
             'inventors' => User::active()->whereRoleIs('inventor')
             ->whereHas('inventorProfile', function ($query)
