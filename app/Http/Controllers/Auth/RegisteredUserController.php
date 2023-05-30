@@ -9,6 +9,7 @@ use App\Models\Package;
 use App\Models\Role;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Notifications\NewUser;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -100,6 +101,12 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $user->notify(new NewUser([
+            'title' => 'مستخدم جديد',
+            'content' => 'تم تسجيل ' . $user->roles->first()->display_name . ' جديد.',
+            'link' => route('users.index')
+        ]));
 
         return redirect( $user->email_verified_at == null ? '/verify-email'  : RouteServiceProvider::HOME);
     }
