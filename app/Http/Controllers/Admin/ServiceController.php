@@ -61,7 +61,8 @@ class ServiceController extends Controller
 
         Notification::send(User::whereRoleIs('admin')->get(), new StoreServiceNotification([
             'title' => 'خدمة جديدة',
-            'content' => 'تم اضافة خدمة من قبل ' . $service->owner->name
+            'content' => 'تم اضافة خدمة من قبل ' . $service->owner->name,
+            'link' => route('services.index')
         ]));
 
         return redirect()->route('services.index')->with('success', 'تم اضافة الخدمة بنجاح. المرجو انتظار مراجعة الخدمة من قبل الادارة');
