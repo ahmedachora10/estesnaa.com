@@ -1,5 +1,5 @@
 @if ($checkType)
-    <div class="d-flex">
+    <a href="{{ isset($notification->data['link']) ? $notification->data['link'] : '#!' }}" class="d-flex">
         <div class="flex-shrink-0 me-3">
             <div class="avatar">
                 <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-wallet"></i></span>
@@ -15,5 +15,5 @@
             <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
             <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
         </div>
-    </div>
+        </div>
 @endif

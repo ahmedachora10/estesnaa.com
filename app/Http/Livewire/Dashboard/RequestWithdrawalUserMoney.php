@@ -60,7 +60,8 @@ class RequestWithdrawalUserMoney extends Component
 
         Notification::send(User::whereRoleIs('admin')->get(), new SendUserMoney([
             'title' => 'طلب سحب لاموال',
-            'content' => 'تم ارسال طلب السحب من قبل ' . auth()->user()->name
+            'content' => 'تم ارسال طلب السحب من قبل ' . auth()->user()->name,
+            'link' => route('withdrawal_requests.index')
         ]));
     }
 
