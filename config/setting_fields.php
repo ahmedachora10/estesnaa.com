@@ -276,6 +276,43 @@ return [
         ]
     ],
 
+    'packages' => [
+        'title' => 'packages',
+        'desc' => '',
+        'icon' => 'menu-icon tf-icons bx bx-package',
+
+        'elements' => [
+            [
+                'type' => 'select',
+                'data' => 'string',
+                'name' => 'free_service_package',
+                'label' => 'free service package',
+                'rules' => 'nullable|integer|in:0,1',
+                'class' => '',
+                'value' => '',
+                'parent_class' => 'col-6',
+                'options' => [
+                    0 => 'لا',
+                    1 => 'نعم',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'data' => 'string',
+                'name' => 'free_inventor_package',
+                'label' => 'free inventor profile package',
+                'rules' => 'nullable|integer|in:0,1',
+                'class' => '',
+                'value' => '',
+                'parent_class' => 'col-6',
+                'options' => [
+                    0 => 'لا',
+                    1 => 'نعم',
+                ]
+            ],
+        ]
+    ],
+
     'footer' => [
 
         'title' => 'Footer',

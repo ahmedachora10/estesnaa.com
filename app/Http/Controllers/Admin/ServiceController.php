@@ -7,7 +7,10 @@ use App\Models\Service;
 use App\Http\Requests\Admin\Service\StoreServiceRequest;
 use App\Http\Requests\Admin\Service\UpdateServiceRequest;
 use App\Models\Category;
+use App\Models\User;
+use App\Notifications\StoreServiceNotification;
 use App\Utils\UploadImage;
+use Illuminate\Support\Facades\Notification;
 
 class ServiceController extends Controller
 {
@@ -53,7 +56,13 @@ class ServiceController extends Controller
     {
         $request->validated();
 
-        Service::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
+        $service = Service::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
+
+
+        Notification::send(User::whereRoleIs('admin')->get(), new StoreServiceNotification([
+            'title' => 'خدمة جديدة',
+            'content' => 'تم اضافة خدمة من قبل ' . $service->owner->name
+        ]));
 
         return redirect()->route('services.index')->with('success', 'تم اضافة الخدمة بنجاح. المرجو انتظار مراجعة الخدمة من قبل الادارة');
     }

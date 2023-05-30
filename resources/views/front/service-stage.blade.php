@@ -109,20 +109,22 @@
                                     تقييم</a>
                             @endif
 
-                            @if ($service->rating->count() > 0 || (auth()->user()->role == 'admin' || $service->user_id == auth()->id()))
+                            @if (auth()->user()->role == 'admin' || $service->user_id == auth()->id())
                                 {{-- <div id="display-rating"></div> --}}
                                 {{-- <blockquote class="blockquote mt-3">
                                     <p>{{ $service->rating->first()->comment }}</p>
                                 </blockquote> --}}
 
-                                <figure>
-                                    <blockquote class="blockquote">
-                                        <div id="display-rating"></div>
-                                    </blockquote>
-                                    <figcaption class="blockquote-footer mt-3" style="line-height: 1.5em">
-                                        {{ $service->rating->first()->comment }}
-                                    </figcaption>
-                                </figure>
+                                @if ($service->rating->first())
+                                    <figure>
+                                        <blockquote class="blockquote">
+                                            <div id="display-rating"></div>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer mt-3" style="line-height: 1.5em">
+                                            {{ $service->rating->first()->comment }}
+                                        </figcaption>
+                                    </figure>
+                                @endif
                             @endif
                         </div>
                     </div>

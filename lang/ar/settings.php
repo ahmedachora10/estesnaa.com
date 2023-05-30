@@ -32,6 +32,10 @@ return [
     'paypal client secret' => 'Client Secret',
     'live mode?' => 'في حالة Production؟',
 
+    'packages' => 'اعدادات الباقات',
+    'free service package' => 'تفعيل باقة الخدمات المجانية',
+    'free inventor profile package' => 'تفعيل باقة التعريف بالمخترعين المجانية',
+
     'save' => 'حفظ الاعدادات',
     'pagination' => 'عدد العناصر',
 ];

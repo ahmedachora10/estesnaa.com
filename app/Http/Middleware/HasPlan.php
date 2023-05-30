@@ -20,7 +20,7 @@ class HasPlan
 
             if(in_array(auth()->user()->role, ['service_provider', 'inventor']) && auth()->user()->service_provider_subscription_paid == false) {
                 return redirect()->route('front.service-provider.plan');
-            } elseif(in_array(auth()->user()->role, ['event', 'inventor']) && !auth()->user()->plan) {
+            } else if(in_array(auth()->user()->role, ['event', 'inventor']) && setting('free_inventor_package') == 0 && !auth()->user()->plan) {
                 return redirect()->route('front.packages');
             }
         }

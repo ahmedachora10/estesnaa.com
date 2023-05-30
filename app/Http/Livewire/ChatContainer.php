@@ -20,13 +20,20 @@ class ChatContainer extends Component
     public $view;
 
     protected $rules = [
-        'message' => 'required|string'
+        'message' => 'required|string',
     ];
 
     public function mount($chat, $view = 'livewire.chat.front.chat-container')
     {
         $this->chat = $chat;
         $this->view = $view;
+    }
+
+    public function updatedFile()
+    {
+        $this->validate([
+            'file' => 'required|file|mimes:jpg,png,jpeg,webp,mp4,pdf,docx,xlsx', // 1MB Max
+        ]);
     }
 
     public function save()
@@ -62,7 +69,7 @@ class ChatContainer extends Component
 
     public function upload()
     {
-        $this->validate(['file' => 'required|file']);
+        $this->validate(['file' => 'required|file|mimes:jpg,png,jpeg,webp,mp4,pdf,docx,xlsx']);
 
         $path = str_replace('public', 'storage', $this->file->storeAs('public/images/chat/files', date('Y-m-d') . str()->random(3) . '.' . $this->file->extension()));
 

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Casts\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Package;
 use App\Models\Role;
+use App\Models\Subscription;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -68,6 +70,28 @@ class RegisteredUserController extends Controller
         $user->attachRole($request->role_id);
 
         $user->update(['role' => $user->roles->first()->name]);
+
+        if(in_array($user->role, ['service_provider', 'inventor']) && setting('free_service_package')) {
+            $user->update(['service_provider_subscription_paid' => true]);
+        }
+
+        if($user->role == 'inventor' && setting('free_inventor_package')) {
+            $package = Package::firstWhere([
+                ['price', '=', 0],
+                ['group', '=', 'inventor_profile'],
+            ]);
+
+            if($package) {
+                Subscription::create([
+                    'user_id' => $user->id,
+                    'plan_id' => $package->id,
+                    'amount' => $package->amount,
+                    'start_date' => now(),
+                    'status' => Status::ENABLED->value,
+                    'end_date' => now()->addDays($package->duration)
+                ]);
+            }
+        }
 
         if($user->role != 'user') {
             $user->profit()->create(['total' => 0]);

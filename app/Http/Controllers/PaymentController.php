@@ -190,6 +190,7 @@ class PaymentController extends Controller
                                     $userProfit = new UserProfit();
                                     $userProfit->user_id = $invention->user_id;
                                 }
+
                                 $userProfit->total += $transaction->amount;
                                 $userProfit->save();
 
@@ -202,7 +203,7 @@ class PaymentController extends Controller
 
                                 session()->remove('inventionID');
                             }
-                        }elseif(session()->exists('serviceID')) {
+                        } elseif (session()->exists('serviceID')) {
                             $service = Service::find(session()->get('serviceID'));
 
                             if($service) {

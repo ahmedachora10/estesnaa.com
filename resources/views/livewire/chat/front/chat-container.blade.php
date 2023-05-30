@@ -63,7 +63,9 @@
 
         <div class="my-2">
             <div wire:loading wire:target="file" class="text-info">جاري تحميل الملف...</div>
-            <div class="text-success" wire:loading.remove>تم اضافة الملف بنجاح</div>
+            @if ($file)
+                <div class="text-success" wire:loading.remove>تم اضافة الملف بنجاح</div>
+            @endif
         </div>
 
         <div class="d-flex justify-content-start mt-4">

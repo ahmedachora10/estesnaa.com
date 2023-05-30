@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Casts\Status;
 use App\Models\Service;
+use App\Notifications\StoreServiceNotification;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,6 +18,13 @@ class ServicesContainer extends Component
     {
         if($service) {
             $service->update(['status' => $service->status->value == Status::ENABLED->value ? Status::DISABLED : Status::ENABLED]);
+
+            if($service->status->value == Status::ENABLED->value) {
+                $service->owner->notify(new StoreServiceNotification([
+                    'title' => 'تم قبول الخدمة',
+                    'content' => 'تم نشر الخدمة ' . $service->name
+                ]));
+            }
         }
     }
     public function render()
