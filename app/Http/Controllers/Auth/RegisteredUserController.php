@@ -15,6 +15,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -102,7 +103,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        $user->notify(new NewUser([
+        Notification::send(User::whereRoleIs('admin')->get(),new NewUser([
             'title' => 'مستخدم جديد',
             'content' => 'تم تسجيل ' . $user->roles->first()->display_name . ' جديد.',
             'link' => route('users.index')
