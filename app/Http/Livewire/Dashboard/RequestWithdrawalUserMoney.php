@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Casts\UserActivityType;
+use App\Models\User;
 use App\Models\UserBankActivity;
 use App\Models\UserProfit;
 use App\Models\UserWithdrawalRequest;
 use App\Notifications\SendUserMoney;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class RequestWithdrawalUserMoney extends Component
@@ -56,7 +58,7 @@ class RequestWithdrawalUserMoney extends Component
 
         $this->dispatchBrowserEvent('toast', ['title' => 'تم ارسال طلبك بنجاح', 'content' => ' سيتم معالجة الطلب خلال 24 ساعة', 'updatedAmount' => $this->userProfit->total]);
 
-        auth()->user()->notify(new SendUserMoney([
+        Notification::send(User::whereRoleIs('admin')->get(), new SendUserMoney([
             'title' => 'طلب سحب لاموال',
             'content' => 'تم ارسال طلب السحب من قبل ' . auth()->user()->name
         ]));
