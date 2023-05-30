@@ -7,6 +7,9 @@ use App\Models\Event;
 use App\Http\Requests\Admin\Event\StoreEventRequest;
 use App\Http\Requests\Admin\Event\UpdateEventRequest;
 use App\Models\Category;
+use App\Models\User;
+use App\Notifications\StoreEvent;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
@@ -49,7 +52,13 @@ class EventController extends Controller
     {
         $request->validated();
 
-        Event::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
+        $event = Event::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
+
+        Notification::send(User::whereRoleIs('admin')->get(), new StoreEvent([
+            'title' => 'فعالية جديدة',
+            'content' => 'تم اضافة فعالية جديدة من قبل ' . $event->owner->name,
+            'link' => route('events.index')
+        ]));
 
         return redirect()->route('events.index')->with('success', 'تم اضافة الفعالية بنجاح. المرجو انتظار مراجعة الفعالية من قبل الادارة');
     }

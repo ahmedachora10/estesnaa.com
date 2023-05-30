@@ -7,7 +7,10 @@ use App\Models\Invention;
 use App\Http\Requests\Admin\Invention\StoreInventionRequest;
 use App\Http\Requests\Admin\Invention\UpdateInventionRequest;
 use App\Models\Category;
+use App\Models\User;
+use App\Notifications\StoreInvention;
 use App\Utils\UploadImage;
+use Illuminate\Support\Facades\Notification;
 
 class InventionController extends Controller
 {
@@ -48,7 +51,13 @@ class InventionController extends Controller
     {
         $request->validated();
 
-        Invention::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
+        $invention = Invention::create($request->safe()->except('image') + $this->saveImage($request->image) + ['user_id' => auth()->id()]);
+
+        Notification::send(User::whereRoleIs('admin')->get(), new StoreInvention([
+            'title' => 'اختراع جديدة',
+            'content' => 'تم اضافة اختراع جديدة من قبل ' . $invention->owner->name,
+            'link' => route('inventions.index')
+        ]));
 
         return redirect()->route('inventions.index')->with('success', 'تم اضافة الاختراع بنجاح. المرجو انتظار المراجعة من قبل الادارة');
     }
