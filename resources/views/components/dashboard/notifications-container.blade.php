@@ -25,6 +25,7 @@
                         <x-notifications.send-money :notification="$item" />
                         <x-notifications.store-service :notification="$item" />
                         <x-notifications.new-user :notification="$item" />
+                        <x-notifications.new-subscription :notification="$item" />
                     </li>
                 @empty
                     <li class="list-group-item list-group-item-action dropdown-notifications-item">لا توجد اشعارات
