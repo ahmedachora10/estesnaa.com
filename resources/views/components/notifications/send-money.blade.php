@@ -15,5 +15,5 @@
             <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
             <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
         </div>
-        </div>
+    </a>
 @endif
