@@ -15,7 +15,7 @@ class NewUser extends Component
      */
     public function __construct(public $notification)
     {
-        $this->type = NotificationsNewUser::class;
+        $this->type = $this->notification->type == NotificationsNewUser::class;
     }
 
     /**

@@ -1,1 +1,1 @@
-<x-notifications.item :notification="$notification" :type="$type" icon="user-plus" />
+<x-notifications.item :notification="$notification" :type="$type" icon="user-plus" bg="primary" />
