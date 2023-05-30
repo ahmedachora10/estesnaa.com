@@ -20,9 +20,11 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserBankActivity;
 use App\Models\UserProfit;
+use App\Notifications\NewSubscription;
 use App\Notifications\SendUserMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Omnipay\Omnipay;
 
 class PaymentController extends Controller
@@ -166,6 +168,11 @@ class PaymentController extends Controller
 
                             if($package) {
                                 $this->saveSubscription($package);
+                                Notification::send(User::whereRoleIs('admin')->get(), new NewSubscription([
+                                    'title' => 'مشترك جديد',
+                                    'content' => 'تم الاشتراك في باقة ' . $package->name . ' من قبل ' . auth()->user()->name,
+                                    'link' => route('subscriptions.index')
+                                ]));
                             }
 
                             session()->remove('packageID');
