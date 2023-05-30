@@ -73,10 +73,10 @@ class PaymentController extends Controller
                 $user->save();
 
                 Notification::send(User::whereRoleIs('admin')->get(), new NewSubscription([
-                                    'title' => 'مشترك جديد',
-                                    'content' => 'تم الاشتراك في باقة ' . $package->name . ' من قبل ' . auth()->user()->name,
-                                    'link' => route('subscriptions.index')
-                                ]));
+                    'title' => 'مشترك جديد',
+                    'content' => 'تم الاشتراك في باقة ' . $package->name . ' من قبل ' . auth()->user()->name,
+                    'link' => route('subscriptions.index')
+                ]));
 
                 return true;
             });
