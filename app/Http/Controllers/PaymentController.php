@@ -56,6 +56,12 @@ class PaymentController extends Controller
                 return redirect()->route('users.show', auth()->id());
             }
 
+            Notification::send(User::whereRoleIs('admin')->get(), new NewSubscription([
+                'title' => 'مشترك جديد',
+                'content' => 'تم الاشتراك في باقة ' . $package->name . ' من قبل ' . auth()->user()->name,
+                'link' => route('subscriptions.index')
+            ]));
+
             return redirect()->route($redirectTO);
         }elseif($package->amount == 0 && ($isServiceProvider || auth()->user()->role == 'inventor') && $package->group == 'service_provider') {
             $done = DB::transaction(function () use($package)
@@ -65,6 +71,13 @@ class PaymentController extends Controller
                 $user = User::find(auth()->id());
                 $user->service_provider_subscription_paid = true;
                 $user->save();
+
+                Notification::send(User::whereRoleIs('admin')->get(), new NewSubscription([
+                                    'title' => 'مشترك جديد',
+                                    'content' => 'تم الاشتراك في باقة ' . $package->name . ' من قبل ' . auth()->user()->name,
+                                    'link' => route('subscriptions.index')
+                                ]));
+
                 return true;
             });
 
