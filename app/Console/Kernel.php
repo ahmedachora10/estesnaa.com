@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\PendingBalanceDuration;
+use App\Jobs\RemoveTemporaryFiles;
 use App\Jobs\SubscriptionExpired;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(new SubscriptionExpired)->everyMinute();
         $schedule->call(new PendingBalanceDuration)->everyMinute();
+        $schedule->call(new RemoveTemporaryFiles)->timezone('Asia/Riyadh')->dailyAt('05:30')->runInBackground();
     }
 
     /**
