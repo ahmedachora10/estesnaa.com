@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(new SubscriptionExpired)->everyMinute();
         $schedule->call(new PendingBalanceDuration)->everyMinute();
-        $schedule->command('tmpfiles:remove')->everyMinute('17:50');
+        $schedule->command('tmpfiles:remove')->dailyAt('05:53');
     }
 
     /**
