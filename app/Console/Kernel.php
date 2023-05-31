@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(new SubscriptionExpired)->everyMinute();
         $schedule->call(new PendingBalanceDuration)->everyMinute();
-        $schedule->call(new RemoveTemporaryFiles)->dailyAt('17:42');
+        $schedule->call(new RemoveTemporaryFiles)->dailyAt('05:43');
     }
 
     /**
