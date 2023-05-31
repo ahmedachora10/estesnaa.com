@@ -31,8 +31,6 @@ class RemoveTemporaryFiles extends Command
     {
         $temporaryFiles = File::files(storage_path('app/livewire-tmp'));
 
-        Storage::put(storage_path('app/tests.txt'), 'Cron job running! ' . date('Y-m-d H:i:s'));
-
         foreach ($temporaryFiles as $file) {
             File::delete($file);
         }
