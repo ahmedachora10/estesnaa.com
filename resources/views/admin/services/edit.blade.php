@@ -39,7 +39,7 @@
             </div> {{-- / Price --}}
 
             <div class="col-md-12 col-12 mb-3">
-                <x-text-area-group :value="$service->description" name="description" :title="trans('table.columns.description')" />
+                <x-text-area-group :value="$service->description" name="description" title="خدماتنا المقدمة للمخترعين" />
             </div> {{-- / Description --}}
 
 
