@@ -8,5 +8,10 @@
     "Pending": "في الانتظار",
     "Implement": "قيد التنفيد",
     "Receipt": "استلام",
-    "Cancel": "الغاء"
+    "Cancel": "الغاء",
+    "Email": " البريد الالكتروني",
+    "Password": "كلمة السر",
+    "Confirm Password": "تأكيد كلمة السر",
+    "Reset Password": "حفظ",
+    "Email Password Reset Link": "ارسال"
 }

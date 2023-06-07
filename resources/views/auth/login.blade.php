@@ -23,7 +23,7 @@
                         autofocus>
                     <i class="glyphicon glyphicon-user form-control-feedback"></i>
                 </div>
-                @error('email')
+                @error('email|password')
                     <span class="text-danger mt-2 mb-3">{{ $message }}</span>
                 @enderror
                 <div class="form-group has-feedback">
@@ -31,10 +31,7 @@
                         required="">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-
-                @error('password')
-                    <span class="text-danger mt-2 mb-3">{{ $message }}</span>
-                @enderror
+                <a href="{{ route('password.request') }}" class="text-primary mt-2 my-2 d-block">هل نسيت كلمة السر؟</a>
                 <br>
                 <div class="row">
                     <!-- /.col -->
@@ -43,7 +40,6 @@
                             class="btn btn-primary btn-block btn-flat w-100">دخول</button>
                     </div>
                     <div class="col-xs-6">
-
                     </div>
                     <!-- /.col -->
                 </div>
