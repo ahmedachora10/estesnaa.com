@@ -70,6 +70,10 @@
                         <x-input-group :value="$user->phone" type="phone" name="phone" :title="trans('table.columns.phone')" />
                     </div> {{-- / Phone --}}
 
+                    <div class="col-md-12 col-12 mb-3">
+                        <x-text-area-group :value="$user->description" name="description" id="brief" title="من نحن" />
+                    </div> {{-- / Description --}}
+
                     <div class="col-md-6 col-12 mb-3">
                         <x-input-group type="password" name="password" :title="trans('table.columns.password')" />
                     </div> {{-- / Password --}}
@@ -249,6 +253,14 @@
         <script>
             ClassicEditor
                 .create(document.querySelector('#description'), {
+                    language: 'ar'
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            ClassicEditor
+                .create(document.querySelector('#brief'), {
                     language: 'ar'
                 })
                 .catch(error => {

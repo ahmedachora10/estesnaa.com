@@ -22,16 +22,11 @@
             <div class="row gy-4 mt-5">
 
                 <div class="col-lg-8">
-                    <div class="portfolio-details-slider swiper bg-white">
+                    <div class="portfolio-details-slider swiper">
                         <div class="swiper-wrapper align-items-center">
-                            <div class="swiper-slide">
+                            <div class="ratio ratio-16x9 shadow">
                                 <img src="{{ asset($service->image) }}" alt="image" class="w-100">
                             </div>
-
-                            <div class="description-container my-5 px-4 pb-5">
-                                {!! $service->description !!}
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -83,6 +78,24 @@
                             @endguest
                         </div>
                     </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="my-3 bg-white pb-3">
+                        <h3 class="text-white w-100 px-3 py-2" style="background-color: #021c3b">من نحن</h3>
+                        <div class="description-container px-3">
+                            {!! $service->owner->description !!}
+                        </div>
+                    </div>
+
+                    <div class="my-3 bg-white pb-3">
+                        <h3 class="text-white w-100 px-3 py-2" style="background-color: #021c3b"> خدماتنا المقدمة
+                            للمخترعين </h3>
+                        <div class="description-container my-3 px-3">
+                            {!! $service->description !!}
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

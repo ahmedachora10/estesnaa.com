@@ -17,6 +17,10 @@
                     <label for="email" class="form-label">البريد الالكتروني</label>
                     <input type="email" wire:model="email" id="email" class="form-control"
                         placeholder="xxxx@xxx.xx" required>
+                    <div id="defaultFormControlHelp" class="form-text text-warning">المرجو ادخال البريد الكتروني لحسابك
+                        على
+                        PAYPAL
+                    </div>
                     <x-error field="email" />
                 </div>
             </div>

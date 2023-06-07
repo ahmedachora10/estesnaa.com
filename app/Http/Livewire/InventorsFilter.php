@@ -24,6 +24,7 @@ class InventorsFilter extends Component
         // {
         //     $query->whereHas('inventorProfilePlan');
         // }])->whereHas('inventors.inventorProfilePlan')->get());
+
     }
 
     public function filter()

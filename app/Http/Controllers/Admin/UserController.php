@@ -111,7 +111,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        // dd($request->all());
         $request->validated();
 
         $data = [];
@@ -149,6 +148,7 @@ class UserController extends Controller
             'password' => ['nullable', 'confirmed', Password::defaults()],
             'avatar' => ['nullable', 'image'],
             'phone' => ['required', 'string', Rule::unique('users', 'phone')->ignore(auth()->user())],
+            'description' => ['nullable', 'string']
         ], $request->all());
 
         $user = User::find(auth()->id());
@@ -160,6 +160,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->description = $request->description;
 
         if($request->avatar != null) {
             $this->removeAvatar($user->avatar);

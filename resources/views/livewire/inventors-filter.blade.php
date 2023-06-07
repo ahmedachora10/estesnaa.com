@@ -59,7 +59,7 @@
                                                 alt="...">
                                         </div>
                                     </div>
-                                    <div class="card-footer text-center">
+                                    <div class="card-footer text-center" style="background-color: white !important">
                                         <h3>
                                             <a class="person-info"
                                                 href="{{ route('front.inventors.show', $inventor) }}">

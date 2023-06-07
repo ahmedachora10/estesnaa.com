@@ -15,7 +15,11 @@
                         <div class="caption">
                             <div class="inner">
                                 <h1>{{ $inventor->name }}</h1>
-                                {{-- <h5>{{ $inventor->dob->format('Y-m-d') }}</h5> --}}
+                                <h5 class="mt-1">
+                                    @if ($inventor->inventorProfile)
+                                        {{ views_for_humans($inventor->inventorProfile->views) }}
+                                    @endif
+                                </h5>
                             </div>
                         </div>
                     </div>

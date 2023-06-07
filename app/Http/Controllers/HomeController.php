@@ -32,6 +32,10 @@ class HomeController extends Controller
     {
         abort_if(!$inventor->hasRole('inventor') || !$inventor->inventorProfilePlan, 404);
 
+        if(!auth()->check() || (auth()->check() && $inventor->id != auth()->id())) {
+            $inventor->inventorProfile->increment('views');
+        }
+
         return view('front.inventions.inventor', compact('inventor'));
     }
 

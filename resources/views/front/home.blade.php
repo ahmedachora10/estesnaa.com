@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 text-right text-lg-start">
-                        <p>{{ setting('about') }}</p>
+                        <p>{!! setting('about') !!}</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
                         <a class="cta-btn align-middle" href="#cta">من نحن</a>

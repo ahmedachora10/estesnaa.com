@@ -40,6 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'country_code',
         'role',
         'address',
+        'description',
         'service_provider_subscription_paid'
     ];
 
