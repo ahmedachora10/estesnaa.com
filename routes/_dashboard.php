@@ -146,6 +146,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function ()
         Route::post('/inventors/profile', [UserController::class, 'updateInventorProfile'])->name('inventors.profile');
         Route::post('users/inventors/video/upload', [UserController::class, 'uploadVideo'])->name('users.upload.video');
         Route::resource('users', UserController::class)->only('show', 'update');
+        Route::get('user/notifications', function ()
+        {
+            return view('admin.notifications');
+        })->name('users.notifications');
     });
 
     /**

@@ -11,28 +11,14 @@
             <div class="dropdown-header d-flex align-items-center py-3">
                 <h5 class="text-body mb-0 me-auto">اشعارات</h5>
                 <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip"
-                    data-bs-placement="top" aria-label="Mark all as read" data-bs-original-title="Mark all as read"><i
-                        class="bx fs-4 bx-envelope-open"></i></a>
+                    data-bs-placement="top" aria-label="Mark all as read" data-bs-original-title="Mark all as read"
+                    onclick="Livewire.emit('makeItRead')"><i class="bx fs-4 bx-envelope-open"></i></a>
             </div>
         </li>
         <li class="dropdown-notifications-list scrollable-container ps">
             <ul class="list-group list-group-flush">
-                @forelse ($notifications as $item)
-                    <li @class([
-                        'list-group-item list-group-item-action dropdown-notifications-item',
-                        'marked-as-read' => !is_null($item->read_at),
-                    ])>
-                        <x-notifications.send-money :notification="$item" />
-                        <x-notifications.store-service :notification="$item" />
-                        <x-notifications.new-user :notification="$item" />
-                        <x-notifications.new-subscription :notification="$item" />
-                        <x-notifications.store-event :notification="$item" />
-                        <x-notifications.store-invention :notification="$item" />
-                    </li>
-                @empty
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item">لا توجد اشعارات
-                        لعرضها</li>
-                @endforelse
+
+                @livewire('dashboard.notifications-container')
 
             </ul>
             <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
@@ -43,7 +29,8 @@
             </div>
         </li>
         <li class="dropdown-menu-footer border-top">
-            <a href="javascript:void(0);" class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40">
+            <a href="{{ route('users.notifications') }}"
+                class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40">
                 عرض كل الاشعارات
             </a>
         </li>

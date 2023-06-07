@@ -15,8 +15,8 @@ class NotificationsContainer extends Component
      */
     public function __construct(public $notifications = null, public $unreadNotifications = 0)
     {
-        $this->notifications = auth()->user()->notifications()->latest()->take(8)->get();
-        $this->unreadNotifications = collect($this->notifications)->whereNull('read_at')->count();
+        // $this->notifications = auth()->user()->notifications()->latest()->take(8)->get();
+        $this->unreadNotifications = auth()->user()->unreadNotifications->count();
     }
 
     /**
